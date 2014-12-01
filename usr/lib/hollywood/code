@@ -1,0 +1,16 @@
+#!/bin/bash
+
+while true; do
+	FILES=$(locate "*.java" "*.py" "*.c" "*.cpp" "*.pl" "*.sh" | sort -R | head -n 4096)
+	for f in $FILES; do
+		[ -r "$f" ] || continue
+		[ -s "$f" ] || continue
+		[ -f "$f" ] || continue
+		lines=$(wc -l "$f" | awk '{print $1}')
+		l=$(($lines*$RANDOM/32767))
+		if timeout --foreground 2s view +$l "$f" 2>/dev/null; then
+			reset
+			exit 0
+		fi
+	done
+done

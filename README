@@ -1,0 +1,39 @@
+Launch Byobu
+Open a random number of splits, random sizes
+In each split, run a noisy text app
+
+Sample Apps:
+ - atop
+ - bmon
+ - cmatrix
+ - dnstop
+ - ethstatus
+ - glances
+ - htop
+ - ifstat
+ - iotop
+ - iptotal
+ - iptraf-ng
+ - itop
+ - jnettop
+ - kerneltop
+ - latencytop
+ - logtop
+ - netmrg
+ - nload
+ - nmon
+ - ntop
+ - powertop
+ - sagan
+ - slurm
+ - snetz
+ - top
+ - tiptop
+ - vnstat
+
+ - tail -f $(find /var/log/ -type f -name '*log') | ccze -A
+ - find some source code, open it, close it a few seconds later
+ - choose random directory, run tree on it
+
+ - wget some web pages and pipe HTML through a colorizer
+ - iwatch root and tail changes

@@ -1,0 +1,9 @@
+#!/bin/sh
+
+while true; do
+	LOGS=$(find /var/log -type f -name "*.log" 2>/dev/null)
+	for log in $LOGS; do
+		cat "$log" 2>/dev/null | ccze -A
+		sleep 0.5
+	done
+done

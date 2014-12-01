@@ -1,0 +1,8 @@
+#!/bin/sh
+
+while true; do
+	for f in $(ls /usr/bin/ | sort -R); do
+		sha512sum "/usr/bin/$f" | ccze -A -c default=green -c dir="bold green"
+		sleep 0.2
+	done
+done

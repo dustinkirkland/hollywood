@@ -1,0 +1,52 @@
+#!/bin/bash
+# N.B.: Use bash for $RANDOM
+#
+#    hollywood: create a hollywood suitable console of tech geekery
+#
+#    Copyright (C) 2014 Dustin Kirkland
+#
+#    Authors: Dustin Kirkland <kirkland@byobu.co>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, version 3 of the License.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+PKG="hollywood"
+trap "tput reset" EXIT HUP INT QUIT TERM KILL ILL TRAP ABRT BUS FPE USR1 SEGV USR2 PIPE ALRM
+dir="-v"
+splits=1
+
+
+arrangements="main-horizontal main-vertical tiled"
+tmux kill-window -t $PKG || true
+tmux new-window -n $PKG top \; \
+	set-option -g pane-active-border-bg black \; \
+	set-option -g pane-active-border-fg black >/dev/null 2>&1
+
+for app in $(ls /usr/lib/$PKG/ | sort -R); do
+	[ "$app" = "top" ] && continue
+	[ "$dir" = "-v" ] && dir="-h" || dir="-v"
+	splits=$((splits+1))
+	tmux split-window $dir -t ${PKG}.$((RANDOM % $splits)) /usr/lib/$PKG/$app >/dev/null 2>&1
+	sleep 0.2
+done
+
+while true; do
+	case $(($RANDOM % 3)) in
+		0) layout="main-horizontal" ;;
+		1) layout="main-vertical" ;;
+		2) layout="tiled" ;;
+	esac
+	tmux select-layout -t $PKG $layout >/dev/null 2>&1 || exit 0
+	sleep 10
+done
+
+exit 0
