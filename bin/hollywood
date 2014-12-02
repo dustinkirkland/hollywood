@@ -18,24 +18,34 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+set -e
 
 PKG="hollywood"
-trap "tput reset" EXIT HUP INT QUIT TERM KILL ILL TRAP ABRT BUS FPE USR1 SEGV USR2 PIPE ALRM
+#trap "sleep 5; echo tput reset" EXIT
 dir="-v"
-splits=1
 
+widget_dir="$(dirname $0)/../lib/$PKG"
 
 arrangements="main-horizontal main-vertical tiled"
-tmux kill-window -t $PKG || true
-tmux new-window -n $PKG top \; \
+tmux kill-window -t $PKG 2>/dev/null || true
+tmux new-window -n $PKG "$widget_dir"/top \; \
 	set-option -g pane-active-border-bg black \; \
-	set-option -g pane-active-border-fg black >/dev/null 2>&1
+	set-option -g pane-active-border-fg black
 
-for app in $(ls /usr/lib/$PKG/ | sort -R); do
+for app in $(ls "$widget_dir" | sort -R); do
 	[ "$app" = "top" ] && continue
 	[ "$dir" = "-v" ] && dir="-h" || dir="-v"
-	splits=$((splits+1))
-	tmux split-window $dir -t ${PKG}.$((RANDOM % $splits)) /usr/lib/$PKG/$app >/dev/null 2>&1
+	panes=$(tmux lsp -t $PKG)
+
+	#echo "Panes:"
+	#echo "$panes"
+
+	# Allow for failed widgets
+	splits=$(echo "$panes" | wc -l)
+	pane=$((RANDOM % $splits))
+
+	#echo "Splitting: $pane $dir for $app"
+	tmux split-window $dir -t ${PKG}.$pane "$widget_dir"/$app
 	sleep 0.2
 done
 
@@ -45,7 +55,7 @@ while true; do
 		1) layout="main-vertical" ;;
 		2) layout="tiled" ;;
 	esac
-	tmux select-layout -t $PKG $layout >/dev/null 2>&1 || exit 0
+	tmux select-layout -t $PKG $layout || exit 0
 	sleep 10
 done
 
