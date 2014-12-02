@@ -1,6 +1,6 @@
 #!/bin/sh
 
-DIRS="/dev"
+DIRS="/sys /dev"
 
 while true; do
 	for d1 in $DIRS; do
