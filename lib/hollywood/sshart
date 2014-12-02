@@ -1,11 +1,15 @@
 #!/bin/sh
 
-tmpfile=$(mktemp)
-trap "exec rm -f $tmpfile $tmpfile.pub 2>/dev/null" EXIT HUP INT QUIT TERM
+tmpdir=$(mktemp -d -t XXXXXX)
+trap "exec rm -rf $tmpdir 2>/dev/null" EXIT HUP INT QUIT TERM
 
 while true; do
+	sleep 3 &
+	tmpfile=$(mktemp -p "$tmpdir" -t XXXXXX)
+	rm -f $tmpfile
+	art=$(ssh-keygen -vvv -b 1024 -t dsa -N "" -f $tmpfile)
 	rm -f $tmpfile $tmpfile.pub
-	ssh-keygen -vvv -b 1024 -t dsa -N "" -f $tmpfile | ccze -A -c default=red
-	sleep 3
+	wait
 	clear
+	echo "$art" | ccze -A -c default=red
 done
