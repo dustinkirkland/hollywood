@@ -6,5 +6,7 @@ hollywood (1.0) unreleased; urgency=medium
     - inital packaging
   * bin/hollywood, debian/control, lib/hollywood/top:
     - add htop, remove top;  htop is more hollywood
+  * lib/hollywood/man:
+    - add a random manpage viewer
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 02 Dec 2014 17:35:06 -0800

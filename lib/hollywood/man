@@ -1,0 +1,8 @@
+#!/bin/sh
+
+while true; do
+	if timeout --foreground 3s man $(ls /usr/share/man/man1/ | sort -R | head -n1 | sed "s/\.1\.gz.*$//"); then
+		reset
+		exit 0
+	fi
+done
