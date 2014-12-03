@@ -1,0 +1,8 @@
+#!/bin/sh
+
+while true; do
+	for f in $(ls /usr/bin/ | sort -R); do
+		head -c 4096 "/usr/bin/$f" | hexdump | ccze -A -c default=green -c dir="bold green"
+		sleep 0.7
+	done
+done
