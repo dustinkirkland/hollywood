@@ -1,0 +1,8 @@
+hollywood (1.0) unreleased; urgency=medium
+
+  * === added directory debian, === added directory debian/source,
+    debian/compat, debian/control, debian/copyright, debian/install,
+    debian/rules, debian/source/format:
+    - inital packaging
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 02 Dec 2014 17:35:06 -0800
