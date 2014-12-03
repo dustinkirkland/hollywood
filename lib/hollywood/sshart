@@ -1,0 +1,15 @@
+#!/bin/sh
+
+tmpdir=$(mktemp -d -t XXXXXX)
+trap "exec rm -rf $tmpdir 2>/dev/null" EXIT HUP INT QUIT TERM
+
+while true; do
+	sleep 3 &
+	tmpfile=$(mktemp -p "$tmpdir" -t XXXXXX)
+	rm -f $tmpfile
+	art=$(ssh-keygen -vvv -b 1024 -t dsa -N "" -f $tmpfile)
+	rm -f $tmpfile $tmpfile.pub
+	wait
+	clear
+	echo "$art" | ccze -A -c default=red
+done
