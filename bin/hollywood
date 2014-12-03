@@ -28,7 +28,7 @@ widget_dir="$(dirname $0)/../lib/$PKG"
 
 arrangements="main-horizontal main-vertical tiled"
 tmux kill-window -t $PKG 2>/dev/null || true
-tmux new-window -n $PKG "$widget_dir"/top \; \
+tmux new-window -n $PKG "$widget_dir"/htop \; \
 	set-option -g pane-active-border-bg black \; \
 	set-option -g pane-active-border-fg black
 
