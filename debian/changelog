@@ -8,5 +8,10 @@ hollywood (1.0) unreleased; urgency=medium
     - add htop, remove top;  htop is more hollywood
   * lib/hollywood/man:
     - add a random manpage viewer
+  * bin/hollywood, debian/copyright, lib/hollywood/cmatrix,
+    lib/hollywood/code, lib/hollywood/errno, lib/hollywood/hexdump,
+    lib/hollywood/logs, lib/hollywood/man, lib/hollywood/sshart,
+    lib/hollywood/tree:
+    use Apache2 license
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 02 Dec 2014 17:35:06 -0800
