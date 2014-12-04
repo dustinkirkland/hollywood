@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #
 # Copyright 2014 Dustin Kirkland <dustin.kirkland@gmail.com>
 #
@@ -15,17 +15,8 @@
 # limitations under the License.
 
 while true; do
-	FILES=$(locate "*.java" "*.c" "*.cpp" | sort -R | head -n 4096)
-	for f in $FILES; do
-		[ -r "$f" ] || continue
-		[ -s "$f" ] || continue
-		[ -f "$f" ] || continue
-		lines=$(wc -l "$f" | awk '{print $1}')
-		[ "$lines" -gt 100 ] || continue
-		l=$(($lines*$RANDOM/32767))
-		if timeout --foreground 2s view +$l "$f" 2>/dev/null; then
-			reset
-			exit 0
-		fi
+	for f in $(find /sys /dev 2>/dev/null | sort -R | head -n 4096); do
+		stat "$f" | ccze -A
+		sleep 0.8
 	done
 done

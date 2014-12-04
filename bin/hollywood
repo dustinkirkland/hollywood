@@ -26,13 +26,13 @@ dir="-v"
 widget_dir="$(dirname $0)/../lib/$PKG"
 
 arrangements="main-horizontal main-vertical tiled"
-tmux kill-window -t $PKG 2>/dev/null || true
+tmux kill-window -t $PKG >/dev/null 2>&1 || true
 tmux new-window -n $PKG "$widget_dir"/htop \; \
 	set-option -g pane-active-border-bg black \; \
-	set-option -g pane-active-border-fg black
+	set-option -g pane-active-border-fg black >/dev/null 2>&1
 
 for app in $(ls "$widget_dir" | sort -R); do
-	[ "$app" = "top" ] && continue
+	[ "$app" = "htop" ] && continue
 	[ "$dir" = "-v" ] && dir="-h" || dir="-v"
 	panes=$(tmux lsp -t $PKG)
 
@@ -44,7 +44,7 @@ for app in $(ls "$widget_dir" | sort -R); do
 	pane=$((RANDOM % $splits))
 
 	#echo "Splitting: $pane $dir for $app"
-	tmux split-window $dir -t ${PKG}.$pane "$widget_dir"/$app
+	tmux split-window $dir -t ${PKG}.$pane "$widget_dir"/$app >/dev/null 2>&1
 	sleep 0.2
 done
 
@@ -54,7 +54,7 @@ while true; do
 		1) layout="main-vertical" ;;
 		2) layout="tiled" ;;
 	esac
-	tmux select-layout -t $PKG $layout || exit 0
+	tmux select-layout -t $PKG $layout >/dev/null 2>&1 || exit 0
 	sleep 10
 done
 

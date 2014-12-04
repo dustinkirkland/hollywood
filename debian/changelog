@@ -13,5 +13,10 @@ hollywood (1.0) unreleased; urgency=medium
     lib/hollywood/logs, lib/hollywood/man, lib/hollywood/sshart,
     lib/hollywood/tree:
     use Apache2 license
+  * bin/hollywood, debian/control, lib/hollywood/apg,
+    lib/hollywood/code, lib/hollywood/htop, lib/hollywood/stat, README:
+    - dbar looks interesting?
+    - silence tmux messages
+    - add apg, htop, and stat
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 02 Dec 2014 17:35:06 -0800

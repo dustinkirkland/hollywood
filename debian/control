@@ -10,7 +10,8 @@ Package: hollywood
 Architecture: all
 Depends: ${misc:Depends},
  byobu,
- htop
+ htop,
+ apg
 Description: fill your console with Hollywood melodrama technobabble
  This utility will split your console into a multiple panes of genuine
  technobabble, perfectly suitable for any Hollywood geek melodrama.
