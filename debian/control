@@ -8,10 +8,19 @@ Homepage: http://launchpad.net/hollywood
 
 Package: hollywood
 Architecture: all
-Depends: ${misc:Depends},
- byobu,
+Depends: ${misc:Depends}, byobu,
+ apg,
+ bmon,
+ bsdmainutils,
+ coreutils,
+ ccze,
+ cmatrix,
  htop,
- apg
+ jp2a,
+ moreutils,
+ openssh-client,
+ speedometer,
+ tree
 Description: fill your console with Hollywood melodrama technobabble
  This utility will split your console into a multiple panes of genuine
  technobabble, perfectly suitable for any Hollywood geek melodrama.

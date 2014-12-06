@@ -24,15 +24,16 @@ PKG="hollywood"
 dir="-v"
 
 widget_dir="$(dirname $0)/../lib/$PKG"
+widget1=$(ls "$widget_dir/" | sort -R | head -n1)
 
 arrangements="main-horizontal main-vertical tiled"
 tmux kill-window -t $PKG >/dev/null 2>&1 || true
-tmux new-window -n $PKG "$widget_dir"/htop \; \
-	set-option -g pane-active-border-bg black \; \
-	set-option -g pane-active-border-fg black >/dev/null 2>&1
+tmux new-window -n $PKG "$widget_dir/$widget1" \; \
+	set-option -g pane-active-border-bg "default" \; \
+	set-option -g pane-active-border-fg "default" >/dev/null 2>&1
 
-for app in $(ls "$widget_dir" | sort -R); do
-	[ "$app" = "htop" ] && continue
+for w in $(ls "$widget_dir" | sort -R); do
+	[ "$w" = "$widget1" ] && continue
 	[ "$dir" = "-v" ] && dir="-h" || dir="-v"
 	panes=$(tmux lsp -t $PKG)
 
@@ -43,8 +44,8 @@ for app in $(ls "$widget_dir" | sort -R); do
 	splits=$(echo "$panes" | wc -l)
 	pane=$((RANDOM % $splits))
 
-	#echo "Splitting: $pane $dir for $app"
-	tmux split-window $dir -t ${PKG}.$pane "$widget_dir"/$app >/dev/null 2>&1
+	#echo "Splitting: $pane $dir for $w"
+	tmux split-window $dir -t ${PKG}.$pane "$widget_dir"/$w >/dev/null 2>&1
 	sleep 0.2
 done
 
