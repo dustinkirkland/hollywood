@@ -1,3 +1,9 @@
+hollywood (1.1) unreleased; urgency=medium
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 09 Dec 2014 17:40:31 -0600
+
 hollywood (1.0-0ubuntu1) vivid; urgency=medium
 
   * === added directory debian, === added directory debian/source,
