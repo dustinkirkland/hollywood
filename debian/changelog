@@ -1,4 +1,4 @@
-hollywood (1.0) unreleased; urgency=medium
+hollywood (1.0-0ubuntu1) vivid; urgency=medium
 
   * === added directory debian, === added directory debian/source,
     debian/compat, debian/control, debian/copyright, debian/install,
@@ -25,4 +25,4 @@ hollywood (1.0) unreleased; urgency=medium
   * lib/hollywood/stat:
     - default to yellow
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 02 Dec 2014 17:35:06 -0800
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 09 Dec 2014 17:40:29 -0600
