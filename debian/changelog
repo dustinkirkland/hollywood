@@ -22,5 +22,7 @@ hollywood (1.0) unreleased; urgency=medium
     lib/hollywood/jp2a, lib/hollywood/speedometer, README:
     - add a few more tools
     - update dependencies
+  * lib/hollywood/stat:
+    - default to yellow
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 02 Dec 2014 17:35:06 -0800
