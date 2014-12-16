@@ -15,7 +15,7 @@
 # limitations under the License.
 
 while true; do
-	FILES=$(locate "*.java" "*.c" "*.cpp" | sort -R | head -n 4096)
+	FILES=$(locate "/usr/*.java" "/usr/*.c" "/usr/*.cpp" | sort -R | head -n 4096)
 	for f in $FILES; do
 		[ -r "$f" ] || continue
 		[ -s "$f" ] || continue
