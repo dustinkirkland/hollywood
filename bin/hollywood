@@ -1,4 +1,4 @@
-#!/bin/bash
+!/bin/bash
 # N.B.: Use bash for $RANDOM
 #
 # hollywood: create a hollywood suitable consoles of tech geekery
@@ -26,12 +26,19 @@ dir="-v"
 widget_dir="$(dirname $0)/../lib/$PKG"
 widget1=$(ls "$widget_dir/" | sort -R | head -n1)
 
+if [ -n "$1" ]; then
+	SPLITS="$1"
+else
+	SPLITS=$(ls "$widget_dir" | wc -l)
+fi
+
 arrangements="main-horizontal main-vertical tiled"
 tmux kill-window -t $PKG >/dev/null 2>&1 || true
 tmux new-window -n $PKG "$widget_dir/$widget1" \; \
 	set-option -g pane-active-border-bg "default" \; \
 	set-option -g pane-active-border-fg "default" >/dev/null 2>&1
 
+split=1
 for w in $(ls "$widget_dir" | sort -R); do
 	[ "$w" = "$widget1" ] && continue
 	[ "$dir" = "-v" ] && dir="-h" || dir="-v"
@@ -47,6 +54,10 @@ for w in $(ls "$widget_dir" | sort -R); do
 	#echo "Splitting: $pane $dir for $w"
 	tmux split-window $dir -t ${PKG}.$pane "$widget_dir"/$w >/dev/null 2>&1
 	sleep 0.2
+	split=$((split+1))
+	if [ $split -ge $SPLITS ]; then
+		break
+	fi
 done
 
 while true; do
