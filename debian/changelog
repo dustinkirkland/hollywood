@@ -1,3 +1,9 @@
+hollywood (1.2) unreleased; urgency=medium
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 16 Dec 2014 15:32:44 -0600
+
 hollywood (1.1-0ubuntu1) vivid; urgency=medium
 
   * === added directory usr, === added directory usr/share, === added
