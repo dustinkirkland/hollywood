@@ -6,6 +6,9 @@ hollywood (1.1) unreleased; urgency=medium
     - add a manpage
   * debian/control, debian/copyright:
     - fix some linitian errors
+  * debian/install, === removed directory usr, === renamed directory
+    usr/share => share:
+    - install the manpage
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 09 Dec 2014 17:40:31 -0600
 
