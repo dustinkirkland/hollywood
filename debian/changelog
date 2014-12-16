@@ -2,6 +2,8 @@ hollywood (1.2) unreleased; urgency=medium
 
   * lib/hollywood/code:
     - ensure we're only looking at code in /usr
+  * debian/control:
+    - add vim for syntax highlighting of code
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 16 Dec 2014 15:32:44 -0600
 
