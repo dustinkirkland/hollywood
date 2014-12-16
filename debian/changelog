@@ -11,6 +11,8 @@ hollywood (1.1) unreleased; urgency=medium
     - install the manpage
   * bin/hollywood:
     - support limiting to a set number of splits
+  * bin/hollywood, lib/hollywood/speedometer:
+    - fix a typo and route logic
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 09 Dec 2014 17:40:31 -0600
 

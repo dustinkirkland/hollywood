@@ -14,5 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-interface=$(route get default|grep interface:|awk '{print $2}')
+local interface Destination Gateway Flags RefCnt Use Metric Mask MTU Window IRTT
+while read Iface Destination Gateway Flags RefCnt Use Metric Mask MTU Window IRTT; do
+	[ "$Mask" = "00000000" ] && break
+done < /proc/net/route
 exec speedometer -tx $interface -rx $interface -i 0.75
