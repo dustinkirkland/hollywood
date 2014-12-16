@@ -15,6 +15,6 @@
 # limitations under the License.
 
 while true; do
-	apg -qlt -c /dev/urandom | awk '{print $3}' | sed -e "s/-/ /g"
+	apg -qlt -c /dev/urandom | awk '{print $3}' | sed -e "s/-/ /g" | ccze -A -c default=magenta
 	sleep 1.1
 done

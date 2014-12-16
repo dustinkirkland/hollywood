@@ -1,6 +1,7 @@
 hollywood (1.3) unreleased; urgency=medium
 
-  * UNRELEASED
+  * bin/hollywood, lib/hollywood/apg:
+    - colorize nato speak, move panes around
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 16 Dec 2014 15:45:02 -0600
 
