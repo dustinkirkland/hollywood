@@ -4,6 +4,8 @@ hollywood (1.1) unreleased; urgency=medium
     directory usr/share/man, === added directory usr/share/man/man1,
     usr/share/man/man1/hollywood.1:
     - add a manpage
+  * debian/control, debian/copyright:
+    - fix some linitian errors
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 09 Dec 2014 17:40:31 -0600
 
