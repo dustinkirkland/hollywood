@@ -1,4 +1,4 @@
-hollywood (1.1) unreleased; urgency=medium
+hollywood (1.1-0ubuntu1) vivid; urgency=medium
 
   * === added directory usr, === added directory usr/share, === added
     directory usr/share/man, === added directory usr/share/man/man1,
@@ -14,7 +14,7 @@ hollywood (1.1) unreleased; urgency=medium
   * bin/hollywood, lib/hollywood/speedometer:
     - fix a typo and route logic
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 09 Dec 2014 17:40:31 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 16 Dec 2014 15:32:42 -0600
 
 hollywood (1.0-0ubuntu1) vivid; urgency=medium
 
