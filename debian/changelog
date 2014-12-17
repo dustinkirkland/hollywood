@@ -1,4 +1,4 @@
-hollywood (1.5) unreleased; urgency=medium
+hollywood (1.5-0ubuntu1) vivid; urgency=medium
 
   * lib/hollywood/apg, lib/hollywood/bmon, lib/hollywood/cmatrix,
     lib/hollywood/code, lib/hollywood/errno, lib/hollywood/hexdump,
@@ -7,7 +7,7 @@ hollywood (1.5) unreleased; urgency=medium
     lib/hollywood/stat, lib/hollywood/tree:
     - exit on ctrl-c in any window
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 08:33:20 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 11:41:02 -0600
 
 hollywood (1.4-0ubuntu1) vivid; urgency=medium
 
