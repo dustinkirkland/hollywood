@@ -1,6 +1,15 @@
 hollywood (1.4) unreleased; urgency=medium
 
-  * UNRELEASED
+  * === added directory share/hollywood, bin/hollywood, debian/control,
+    debian/copyright, lib/hollywood/mplayer, share/hollywood/mi.mp4:
+    - add Mission Impossible theme song with audio visualizer movie
+    - song was downloaded and is used under CC0 1.0, from:
+      + https://archive.org/details/MissionImpossibleTheme
+    - video was created by using gtk-recordmydesktop screencast of
+      totem, using the Monoscope visual effect, while playing the song,
+      then mixed back with the song using avconv
+    - added mplayer to deps
+    - added mplayer plugin to play mi.mp4 and render to ascii art
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 16 Dec 2014 18:14:29 -0600
 

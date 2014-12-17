@@ -67,7 +67,7 @@ while true; do
 		2) layout="tiled" ;;
 	esac
 	tmux select-layout -t $PKG $layout >/dev/null 2>&1 || exit 0
-	tmux swap-pane -s :. -t :.+ >/dev/null 2>&1 || exit 0
+	tmux swap-pane -s 0 -t $(($SPLITS*$RANDOM/32767)) >/dev/null 2>&1 || exit 0
 	sleep 10
 done
 
