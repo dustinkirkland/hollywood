@@ -1,4 +1,4 @@
-hollywood (1.4) unreleased; urgency=medium
+hollywood (1.4-0ubuntu1) vivid; urgency=medium
 
   * === added directory share/hollywood, bin/hollywood, debian/control,
     debian/copyright, lib/hollywood/mplayer, share/hollywood/mi.mp4:
@@ -11,7 +11,7 @@ hollywood (1.4) unreleased; urgency=medium
     - added mplayer to deps
     - added mplayer plugin to play mi.mp4 and render to ascii art
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 16 Dec 2014 18:14:29 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 08:33:18 -0600
 
 hollywood (1.3-0ubuntu1) vivid; urgency=medium
 
