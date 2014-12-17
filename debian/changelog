@@ -1,3 +1,9 @@
+hollywood (1.5) unreleased; urgency=medium
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 08:33:20 -0600
+
 hollywood (1.4-0ubuntu1) vivid; urgency=medium
 
   * === added directory share/hollywood, bin/hollywood, debian/control,
