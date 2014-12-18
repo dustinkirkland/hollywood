@@ -20,9 +20,8 @@
 set -e
 
 PKG="hollywood"
-#trap "sleep 5; echo tput reset" EXIT
-dir="-v"
 
+dir="-v"
 widget_dir="$(dirname $0)/../lib/$PKG"
 widget1=$(ls "$widget_dir/" | sort -R | head -n1)
 
@@ -33,14 +32,16 @@ else
 fi
 
 arrangements="main-horizontal main-vertical tiled"
-tmux kill-window -t $PKG >/dev/null 2>&1 || true
 
 if [ -z "$TMUX" ]; then
 	# Launch our byobu
-	sleep 0.2
-	exec byobu new-session "$0"
+	byobu new-session -d -s $PKG "/bin/bash"
+	byobu send-keys -t $PKG "$0"
+	byobu send-keys -t $PKG Enter
+	exec byobu attach-session -t $PKG
 	exit 1
 fi
+
 tmux new-window -n $PKG "$widget_dir/$widget1" \; \
 	set-option -g pane-active-border-bg "default" \; \
 	set-option -g pane-active-border-fg "default" >/dev/null 2>&1
