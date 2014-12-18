@@ -14,9 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-trap "tmux kill-window -t hollywood >/dev/null 2>&1" EXIT HUP INT QUIT TERM
+trap "tmux kill-window -t hollywood >/dev/null 2>&1" HUP INT QUIT TERM
 local interface Destination Gateway Flags RefCnt Use Metric Mask MTU Window IRTT
-while read Iface Destination Gateway Flags RefCnt Use Metric Mask MTU Window IRTT; do
-	[ "$Mask" = "00000000" ] && break
-done < /proc/net/route
-speedometer -tx $interface -rx $interface -i 0.75
+while true; do
+	while read Iface Destination Gateway Flags RefCnt Use Metric Mask MTU Window IRTT; do
+		[ "$Mask" = "00000000" ] && break
+	done < /proc/net/route
+	speedometer -tx $interface -rx $interface -i 0.75
+done

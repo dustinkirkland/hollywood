@@ -1,6 +1,15 @@
 hollywood (1.6) unreleased; urgency=medium
 
-  * UNRELEASED
+  * bin/hollywood, lib/hollywood/bmon, lib/hollywood/cmatrix,
+    lib/hollywood/htop, lib/hollywood/speedometer:
+    - be a little more resilient to inadvertent failures
+  * bin/hollywood, lib/hollywood/apg, lib/hollywood/bmon,
+    lib/hollywood/cmatrix, lib/hollywood/errno, lib/hollywood/hexdump,
+    lib/hollywood/htop, lib/hollywood/jp2a, lib/hollywood/logs,
+    lib/hollywood/man, lib/hollywood/speedometer, lib/hollywood/sshart,
+    lib/hollywood/stat, lib/hollywood/tree:
+    - launch byobu, if we're not already in a byobu
+    - be a bit more resilient on launch
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 11:41:04 -0600
 

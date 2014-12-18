@@ -34,6 +34,12 @@ fi
 
 arrangements="main-horizontal main-vertical tiled"
 tmux kill-window -t $PKG >/dev/null 2>&1 || true
+
+if [ -z "$TMUX" ]; then
+	# Launch our byobu
+	exec byobu "$0"
+	exit 1
+fi
 tmux new-window -n $PKG "$widget_dir/$widget1" \; \
 	set-option -g pane-active-border-bg "default" \; \
 	set-option -g pane-active-border-fg "default" >/dev/null 2>&1
