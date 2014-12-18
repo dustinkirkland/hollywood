@@ -1,4 +1,4 @@
-hollywood (1.6) unreleased; urgency=medium
+hollywood (1.6-0ubuntu1) vivid; urgency=medium
 
   * bin/hollywood, lib/hollywood/bmon, lib/hollywood/cmatrix,
     lib/hollywood/htop, lib/hollywood/speedometer:
@@ -22,7 +22,7 @@ hollywood (1.6) unreleased; urgency=medium
     - rather than tmux killing the window (which leaves running processes
       behind), kill the processes themselves and let the window die off
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 11:41:04 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 22:16:36 -0600
 
 hollywood (1.5-0ubuntu1) vivid; urgency=medium
 
