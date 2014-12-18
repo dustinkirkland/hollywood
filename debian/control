@@ -3,7 +3,7 @@ Section: admin
 Priority: optional
 Maintainer: Dustin Kirkland <kirkland@ubuntu.com>
 Build-Depends: debhelper (>= 7.0.50~)
-Standards-Version: 3.9.4
+Standards-Version: 3.9.5
 Homepage: http://launchpad.net/hollywood
 
 Package: hollywood

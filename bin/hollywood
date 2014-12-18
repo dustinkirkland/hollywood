@@ -37,7 +37,8 @@ tmux kill-window -t $PKG >/dev/null 2>&1 || true
 
 if [ -z "$TMUX" ]; then
 	# Launch our byobu
-	exec byobu "$0"
+	sleep 0.2
+	exec byobu new-session "$0"
 	exit 1
 fi
 tmux new-window -n $PKG "$widget_dir/$widget1" \; \

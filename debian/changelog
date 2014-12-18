@@ -10,6 +10,10 @@ hollywood (1.6) unreleased; urgency=medium
     lib/hollywood/stat, lib/hollywood/tree:
     - launch byobu, if we're not already in a byobu
     - be a bit more resilient on launch
+  * bin/hollywood:
+    - create a new session, delay just a bit
+  * bin/hollywood, debian/control, debian/copyright:
+    - make lintian happier
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 11:41:04 -0600
 
