@@ -1,3 +1,9 @@
+hollywood (1.7) unreleased; urgency=medium
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 22:16:38 -0600
+
 hollywood (1.6-0ubuntu1) vivid; urgency=medium
 
   * bin/hollywood, lib/hollywood/bmon, lib/hollywood/cmatrix,
