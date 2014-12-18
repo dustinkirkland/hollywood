@@ -14,6 +14,13 @@ hollywood (1.6) unreleased; urgency=medium
     - create a new session, delay just a bit, launch it
   * bin/hollywood, debian/control, debian/copyright:
     - make lintian happier
+  * lib/hollywood/apg, lib/hollywood/bmon, lib/hollywood/cmatrix,
+    lib/hollywood/code, lib/hollywood/errno, lib/hollywood/hexdump,
+    lib/hollywood/htop, lib/hollywood/jp2a, lib/hollywood/logs,
+    lib/hollywood/man, lib/hollywood/speedometer, lib/hollywood/sshart,
+    lib/hollywood/stat, lib/hollywood/tree:
+    - rather than tmux killing the window (which leaves running processes
+      behind), kill the processes themselves and let the window die off
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 11:41:04 -0600
 

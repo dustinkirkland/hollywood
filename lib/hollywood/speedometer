@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-trap "tmux kill-window -t hollywood >/dev/null 2>&1" HUP INT QUIT TERM
+trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1" HUP INT QUIT TERM
 local interface Destination Gateway Flags RefCnt Use Metric Mask MTU Window IRTT
 while true; do
 	while read Iface Destination Gateway Flags RefCnt Use Metric Mask MTU Window IRTT; do

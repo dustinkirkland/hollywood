@@ -15,7 +15,7 @@
 # limitations under the License.
 
 tmpdir=$(mktemp -d -t XXXXXX)
-trap "rm -rf $tmpdir 2>/dev/null && tmux kill-window -t hollywood >/dev/null 2>&1" HUP INT QUIT TERM
+trap "rm -rf $tmpdir 2>/dev/null && pkill -f -9 lib/hollywood/ >/dev/null 2>&1" HUP INT QUIT TERM
 
 while true; do
 	sleep 3 &
