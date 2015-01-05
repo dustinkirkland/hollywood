@@ -20,7 +20,7 @@
 set -e
 
 PKG="hollywood"
-trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1 && exit 0" HUP INT QUIT TERM
+trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1 && exit 0" EXIT HUP INT QUIT TERM
 
 dir="-v"
 widget_dir="$(dirname $0)/../lib/$PKG"

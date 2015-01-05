@@ -11,7 +11,7 @@ hollywood (1.7) unreleased; urgency=medium
     - test for existence of each widget
       + https://github.com/dustinkirkland/hollywood/issues/1
   * bin/hollywood:
-    - exit cleanly
+    - exit cleanly, trap signals
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 22:16:38 -0600
 
