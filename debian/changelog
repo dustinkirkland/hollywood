@@ -10,8 +10,9 @@ hollywood (1.7) unreleased; urgency=medium
     lib/hollywood/sshart, lib/hollywood/stat, lib/hollywood/tree:
     - test for existence of each widget
       + https://github.com/dustinkirkland/hollywood/issues/1
-  * bin/hollywood:
-    - exit cleanly, trap signals
+  * bin/hollywood, share/man/man1/hollywood.1:
+    - exit cleanly, trap signals, document exit, renice widgets
+      to minimum scheduling priority
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 22:16:38 -0600
 
