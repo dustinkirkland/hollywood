@@ -14,6 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+command -v stat >/dev/null 2>&1 || exit 1
+command -v ccze >/dev/null 2>&1 || exit 1
+
 trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1" HUP INT QUIT TERM
 while true; do
 	for f in $(find /sys /dev 2>/dev/null | sort -R | head -n 4096); do

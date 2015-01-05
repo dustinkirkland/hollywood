@@ -3,6 +3,13 @@ hollywood (1.7) unreleased; urgency=medium
   * debian/control:
     - add missing dependency on mlocate:
       https://github.com/dustinkirkland/hollywood/issues/2
+  * lib/hollywood/apg, lib/hollywood/bmon, lib/hollywood/cmatrix,
+    lib/hollywood/code, lib/hollywood/errno, lib/hollywood/hexdump,
+    lib/hollywood/htop, lib/hollywood/jp2a, lib/hollywood/logs,
+    lib/hollywood/man, lib/hollywood/mplayer, lib/hollywood/speedometer,
+    lib/hollywood/sshart, lib/hollywood/stat, lib/hollywood/tree:
+    - test for existence of each widget
+      + https://github.com/dustinkirkland/hollywood/issues/1
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 22:16:38 -0600
 
