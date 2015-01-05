@@ -1,4 +1,4 @@
-hollywood (1.7) unreleased; urgency=medium
+hollywood (1.7-0ubuntu1) vivid; urgency=medium
 
   * debian/control:
     - add missing dependency on mlocate:
@@ -15,7 +15,7 @@ hollywood (1.7) unreleased; urgency=medium
       to minimum scheduling priority
   * close LP: #1403659, now that we launch byobu if not already running
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 22:16:38 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 05 Jan 2015 09:58:13 -0600
 
 hollywood (1.6-0ubuntu1) vivid; urgency=medium
 
