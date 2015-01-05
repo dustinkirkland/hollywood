@@ -1,6 +1,8 @@
 hollywood (1.7) unreleased; urgency=medium
 
-  * UNRELEASED
+  * debian/control:
+    - add missing dependency on mlocate:
+      https://github.com/dustinkirkland/hollywood/issues/2
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 22:16:38 -0600
 
