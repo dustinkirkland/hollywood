@@ -13,6 +13,7 @@ hollywood (1.7) unreleased; urgency=medium
   * bin/hollywood, share/man/man1/hollywood.1:
     - exit cleanly, trap signals, document exit, renice widgets
       to minimum scheduling priority
+  * close LP: #1403659, now that we launch byobu if not already running
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 22:16:38 -0600
 
@@ -26,7 +27,7 @@ hollywood (1.6-0ubuntu1) vivid; urgency=medium
     lib/hollywood/htop, lib/hollywood/jp2a, lib/hollywood/logs,
     lib/hollywood/man, lib/hollywood/speedometer, lib/hollywood/sshart,
     lib/hollywood/stat, lib/hollywood/tree:
-    - launch byobu, if we're not already in a byobu
+    - launch byobu, if we're not already in a byobu, LP: #1403659
     - be a bit more resilient on launch
   * bin/hollywood:
     - create a new session, delay just a bit, launch it
