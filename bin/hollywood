@@ -33,11 +33,18 @@ fi
 arrangements="main-horizontal main-vertical tiled"
 
 if [ -z "$TMUX" ]; then
-	# Launch our byobu
-	byobu new-session -d -s $PKG "/bin/bash"
-	byobu send-keys -t $PKG "$0"
-	byobu send-keys -t $PKG Enter
-	exec byobu attach-session -t $PKG
+	# Not in a tmux session: start one, with
+	# byobu if it's found, else with plain tmux
+	command -v byobu >/dev/null 2>&1
+	if [ $? -eq 0 ]; then
+		tmux_launcher=byobu
+	else
+		tmux_launcher=tmux
+	fi
+	$tmux_launcher new-session -d -s $PKG "/bin/bash"
+	$tmux_launcher send-keys -t $PKG "$0"
+	$tmux_launcher send-keys -t $PKG Enter
+	exec $tmux_launcher attach-session -t $PKG
 	exit 1
 fi
 
