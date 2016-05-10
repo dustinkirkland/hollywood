@@ -16,7 +16,7 @@
 
 command -v ccze >/dev/null 2>&1 || exit 1
 
-trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1" HUP INT QUIT TERM
+trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
 while true; do
 	LOGS=$(find /var/log -type f -name "*.log" 2>/dev/null)
 	for log in $LOGS; do

@@ -17,19 +17,14 @@
 command -v locate >/dev/null 2>&1 || exit 1
 command -v view >/dev/null 2>&1 || exit 1
 
-trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1" EXIT HUP INT QUIT TERM
+trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
 while true; do
-	FILES=$(locate "/usr/*.java" "/usr/*.c" "/usr/*.cpp" | sort -R | head -n 4096)
+	FILES=$(locate "/usr/*.java" "/usr/*.c" "/usr/*.cpp" | sort -R | head -n 4096) || true
 	for f in $FILES; do
 		[ -r "$f" ] || continue
 		[ -s "$f" ] || continue
 		[ -f "$f" ] || continue
-		lines=$(wc -l "$f" | awk '{print $1}')
-		[ "$lines" -gt 100 ] || continue
-		l=$(($lines*$RANDOM/32767))
-		if timeout --foreground 2s view +$l "$f" 2>/dev/null; then
-			reset
-			exit 0
-		fi
+		pygmentize "$f" 2>/dev/null || true
+		sleep 2
 	done
 done

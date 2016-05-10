@@ -18,7 +18,7 @@ command -v ssh-keygen >/dev/null 2>&1 || exit 1
 command -v ccze >/dev/null 2>&1 || exit 1
 
 tmpdir=$(mktemp -d -t XXXXXX)
-trap "rm -rf $tmpdir 2>/dev/null && pkill -f -9 lib/hollywood/ >/dev/null 2>&1" HUP INT QUIT TERM
+trap "rm -rf $tmpdir 2>/dev/null && pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
 
 while true; do
 	sleep 3 &

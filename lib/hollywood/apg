@@ -16,8 +16,8 @@
 
 command -v apg >/dev/null 2>&1 || exit 1
 
-trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1" HUP INT QUIT TERM
+trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
 while true; do
-	apg -qlt -c /dev/urandom | awk '{print $3}' | sed -e "s/-/ /g" | ccze -A -c default=magenta
-	sleep 1.1
+	apg -qlt -c /dev/urandom -n 1 | ccze -A -c default=magenta
+	sleep 0.2
 done

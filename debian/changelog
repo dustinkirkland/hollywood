@@ -1,6 +1,13 @@
 hollywood (1.8) unreleased; urgency=medium
 
-  * UNRELEASED
+  [ Dimitri Merejkowsky and Dustin Kirkland ]
+  * bin/hollywood, lib/hollywood/apg, lib/hollywood/bmon,
+    lib/hollywood/cmatrix, lib/hollywood/code, lib/hollywood/errno,
+    lib/hollywood/hexdump, lib/hollywood/htop, lib/hollywood/jp2a,
+    lib/hollywood/logs, lib/hollywood/man, lib/hollywood/mplayer,
+    lib/hollywood/speedometer, lib/hollywood/sshart, lib/hollywood/stat,
+    lib/hollywood/tree, TODO:
+    - improve stability
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 05 Jan 2015 09:58:15 -0600
 

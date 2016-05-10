@@ -17,8 +17,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
-
 PKG="hollywood"
 trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit 0" EXIT HUP INT QUIT TERM
 
@@ -35,11 +33,18 @@ fi
 arrangements="main-horizontal main-vertical tiled"
 
 if [ -z "$TMUX" ]; then
-	# Launch our byobu
-	byobu new-session -d -s $PKG "/bin/bash"
-	byobu send-keys -t $PKG "$0"
-	byobu send-keys -t $PKG Enter
-	exec byobu attach-session -t $PKG
+	# Not in a tmux session: start one, with
+	# byobu if it's found, else with plain tmux
+	command -v byobu >/dev/null 2>&1
+	if [ $? -eq 0 ]; then
+		tmux_launcher=byobu
+	else
+		tmux_launcher=tmux
+	fi
+	$tmux_launcher new-session -d -s $PKG "/bin/bash"
+	$tmux_launcher send-keys -t $PKG "$0"
+	$tmux_launcher send-keys -t $PKG Enter
+	exec $tmux_launcher attach-session -t $PKG
 	exit 1
 fi
 
@@ -70,15 +75,16 @@ for w in $(ls "$widget_dir" | sort -R); do
 	fi
 done
 
+case $(($RANDOM % 3)) in
+	0) layout="main-horizontal" ;;
+	1) layout="main-vertical" ;;
+	2) layout="tiled" ;;
+esac
+tmux select-layout -t $PKG $layout
 while true; do
-	case $(($RANDOM % 3)) in
-		0) layout="main-horizontal" ;;
-		1) layout="main-vertical" ;;
-		2) layout="tiled" ;;
-	esac
-	tmux select-layout -t $PKG $layout >/dev/null 2>&1 || exit 0
-	tmux swap-pane -s 0 -t $(($SPLITS*$RANDOM/32767)) >/dev/null 2>&1 || exit 0
-	sleep 10
+	if [ $(tmux list-panes -t $PKG 2>/dev/null | wc -l) -gt 0 ]; then
+		sleep 1
+		continue
+	fi
+	exit 0
 done
-
-exit 0
