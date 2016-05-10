@@ -1,4 +1,4 @@
-hollywood (1.8) unreleased; urgency=medium
+hollywood (1.8-0ubuntu1) yakkety; urgency=medium
 
   [ Dimitri Merejkowsky and Dustin Kirkland ]
   * bin/hollywood, lib/hollywood/apg, lib/hollywood/bmon,
@@ -9,7 +9,7 @@ hollywood (1.8) unreleased; urgency=medium
     lib/hollywood/tree, TODO:
     - improve stability
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 05 Jan 2015 09:58:15 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 09 May 2016 21:33:35 -0500
 
 hollywood (1.7-0ubuntu1) vivid; urgency=medium
 
