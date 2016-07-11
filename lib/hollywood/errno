@@ -15,6 +15,7 @@
 # limitations under the License.
 
 command -v errno >/dev/null 2>&1 || exit 1
+command -v ccze >/dev/null 2>&1 || exit 1
 
 trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
 while true; do
