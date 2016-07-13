@@ -1,6 +1,8 @@
 hollywood (1.9) unreleased; urgency=medium
 
-  * UNRELEASED
+  [ dlahoti ]
+  * lib/hollywood/errno:
+    - add check for ccze to errno
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 09 May 2016 21:33:37 -0500
 
