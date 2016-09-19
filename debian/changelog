@@ -1,4 +1,4 @@
-hollywood (1.9) unreleased; urgency=medium
+hollywood (1.9-0ubuntu1) yakkety; urgency=medium
 
   [ dlahoti ]
   * lib/hollywood/errno:
@@ -8,7 +8,7 @@ hollywood (1.9) unreleased; urgency=medium
   * bin/hollywood:
     - fix github #12, SPLITS Parameter doesn't work
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 09 May 2016 21:33:37 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 18 Sep 2016 20:46:43 -0500
 
 hollywood (1.8-0ubuntu1) yakkety; urgency=medium
 
