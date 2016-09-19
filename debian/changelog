@@ -4,6 +4,10 @@ hollywood (1.9) unreleased; urgency=medium
   * lib/hollywood/errno:
     - add check for ccze to errno
 
+  [ Dustin Kirkland ]
+  * bin/hollywood:
+    - fix github #12, SPLITS Parameter doesn't work
+
  -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 09 May 2016 21:33:37 -0500
 
 hollywood (1.8-0ubuntu1) yakkety; urgency=medium
