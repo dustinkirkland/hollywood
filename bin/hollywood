@@ -75,13 +75,19 @@ for w in $(ls "$widget_dir" | sort -R); do
 	fi
 done
 
-case $(($RANDOM % 3)) in
-	0) layout="main-horizontal" ;;
-	1) layout="main-vertical" ;;
-	2) layout="tiled" ;;
-esac
-tmux select-layout -t $PKG $layout
+i=0
 while true; do
+	i=$((i+1))
+	case $i in
+		*5|*0)
+			case $(($RANDOM % 3)) in
+				0) layout="main-horizontal" ;;
+				1) layout="main-vertical" ;;
+				2) layout="tiled" ;;
+			esac
+			tmux select-layout -t $PKG $layout
+		;;
+	esac
 	if [ $(tmux list-panes -t $PKG 2>/dev/null | wc -l) -gt 0 ]; then
 		sleep 1
 		continue

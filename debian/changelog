@@ -4,6 +4,8 @@ hollywood (1.10) unreleased; urgency=medium
     - fixed github issue #14
       https://github.com/dustinkirkland/hollywood/issues/14
       fixed incomplete sentence in manpage
+  * bin/hollywood:
+    - switch layout every 5 seconds
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 18 Sep 2016 20:46:45 -0500
 
