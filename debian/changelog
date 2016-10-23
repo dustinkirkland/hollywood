@@ -1,6 +1,9 @@
 hollywood (1.10) unreleased; urgency=medium
 
-  * UNRELEASED
+  * share/man/man1/hollywood.1:
+    - fixed github issue #14
+      https://github.com/dustinkirkland/hollywood/issues/14
+      fixed incomplete sentence in manpage
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 18 Sep 2016 20:46:45 -0500
 
