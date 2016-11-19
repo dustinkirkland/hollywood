@@ -1,3 +1,9 @@
+hollywood (1.11) unreleased; urgency=medium
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 18 Nov 2016 18:37:52 -0600
+
 hollywood (1.10-0ubuntu1) zesty; urgency=medium
 
   * share/man/man1/hollywood.1:
