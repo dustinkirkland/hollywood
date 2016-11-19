@@ -1,4 +1,4 @@
-hollywood (1.10) unreleased; urgency=medium
+hollywood (1.10-0ubuntu1) zesty; urgency=medium
 
   * share/man/man1/hollywood.1:
     - fixed github issue #14

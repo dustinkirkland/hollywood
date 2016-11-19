@@ -29,3 +29,16 @@ Description: fill your console with Hollywood melodrama technobabble
  technobabble, perfectly suitable for any Hollywood geek melodrama.
  It is particularly suitable on any number of computer consoles in the
  background of any excellent schlock technothriller.
+
+Package: wallstreet
+Architecture: all
+Depends: ${misc:Depends},
+ byobu,
+ elinks,
+ links2,
+ lynx,
+ newsbeuter,
+ w3m
+Description: fill your console with Wall Street-like news and stats
+ This utility will split your console into a multiple panes of news
+ and statistics, like any good computer screen on Wall Street.

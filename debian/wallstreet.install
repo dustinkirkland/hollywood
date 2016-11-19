@@ -1,0 +1,4 @@
+bin/wallstreet usr/bin/
+bin/breaks usr/bin/
+lib/wallstreet usr/lib/
+share/wallstreet usr/share/

@@ -1,0 +1,3 @@
+bin/hollywood usr/bin/
+lib/hollywood usr/lib/
+share/man/man1/hollywood.1 usr/share/man/man1/
