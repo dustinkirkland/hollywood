@@ -1,6 +1,10 @@
 hollywood (1.11) unreleased; urgency=medium
 
-  * UNRELEASED
+  * bin/breaks, bin/wallstreet, lib/wallstreet/img2txt,
+    lib/wallstreet/jp2a, lib/wallstreet/rsstail, lib/wallstreet/w3m,
+    share/wallstreet/lynx.lss, share/wallstreet/newsbeuter2.urls,
+    share/wallstreet/newsbeuter3.urls:
+    - first crack at a "wallstreet" package
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 18 Nov 2016 18:37:52 -0600
 

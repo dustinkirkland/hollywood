@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Copyright 2014 Dustin Kirkland <dustin.kirkland@gmail.com>
 #
@@ -14,11 +14,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-command -v w3m >/dev/null 2>&1 || exit 1
+command -v locate >/dev/null 2>&1 || exit 1
+command -v jp2a >/dev/null 2>&1 || exit 1
+f=$(mktemp)
 
-trap "pkill -f -9 lib/wallstreet/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
+URL="http://www.wsj.com"
+URL="http://www.wsj.com/news/markets"
+
+trap "rm -f $f; pkill -f -9 lib/wallstreet/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
+wget -q -O- $URL | sed -e "s/\.jpg/.jpg\n/g" | sed -e "s/.*http/http/g" | grep "^http.*\/images\/.*jpg$" | grep -v "\"" >$f 2>/dev/null
 while true; do
 	clear
-	w3m -dump http://google.com/finance | egrep "[0-9]%|^[A-Z]+\s\s+.*[0-9]" | breaks | perl -pe 's:-[0-9\.%]+[^\s\)]:\033[31;1m$&\033[30;0m:g' | perl -pe 's:\+[0-9\.%]+[^\s\)]:\033[32;1m$&\033[30;0m:g' | perl -pe 's:\s[\(\s][0-9\.]+%[\)\s]:\033[32;1m$&\033[30;0m:g' | perl -pe 's:^.+\s\s:\033[34;1m$&\033[30;0m:' | perl -pe 's:[0-9.,]+[\sMB]:\033[35;1m$&\033[30;0m:g'
-	sleep 60
+	jp2a -b --color --term-fit $(shuf -n1 $f)
+	sleep 3
 done
+rm -f $f

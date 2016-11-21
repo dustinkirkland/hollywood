@@ -1,0 +1,68 @@
+#!/bin/bash
+# N.B.: Use bash for $RANDOM
+#
+# wallstreet: create wallstreet suitable consoles of news nerdery
+#
+# Copyright 2014 Dustin Kirkland <dustin.kirkland@gmail.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+PKG="wallstreet"
+trap "pkill -f -9 lib/$PKG/ >/dev/null 2>&1; exit 0" EXIT HUP INT QUIT TERM
+
+dir="-v"
+widget_dir="$(dirname $0)/../lib/$PKG"
+widget1=$(ls "$widget_dir/" | sort -R | head -n1)
+
+if [ -n "$1" ]; then
+	SPLITS="$1"
+else
+	SPLITS=$(ls "$widget_dir" | wc -l)
+fi
+
+arrangements="main-horizontal main-vertical tiled"
+
+if [ -z "$TMUX" ]; then
+	# Not in a tmux session: start one, with
+	# byobu if it's found, else with plain tmux
+	command -v byobu >/dev/null 2>&1
+	if [ $? -eq 0 ]; then
+		tmux_launcher=byobu
+	else
+		tmux_launcher=tmux
+	fi
+	$tmux_launcher new-session -d -s $PKG "/bin/bash"
+	$tmux_launcher send-keys -t $PKG "$0 $1"
+	$tmux_launcher send-keys -t $PKG Enter
+	exec $tmux_launcher attach-session -t $PKG
+	exit 1
+fi
+
+tmux new-window -n $PKG "$widget_dir/w3m" \; \
+	set-option -g pane-active-border-bg "default" \; \
+	set-option -g pane-active-border-fg "default" \; \
+	split-window -h -t $PKG "nice -n 19 $widget_dir/img2txt" \; \
+	split-window -v -t $PKG "nice -n 19 $widget_dir/newsbeuter 1" \; \
+	send-keys -t $PKG "Enter" \; \
+	split-window -v -t $PKG "nice -n 19 $widget_dir/rsstail" \; \
+	>/dev/null 2>&1
+
+tmux select-layout -t $PKG main-vertical
+
+while true; do
+	if [ $(tmux list-panes -t $PKG 2>/dev/null | wc -l) -gt 0 ]; then
+		sleep 1
+		continue
+	fi
+	exit 0
+done

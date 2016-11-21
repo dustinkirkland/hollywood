@@ -14,11 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-command -v w3m >/dev/null 2>&1 || exit 1
+command -v rsstail >/dev/null 2>&1 || exit 1
+
+#URL=http://rss.cnn.com/rss/money_latest.rss
+URL=http://feeds.reuters.com/news/wealth
 
 trap "pkill -f -9 lib/wallstreet/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
 while true; do
-	clear
-	w3m -dump http://google.com/finance | egrep "[0-9]%|^[A-Z]+\s\s+.*[0-9]" | breaks | perl -pe 's:-[0-9\.%]+[^\s\)]:\033[31;1m$&\033[30;0m:g' | perl -pe 's:\+[0-9\.%]+[^\s\)]:\033[32;1m$&\033[30;0m:g' | perl -pe 's:\s[\(\s][0-9\.]+%[\)\s]:\033[32;1m$&\033[30;0m:g' | perl -pe 's:^.+\s\s:\033[34;1m$&\033[30;0m:' | perl -pe 's:[0-9.,]+[\sMB]:\033[35;1m$&\033[30;0m:g'
-	sleep 60
+	rsstail -p -d -i 60 -r -u $URL | sed -e "s/<img.*//" | perl -pe 's:.*:\033[33;1m$&\033[30;0m:g'
 done
