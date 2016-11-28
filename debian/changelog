@@ -15,6 +15,11 @@ hollywood (1.11) unreleased; urgency=medium
     share/wallstreet/newsbeuter.config:
     - a number of updates, statically configuring the windows, focusing on
       news
+  * bin/hollywood, debian/hollywood.install, lib/hollywood/mplayer,
+    share/man/man1/hollywood.1:
+    - add a -h|--help option
+    - move the splits argument to "--splits"
+    - add a -q|--quiet|--nosound arg to enable quiet mode
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 18 Nov 2016 18:37:52 -0600
 

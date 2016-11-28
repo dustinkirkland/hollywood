@@ -21,15 +21,26 @@ PKG="hollywood"
 trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit 0" EXIT HUP INT QUIT TERM
 
 dir="-v"
+MPLAYER_OPTS=""
 widget_dir="$(dirname $0)/../lib/$PKG"
+SPLITS=$(ls "$widget_dir" | wc -l)
+while [ ! -z "$1" ]; do
+	case "$1" in
+		-q|--quiet|--silent|--nosound)
+			MPLAYER_OPTS="-nosound"
+			shift
+		;;
+		-s|--splits)
+			SPLITS="$2"
+			shift 2
+		;;
+		-h|--help|*)
+			exec man $PKG
+		;;
+	esac
+done
+
 widget1=$(ls "$widget_dir/" | sort -R | head -n1)
-
-if [ -n "$1" ]; then
-	SPLITS="$1"
-else
-	SPLITS=$(ls "$widget_dir" | wc -l)
-fi
-
 arrangements="main-horizontal main-vertical tiled"
 
 if [ -z "$TMUX" ]; then
@@ -67,7 +78,7 @@ for w in $(ls "$widget_dir" | sort -R); do
 	pane=$((RANDOM % $splits))
 
 	#echo "Splitting: $pane $dir for $w"
-	tmux split-window $dir -t ${PKG}.$pane "nice -n 19 $widget_dir/$w" >/dev/null 2>&1
+	tmux split-window $dir -t ${PKG}.$pane "MPLAYER_OPTS=$MPLAYER_OPTS nice -n 19 $widget_dir/$w" >/dev/null 2>&1
 	sleep 0.2
 	split=$((split+1))
 	if [ $split -ge $SPLITS ]; then
