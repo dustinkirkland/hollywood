@@ -1,13 +1,14 @@
 #!/usr/bin/python
+import os
 import sys
 
+columns = int(os.popen('tput cols', 'r').read())
 last_length = 0
 for line in sys.stdin:
 	line = line.rstrip()
 	if len(line) >= last_length + 3:
-		print("\n%s" % line)
+		print "-" * (columns-1)
 	elif len(line) <= last_length - 3:
-		print("\n%s" % line)
-	else:
-		print("%s" % line)
+		print "-" * (columns-1)
+	print("%s" % line)
 	last_length = len(line)

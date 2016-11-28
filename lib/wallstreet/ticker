@@ -1,0 +1,58 @@
+#!/bin/sh
+#
+# Copyright 2016 Dustin Kirkland <dustin.kirkland@gmail.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+command -v ticker >/dev/null 2>&1 || exit 1
+
+[ -n "$TMDIR" ] || TMPDIR=$(mktemp -d /dev/shm/$PKG.XXXXXXXXX)
+trap "rm -rf $TMPDIR; pkill -f -9 lib/wallstreet/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
+URL=http://google.com/finance
+
+while true; do
+	case "$1" in
+		+)
+			while [ ! -s "$TMPDIR/finance" ]; do
+				w3m -dump "$URL" >$TMPDIR/finance 2>/dev/null
+			done
+			text=$(cat $TMPDIR/finance | \
+				egrep "[0-9]%|^[A-Z]+\s\s+.*[0-9]" | \
+				egrep "\+[0-9\.%]+[^\s\)]|\s[\(\s][0-9\.]+%[\)\s]" | \
+				sed -e ':a;N;$!ba;s/\n/ ... /g' -e "s/\s\+/  /g")
+			ticker -u -d 0.2 -f brightgreen "$text"
+		;;
+		-)
+			while [ ! -s "$TMPDIR/finance" ]; do
+				w3m -dump "$URL" >$TMPDIR/finance 2>/dev/null
+			done
+			text=$(cat $TMPDIR/finance | \
+				egrep "[0-9]%|^[A-Z]+\s\s+.*[0-9]" | \
+				egrep "\-[0-9\.%]+[^\s\)]" | \
+				sed -e ':a;N;$!ba;s/\n/ ... /g' -e "s/\s\+/  /g")
+			ticker -u -d 0.3 -f brightred "$text"
+		;;
+		topNews|*)
+			pkill -f -9 "rsstail.*37293"
+			rsstail -H -N -p -d -i 60 -r -b 37293 -u http://feeds.reuters.com/reuters/topNews >$TMPDIR/headlines 2>/dev/null &
+			while [ ! -s $TMPDIR/headlines ]; do
+				# Wait for headlines
+				sleep 1
+			done
+			text=$(cat $TMPDIR/headlines | sed -e ':a;N;$!ba;s/\n/ ... /g')
+			ticker -u -d 0.1 -f yellow "$text"
+		;;
+	esac
+	sleep 60
+done
+rm -rf "$TMPDIR"

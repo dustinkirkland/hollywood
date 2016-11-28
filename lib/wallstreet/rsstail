@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright 2014 Dustin Kirkland <dustin.kirkland@gmail.com>
+# Copyright 2016 Dustin Kirkland <dustin.kirkland@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,5 +21,7 @@ URL=http://feeds.reuters.com/news/wealth
 
 trap "pkill -f -9 lib/wallstreet/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
 while true; do
-	rsstail -p -d -i 60 -r -u $URL | sed -e "s/<img.*//" | perl -pe 's:.*:\033[33;1m$&\033[30;0m:g'
+	pkill -f -9 "rsstail.*28374"
+	rsstail -H -N -p -d -i 60 -r -b 28374 -u $URL | perl -pe 's:.*:\033[33;1m$&\033[30;0m:g'
+	sleep 1
 done

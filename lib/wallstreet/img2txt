@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright 2014 Dustin Kirkland <dustin.kirkland@gmail.com>
+# Copyright 2016 Dustin Kirkland <dustin.kirkland@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,16 +16,18 @@
 
 command -v locate >/dev/null 2>&1 || exit 1
 command -v img2txt >/dev/null 2>&1 || exit 1
-f=$(mktemp)
+[ -n "$TMDIR" ] || TMPDIR=$(mktemp -d /dev/shm/$PKG.XXXXXXXXX)
+trap "rm -rf $TMPDIR; pkill -f -9 lib/wallstreet/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
 
 URL=http://www.wsj.com/news/markets
 
-trap "rm -f $f $f.jpg; pkill -f -9 lib/wallstreet/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
-wget -q -O- $URL | sed -e "s/\.jpg/.jpg\n/g" | sed -e "s/.*http/http/g" | grep "^http.*\/images\/.*jpg$" | grep -v "\"" >$f 2>/dev/null
+while [ ! -s $TMPDIR/images ]; do
+	wget -q -O- $URL | sed -e "s/\.jpg/.jpg\n/g" | sed -e "s/.*http/http/g" | grep "^http.*\/images\/.*jpg$" | grep -v "\"" >$TMPDIR/images 2>/dev/null
+done
 while true; do
 	clear
-	wget -q -O- $(shuf -n1 $f) >$f.jpg 2>/dev/null
-	img2txt -W $(tput cols) $f.jpg
+	wget -q -O- $(shuf -n1 $TMPDIR/images) >$TMPDIR/image.jpg 2>/dev/null
+	img2txt -W $(tput cols) $TMPDIR/image.jpg
 	sleep 10
 done
-rm -f $f $f.jpg
+rm -rf "$TMPDIR"

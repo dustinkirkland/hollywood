@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright 2014 Dustin Kirkland <dustin.kirkland@gmail.com>
+# Copyright 2016 Dustin Kirkland <dustin.kirkland@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,9 +16,22 @@
 
 command -v w3m >/dev/null 2>&1 || exit 1
 
-trap "pkill -f -9 lib/wallstreet/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
+[ -n "$TMDIR" ] || TMPDIR=$(mktemp -d /dev/shm/$PKG.XXXXXXXXX)
+trap "rm -rf $TMPDIR; pkill -f -9 lib/wallstreet/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
+URL=http://google.com/finance
+
 while true; do
+	w3m -dump "$URL" >$TMPDIR/finance 2>/dev/null
 	clear
-	w3m -dump http://google.com/finance | egrep "[0-9]%|^[A-Z]+\s\s+.*[0-9]" | breaks | perl -pe 's:-[0-9\.%]+[^\s\)]:\033[31;1m$&\033[30;0m:g' | perl -pe 's:\+[0-9\.%]+[^\s\)]:\033[32;1m$&\033[30;0m:g' | perl -pe 's:\s[\(\s][0-9\.]+%[\)\s]:\033[32;1m$&\033[30;0m:g' | perl -pe 's:^.+\s\s:\033[34;1m$&\033[30;0m:' | perl -pe 's:[0-9.,]+[\sMB]:\033[35;1m$&\033[30;0m:g'
+	cat $TMPDIR/finance | \
+		egrep "[0-9]%|^[A-Z]+\s\s+.*[0-9]" | \
+		sed -e "s/^\[.*\]\s\+//" | \
+		breaks | \
+		perl -pe 's:-[0-9\.%]+[^\s\)]:\033[31;1m$&\033[30;0m:g' | \
+		perl -pe 's:\+[0-9\.%]+[^\s\)]:\033[32;1m$&\033[30;0m:g' | \
+		perl -pe 's:\s[\(\s][0-9\.]+%[\)\s]:\033[32;1m$&\033[30;0m:g' | \
+		perl -pe 's:^.+\s\s:\033[34;1m$&\033[30;0m:' | \
+		perl -pe 's:[0-9.,]+[\sMB]:\033[35;1m$&\033[30;0m:g'
 	sleep 60
 done
+rm -rf "$TMPDIR"

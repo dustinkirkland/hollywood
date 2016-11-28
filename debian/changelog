@@ -5,6 +5,16 @@ hollywood (1.11) unreleased; urgency=medium
     share/wallstreet/lynx.lss, share/wallstreet/newsbeuter2.urls,
     share/wallstreet/newsbeuter3.urls:
     - first crack at a "wallstreet" package
+  * bin/wallstreet, lib/wallstreet/img2txt, lib/wallstreet/jp2a,
+    lib/wallstreet/newsbeuter, lib/wallstreet/rsstail,
+    lib/wallstreet/ticker, lib/wallstreet/w3m:
+    - further refinement, added a couple of tickers
+  * bin/breaks, bin/wallstreet, lib/wallstreet/img2txt,
+    lib/wallstreet/jp2a, lib/wallstreet/newsbeuter,
+    lib/wallstreet/rsstail, lib/wallstreet/ticker, lib/wallstreet/w3m,
+    share/wallstreet/newsbeuter.config:
+    - a number of updates, statically configuring the windows, focusing on
+      news
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 18 Nov 2016 18:37:52 -0600
 
