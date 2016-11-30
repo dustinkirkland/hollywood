@@ -34,10 +34,13 @@ Package: wallstreet
 Architecture: all
 Depends: ${misc:Depends},
  byobu,
- elinks,
- links2,
- lynx,
+ img2txt,
+ locate,
  newsbeuter,
+ perl-base,
+ rsstail,
+ ticker,
+ wget,
  w3m
 Description: fill your console with Wall Street-like news and stats
  This utility will split your console into a multiple panes of news

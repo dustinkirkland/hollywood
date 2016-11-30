@@ -14,7 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-command -v locate >/dev/null 2>&1 || exit 1
 command -v jp2a >/dev/null 2>&1 || exit 1
 f=$(mktemp)
 
