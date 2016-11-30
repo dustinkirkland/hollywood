@@ -1,4 +1,4 @@
-hollywood (1.11) unreleased; urgency=medium
+hollywood (1.11-0ubuntu1) zesty; urgency=medium
 
   * bin/breaks, bin/wallstreet, lib/wallstreet/img2txt,
     lib/wallstreet/jp2a, lib/wallstreet/rsstail, lib/wallstreet/w3m,
@@ -23,7 +23,7 @@ hollywood (1.11) unreleased; urgency=medium
   * debian/control, lib/wallstreet/img2txt, lib/wallstreet/jp2a:
     - update dependencies, add wallstreet stuff
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 18 Nov 2016 18:37:52 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 30 Nov 2016 16:57:52 -0600
 
 hollywood (1.10-0ubuntu1) zesty; urgency=medium
 
