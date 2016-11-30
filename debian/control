@@ -34,8 +34,7 @@ Package: wallstreet
 Architecture: all
 Depends: ${misc:Depends},
  byobu,
- img2txt,
- locate,
+ caca-utils,
  newsbeuter,
  perl-base,
  rsstail,
