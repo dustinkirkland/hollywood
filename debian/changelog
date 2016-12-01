@@ -1,7 +1,7 @@
 hollywood (1.12) unreleased; urgency=medium
 
   * bin/breaks => lib/wallstreet/breaks, lib/wallstreet/w3m:
-    - install missing binary
+    - install missing binary, move out of /usr/bin
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 30 Nov 2016 16:57:54 -0600
 
