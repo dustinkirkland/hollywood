@@ -15,6 +15,7 @@
 # limitations under the License.
 
 command -v w3m >/dev/null 2>&1 || exit 1
+PKG="wallstreet"
 
 [ -n "$TMDIR" ] || TMPDIR=$(mktemp -d /dev/shm/$PKG.XXXXXXXXX)
 trap "rm -rf $TMPDIR; pkill -f -9 lib/wallstreet/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
@@ -26,7 +27,7 @@ while true; do
 	cat $TMPDIR/finance | \
 		egrep "[0-9]%|^[A-Z]+\s\s+.*[0-9]" | \
 		sed -e "s/^\[.*\]\s\+//" | \
-		breaks | \
+		/usr/lib/$PKG/breaks | \
 		perl -pe 's:-[0-9\.%]+[^\s\)]:\033[31;1m$&\033[30;0m:g' | \
 		perl -pe 's:\+[0-9\.%]+[^\s\)]:\033[32;1m$&\033[30;0m:g' | \
 		perl -pe 's:\s[\(\s][0-9\.]+%[\)\s]:\033[32;1m$&\033[30;0m:g' | \
