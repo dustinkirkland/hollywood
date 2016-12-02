@@ -65,6 +65,7 @@ if dpkg --compare-versions $version le 2.1; then
 		resize-pane -t $PKG.1 -y 3 \; \
 		resize-pane -t $PKG.2 -y 3 \; \
 		resize-pane -t $PKG.3 -y 3 \; \
+		resize-pane -t $PKG.4 -y 45 \; \
 		resize-pane -t $PKG.5 -x 70 \; \
 		>/dev/null 2>&1
 else
