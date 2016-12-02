@@ -49,50 +49,44 @@ if [ -z "$TMUX" ]; then
 	exit 1
 fi
 
-#tmux new-window -n $PKG "$widget_dir/w3m" \; \
-#	set-option -g pane-active-border-bg "default" \; \
-#	set-option -g pane-active-border-fg "default" \; \
-#	split-window -v -t $PKG.1 "nice -n 19 $widget_dir/ticker +" \; \
-#	split-window -v -t $PKG.2 "nice -n 19 $widget_dir/ticker -" \; \
-#	split-window -v -t $PKG.3 "nice -n 19 $widget_dir/ticker topNews" \; \
-#	split-window -h -t $PKG.1 "nice -n 19 $widget_dir/img2txt" \; \
-#	split-window -v -t $PKG.5 "nice -n 19 $widget_dir/newsbeuter 1" \; \
-#	send-keys -t $PKG "Enter" \; \
-#	split-window -v -t $PKG.6 "nice -n 19 $widget_dir/rsstail" \; \
-#	>/dev/null 2>&1
-
-tmux new-window -n $PKG "$widget_dir/w3m" \; \
-	set-option -g pane-active-border-bg "default" \; \
-	set-option -g pane-active-border-fg "default" \; \
-	split-window -v -t $PKG.0 $widget_dir/ticker + \; \
-	resize-pane -t $PKG.1 -y 6 \; \
-	split-window -v -t $PKG.1 $widget_dir/ticker - \; \
-	resize-pane -t $PKG.2 -y 5 \; \
-	split-window -v -t $PKG.2 $widget_dir/ticker topNews \; \
-	resize-pane -t $PKG.3 -y 2 \; \
-	split-window -h -t $PKG.0 $widget_dir/img2txt \; \
-	resize-pane -t $PKG.0 -x 80 \; \
-	split-window -v -t $PKG.4 $widget_dir/rsstail \; \
-	resize-pane -t $PKG.5 -y 26 \; \
-	split-window -h -t $PKG.4 $widget_dir/newsbeuter 1 \; \
-	send-keys -t $PKG.6 "Enter" \; \
-	resize-pane -t $PKG.6 -x 80 \; \
-	>/dev/null 2>&1
-
-#tmux new-window -n $PKG top \; \
-#	set-option -g pane-active-border-bg "default" \; \
-#	set-option -g pane-active-border-fg "default" \; \
-#	split-window -v -t $PKG.0 ticker -l hello \; \
-#	resize-pane -t $PKG.1 -y 6 \; \
-#	split-window -v -t $PKG.1 ticker -l howdy \; \
-#	resize-pane -t $PKG.2 -y 5 \; \
-#	split-window -v -t $PKG.2 ticker -l wassup \; \
-#	resize-pane -t $PKG.3 -y 2 \; \
-#	split-window -h -t $PKG.0 top \; \
-#	resize-pane -t $PKG.0 -x 90 \; \
-#	split-window -v -t $PKG.4 top \; \
-#	split-window -h -t $PKG.5 top \; \
-#	>/dev/null 2>&1
+version=$(tmux -V | sed -e "s/.*\s//")
+if dpkg --compare-versions $version le 2.1; then
+	tmux new-window -n $PKG "$widget_dir/w3m" \; \
+		set-option -g pane-active-border-bg "default" \; \
+		set-option -g pane-active-border-fg "default" \; \
+		split-window -v -t $PKG.0 $widget_dir/ticker + \; \
+		split-window -v -t $PKG.1 $widget_dir/ticker - \; \
+		split-window -v -t $PKG.2 $widget_dir/ticker topNews \; \
+		split-window -h -t $PKG.0 $widget_dir/img2txt \; \
+		split-window -h -t $PKG.4 $widget_dir/newsbeuter \; \
+		split-window -v -t $PKG.4 $widget_dir/rsstail \; \
+		send-keys -t $PKG.5 "Enter" \; \
+		resize-pane -t $PKG.0 -x 80 -y 80 \; \
+		resize-pane -t $PKG.1 -y 3 \; \
+		resize-pane -t $PKG.2 -y 3 \; \
+		resize-pane -t $PKG.3 -y 3 \; \
+		resize-pane -t $PKG.5 -x 70 \; \
+		>/dev/null 2>&1
+else
+	# Ubuntu 16.10 and newer
+	tmux new-window -n $PKG "$widget_dir/w3m" \; \
+		split-window -v -t $PKG.0 $widget_dir/ticker + \; \
+		split-window -v -t $PKG.1 $widget_dir/ticker - \; \
+		split-window -v -t $PKG.2 $widget_dir/ticker topNews \; \
+		split-window -h -t $PKG.0 $widget_dir/img2txt \; \
+		split-window -h -t $PKG.1 $widget_dir/newsbeuter \; \
+		split-window -v -t $PKG.1 $widget_dir/rsstail \; \
+		send-keys -t $PKG.3 "Enter" \; \
+		resize-pane -t $PKG.6 -y 3 \; \
+		resize-pane -t $PKG.5 -y 3 \; \
+		resize-pane -t $PKG.4 -y 3 \; \
+		resize-pane -t $PKG.0 -x 80 -y 80 \; \
+		resize-pane -t $PKG.3 -x 70 \; \
+		resize-pane -t $PKG.2 -y 30 \; \
+		set-option -g pane-active-border-bg "default" \; \
+		set-option -g pane-active-border-fg "default" \; \
+		>/dev/null 2>&1
+fi
 
 while true; do
 	if [ $(tmux list-panes -t $PKG 2>/dev/null | wc -l) -gt 0 ]; then

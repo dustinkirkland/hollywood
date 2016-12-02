@@ -18,6 +18,6 @@ command -v newsbeuter >/dev/null 2>&1 || exit 1
 
 trap "pkill -f -9 lib/wallstreet/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
 while true; do
-	newsbeuter -r -C /usr/share/wallstreet/newsbeuter.config -u /usr/share/wallstreet/newsbeuter${1}.urls
+	newsbeuter -r -C /usr/share/wallstreet/newsbeuter.config -u /usr/share/wallstreet/newsbeuter.urls
 	sleep 1
 done
