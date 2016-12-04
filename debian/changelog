@@ -12,6 +12,8 @@ hollywood (1.12) unreleased; urgency=medium
     - add more feeds, remove empty lines from rsstail
   * lib/wallstreet/rsstail, share/wallstreet/newsbeuter.config:
     - fix background, reload newsbeuter once a minute
+  * share/wallstreet/nrss.config:
+    - initial nrss config
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 30 Nov 2016 16:57:54 -0600
 
