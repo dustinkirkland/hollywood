@@ -16,14 +16,13 @@
 
 command -v rsstail >/dev/null 2>&1 || exit 1
 
-#URL=http://rss.cnn.com/rss/money_latest.rss
 URL=http://feeds.reuters.com/news/wealth
 
 trap "pkill -f -9 lib/wallstreet/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
 printf '\e[38;5;226m'
-printf '\e[48;5;0m'
+#printf '\e[48;5;0m'
 while true; do
 	pkill -f -9 "rsstail.*28374" 2>/dev/null || true
-	rsstail -H -N -d -i 60 -b 28374 -u $URL | sed -e "/^\s*$/d"
+	rsstail -H -N -d -i 60 -b 28374 -u $URL | grep "Reuters"
 	sleep 1
 done
