@@ -1,0 +1,20 @@
+name: hollywood
+version: 0
+summary: this will install hollywood
+description: |
+    Hollywood from the Ubuntu package archive
+confinement: classic
+grade: devel
+
+parts:
+  hollywood:
+    plugin: nil
+    stage-packages: [hollywood]
+    stage:
+        - -bin/hollywood
+    snap:
+        - -bin/hollywood
+
+apps:
+   hollywood:
+     command: hollywood

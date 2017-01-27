@@ -1,6 +1,7 @@
 hollywood (1.13) unreleased; urgency=medium
 
-  * UNRELEASED
+  * === added directory snap, snap/snapcraft.yaml:
+    - added a first crack at a snapcraft.yaml
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 04 Dec 2016 11:17:40 -0600
 
