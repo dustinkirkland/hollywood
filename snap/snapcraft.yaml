@@ -1,10 +1,13 @@
 name: hollywood
-version: 0
-summary: this will install hollywood
-description: |
-    Hollywood from the Ubuntu package archive
+version: 1.12
+summary: fill your console with Hollywood melodrama technobabble
+description: >
+    This utility will split your console into a multiple panes of genuine
+    technobabble, perfectly suitable for any Hollywood geek melodrama.
+    It is particularly suitable on any number of computer consoles in the
+    background of any excellent schlock technothriller.
 confinement: classic
-grade: devel
+grade: stable
 
 parts:
   hollywood:
