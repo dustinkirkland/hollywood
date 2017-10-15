@@ -4,6 +4,13 @@ hollywood (1.13) unreleased; urgency=medium
     - added a first crack at a snapcraft.yaml
   * snap/snapcraft.yaml:
     - polish up the snapcraft.yaml
+  * === added directory snap.wallstreet, === renamed directory snap =>
+    snap.hollywood, snap.wallstreet/snapcraft.yaml:
+    - all wallstreet snap packaging
+  * === added directory snap.wallstreet, === renamed directory snap =>
+    snap.hollywood, snap.hollywood/snapcraft.yaml,
+    snap.wallstreet/snapcraft.yaml:
+    - fix versions
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 04 Dec 2016 11:17:40 -0600
 
