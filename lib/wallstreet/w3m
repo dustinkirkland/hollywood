@@ -19,7 +19,7 @@ PKG="wallstreet"
 
 [ -n "$TMDIR" ] || TMPDIR=$(mktemp -d /dev/shm/$PKG.XXXXXXXXX)
 trap "rm -rf $TMPDIR; pkill -f -9 lib/wallstreet/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
-URL=http://google.com/finance
+URL=http://finance.yahoo.com/
 
 while true; do
 	w3m -dump "$URL" >$TMPDIR/finance 2>/dev/null
