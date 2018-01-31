@@ -1,8 +1,8 @@
-hollywood (1.14) unreleased; urgency=medium
+hollywood (1.14-0ubuntu1) bionic; urgency=medium
 
   * rebuild release tarball without snap packaging embedded
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 31 Jan 2018 14:23:13 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 31 Jan 2018 14:44:02 -0600
 
 hollywood (1.13-0ubuntu1) bionic; urgency=medium
 
