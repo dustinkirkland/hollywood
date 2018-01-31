@@ -1,6 +1,6 @@
 hollywood (1.14) unreleased; urgency=medium
 
-  * UNRELEASED
+  * rebuild release tarball without snap packaging embedded
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 31 Jan 2018 14:23:13 -0600
 
