@@ -1,4 +1,4 @@
-hollywood (1.13) unreleased; urgency=medium
+hollywood (1.13-0ubuntu1) bionic; urgency=medium
 
   * === added directory snap, snap/snapcraft.yaml:
     - added a first crack at a snapcraft.yaml
@@ -14,7 +14,7 @@ hollywood (1.13) unreleased; urgency=medium
   * lib/wallstreet/w3m:
     - fix Google Finance URL
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 04 Dec 2016 11:17:40 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 31 Jan 2018 14:23:10 -0600
 
 hollywood (1.12-0ubuntu1) zesty; urgency=medium
 
