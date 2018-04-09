@@ -1,6 +1,9 @@
 hollywood (1.15) unreleased; urgency=medium
 
-  * UNRELEASED
+  * README:
+    - removed some cruft
+  * screenshots/
+    - added a screenshots directory
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 31 Jan 2018 14:44:05 -0600
 
