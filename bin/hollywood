@@ -18,7 +18,8 @@
 # limitations under the License.
 
 PKG="hollywood"
-trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit 0" EXIT HUP INT QUIT TERM
+tmp=/tmp/hollywood
+trap "pkill -f -9 lib/hollywood/;rm $tmp >/dev/null 2>&1; exit 0" EXIT HUP INT QUIT TERM
 
 dir="-v"
 MPLAYER_OPTS=""
@@ -28,6 +29,7 @@ while [ ! -z "$1" ]; do
 	case "$1" in
 		-q|--quiet|--silent|--nosound)
 			MPLAYER_OPTS="-nosound"
+      echo 1 >$tmp
 			shift
 		;;
 		-s|--splits)
@@ -39,8 +41,17 @@ while [ ! -z "$1" ]; do
 		;;
 	esac
 done
+if [[ -f $tmp ]]; then
+  MPLAYER_OPTS=$(cat $tmp)
+fi
 
-widget1=$(ls "$widget_dir/" | sort -R | head -n1)
+if [[ -z $MPLAYER_OPTS ]]; then
+  widget1=$(ls "$widget_dir/" | sort -R | head -n1)
+  widget_all=$(ls "$widget_dir/" | sort -R)
+else
+  widget1=$(ls "$widget_dir/" | grep -v "mplayer" | sort -R | head -n1)
+  widget_all=$(ls "$widget_dir/" | grep -v "mplayer"  | sort -R)
+fi
 arrangements="main-horizontal main-vertical tiled"
 
 if [ -z "$TMUX" ]; then
@@ -65,7 +76,7 @@ tmux new-window -n $PKG "$widget_dir/$widget1" \; \
 
 split=1
 sleep 0.5
-for w in $(ls "$widget_dir" | sort -R); do
+for w in $widget_all; do
 	[ "$w" = "$widget1" ] && continue
 	[ "$dir" = "-v" ] && dir="-h" || dir="-v"
 	panes=$(tmux lsp -t $PKG)
