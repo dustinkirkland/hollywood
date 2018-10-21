@@ -1,0 +1,4 @@
+version=4
+opts="pgpsigurlmangle=s%(hollywood_[\d\.]+\.orig\.tar\.gz)%..\-$1.asc%" \
+https://launchpad.net/hollywood/+download \
+   .*/hollywood_([\d\.]+)\.orig\.tar\.gz debian uupdate

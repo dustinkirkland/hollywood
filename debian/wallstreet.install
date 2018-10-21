@@ -1,0 +1,4 @@
+bin/wallstreet usr/games/
+lib/wallstreet usr/lib/
+debian/wallstreet.1 usr/share/man/man1/
+share/wallstreet usr/share/
