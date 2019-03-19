@@ -1,4 +1,4 @@
-hollywood (1.15) unreleased; urgency=medium
+hollywood (1.15-0ubuntu1) disco; urgency=medium
 
   * README:
     - removed some cruft
@@ -8,7 +8,7 @@ hollywood (1.15) unreleased; urgency=medium
     - default to nosound, add --sound to enable sound
     - https://github.com/dustinkirkland/hollywood/issues/27
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 31 Jan 2018 14:44:05 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 18 Mar 2019 20:05:17 -0500
 
 hollywood (1.14-0ubuntu1) bionic; urgency=medium
 
