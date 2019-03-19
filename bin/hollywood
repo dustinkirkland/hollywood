@@ -21,13 +21,13 @@ PKG="hollywood"
 trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit 0" EXIT HUP INT QUIT TERM
 
 dir="-v"
-MPLAYER_OPTS=""
+MPLAYER_OPTS="-nosound"
 widget_dir="$(dirname $0)/../lib/$PKG"
 SPLITS=$(ls "$widget_dir" | wc -l)
 while [ ! -z "$1" ]; do
 	case "$1" in
-		-q|--quiet|--silent|--nosound)
-			MPLAYER_OPTS="-nosound"
+		--sound)
+			MPLAYER_OPTS=""
 			shift
 		;;
 		-s|--splits)

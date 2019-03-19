@@ -4,6 +4,9 @@ hollywood (1.15) unreleased; urgency=medium
     - removed some cruft
   * screenshots/
     - added a screenshots directory
+  * bin/hollywood, share/man/man1/hollywood.1:
+    - default to nosound, add --sound to enable sound
+    - https://github.com/dustinkirkland/hollywood/issues/27
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 31 Jan 2018 14:44:05 -0600
 
