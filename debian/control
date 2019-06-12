@@ -10,6 +10,7 @@ Package: hollywood
 Architecture: all
 Depends: ${misc:Depends}, byobu,
  apg,
+ atop,
  bmon,
  bsdmainutils,
 # coreutils,

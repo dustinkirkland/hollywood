@@ -18,17 +18,44 @@
 # limitations under the License.
 
 PKG="hollywood"
-trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit 0" EXIT HUP INT QUIT TERM
+trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit 0" INT
 
-dir="-v"
-MPLAYER_OPTS="-nosound"
-widget_dir="$(dirname $0)/../lib/$PKG"
-SPLITS=$(ls "$widget_dir" | wc -l)
+spin_up() {
+	local w=
+	local panes=
+	local splits=
+	local pane=
+	local dir="v"
+	local split=1
+	sleep 0.5
+	for w in $(ls "$WIDGET_DIR" | sort -R); do
+		[ "$dir" = "-v" ] && dir="-h" || dir="-v"
+		panes=$(tmux list-panes -t $PKG 2>/dev/null)
+		# Allow for failed widgets
+		splits=$(echo "$panes" | wc -l)
+		pane=$((RANDOM % $splits))
+		tmux split-window $dir -t ${PKG}.$pane "MPLAYER_OPTS='$MPLAYER_OPTS' nice -n 19 $WIDGET_DIR/$w" >/dev/null 2>&1
+		sleep 0.2
+		split=$((split+1))
+		if [ $split -ge $SPLITS ]; then
+			break
+		fi
+	done
+}
+
+MPLAYER_OPTS="-nosound -speed 5"
+WIDGET_DIR="$(dirname $0)/../lib/$PKG"
+SPLITS=$(ls "$WIDGET_DIR" | wc -l)
+DELAY=10
 while [ ! -z "$1" ]; do
 	case "$1" in
 		--sound)
 			MPLAYER_OPTS=""
 			shift
+		;;
+		-d|--delay)
+			DELAY="$2"
+			shift 2
 		;;
 		-s|--splits)
 			SPLITS="$2"
@@ -40,7 +67,7 @@ while [ ! -z "$1" ]; do
 	esac
 done
 
-widget1=$(ls "$widget_dir/" | sort -R | head -n1)
+widget1=$(ls "$WIDGET_DIR/" | sort -R | head -n1)
 arrangements="main-horizontal main-vertical tiled"
 
 if [ -z "$TMUX" ]; then
@@ -59,46 +86,19 @@ if [ -z "$TMUX" ]; then
 	exit 1
 fi
 
-tmux new-window -n $PKG "$widget_dir/$widget1" \; \
+tmux new-window -n $PKG "$WIDGET_DIR/$widget1" \; \
 	set-option -g pane-active-border-bg "default" \; \
 	set-option -g pane-active-border-fg "default" >/dev/null 2>&1
 
-split=1
-sleep 0.5
-for w in $(ls "$widget_dir" | sort -R); do
-	[ "$w" = "$widget1" ] && continue
-	[ "$dir" = "-v" ] && dir="-h" || dir="-v"
-	panes=$(tmux lsp -t $PKG)
-
-	#echo "Panes:"
-	#echo "$panes"
-
-	# Allow for failed widgets
-	splits=$(echo "$panes" | wc -l)
-	pane=$((RANDOM % $splits))
-
-	#echo "Splitting: $pane $dir for $w"
-	tmux split-window $dir -t ${PKG}.$pane "MPLAYER_OPTS=$MPLAYER_OPTS nice -n 19 $widget_dir/$w" >/dev/null 2>&1
-	sleep 0.2
-	split=$((split+1))
-	if [ $split -ge $SPLITS ]; then
-		break
-	fi
-done
+spin_up
 
 i=0
 while true; do
 	i=$((i+1))
-	case $i in
-		*5|*0)
-			case $(($RANDOM % 3)) in
-				0) layout="main-horizontal" ;;
-				1) layout="main-vertical" ;;
-				2) layout="tiled" ;;
-			esac
-			tmux select-layout -t $PKG $layout
-		;;
-	esac
+	if [ "$((i % DELAY))" = "0" ]; then
+		tmux kill-pane -a -t $PKG.bottom-right
+		spin_up
+	fi
 	if [ $(tmux list-panes -t $PKG 2>/dev/null | wc -l) -gt 0 ]; then
 		sleep 1
 		continue

@@ -1,6 +1,27 @@
 hollywood (1.16) unreleased; urgency=medium
 
-  * UNRELEASED
+  * debian/control:
+    - added atop
+  * bin/hollywood, debian/control, lib/hollywood/apg,
+    lib/hollywood/atop, lib/hollywood/bmon, lib/hollywood/cmatrix,
+    lib/hollywood/code, lib/hollywood/errno, lib/hollywood/hexdump,
+    lib/hollywood/htop, lib/hollywood/jp2a, lib/hollywood/logs,
+    lib/hollywood/man, lib/hollywood/mplayer, lib/hollywood/speedometer,
+    lib/hollywood/sshart, lib/hollywood/stat, lib/hollywood/tree,
+    share/man/man1/hollywood.1:
+    - rework the pane reorganization system
+      + rather than just using the presets, tear down all panes but one,
+        and build them back up
+      + adds much more randomness (2^16) and more interesting pane layouts
+    - speed up mplayer (when sound is off), makes for a more interesting
+      animation
+    - add and document a command line option for -d|--delay in seconds,
+      for the amount of time between window reorganization
+    - simplify the pkill/trap to only catch ctrl-c (SIGINT)
+    - loop the mplayer animation, in case the delay is longer than the
+      length of the animation
+    - reorganize the stat widget, to run head first, then randomize,
+      improves start time drammatically
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 18 Mar 2019 20:05:23 -0500
 
