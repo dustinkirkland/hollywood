@@ -1,4 +1,4 @@
-hollywood (1.16) unreleased; urgency=medium
+hollywood (1.16-0ubuntu1) eoan; urgency=medium
 
   * debian/control:
     - added atop
@@ -35,7 +35,7 @@ hollywood (1.16) unreleased; urgency=medium
   * share/man/man1/hollywood.1:
     - add link to hollywood.computer
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 18 Mar 2019 20:05:23 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 11 Jun 2019 23:37:11 -0500
 
 hollywood (1.15-0ubuntu1) disco; urgency=medium
 
