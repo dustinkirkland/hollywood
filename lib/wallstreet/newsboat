@@ -14,10 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-command -v newsbeuter >/dev/null 2>&1 || exit 1
-
+command -v newsboat >/dev/null 2>&1 || exit 1
 trap "pkill -f -9 lib/wallstreet/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
+PKG="wallstreet"
+dir="$(dirname $0)/../../share/$PKG"
 while true; do
-	newsbeuter -r -C /usr/share/wallstreet/newsbeuter.config -u /usr/share/wallstreet/newsbeuter.urls
+	newsboat -r -C "$dir"/newsboat.config -u "$dir"/newsboat.urls
 	sleep 1
 done

@@ -57,9 +57,9 @@ if dpkg --compare-versions $version le 2.1; then
 		split-window -v -t $PKG.0 $widget_dir/ticker + \; \
 		split-window -v -t $PKG.1 $widget_dir/ticker - \; \
 		split-window -v -t $PKG.2 $widget_dir/ticker topNews \; \
-		split-window -h -t $PKG.0 $widget_dir/img2txt \; \
-		split-window -h -t $PKG.4 $widget_dir/newsbeuter \; \
-		split-window -v -t $PKG.4 $widget_dir/rsstail \; \
+		split-window -h -t $PKG.0 $widget_dir/jp2a \; \
+		split-window -h -t $PKG.4 $widget_dir/newsboat \; \
+		split-window -v -t $PKG.4 $widget_dir/img2txt \; \
 		send-keys -t $PKG.5 "Enter" \; \
 		resize-pane -t $PKG.0 -x 80 -y 80 \; \
 		resize-pane -t $PKG.1 -y 3 \; \
@@ -74,9 +74,9 @@ else
 		split-window -v -t $PKG.0 $widget_dir/ticker + \; \
 		split-window -v -t $PKG.1 $widget_dir/ticker - \; \
 		split-window -v -t $PKG.2 $widget_dir/ticker topNews \; \
-		split-window -h -t $PKG.0 $widget_dir/img2txt \; \
-		split-window -h -t $PKG.1 $widget_dir/newsbeuter \; \
-		split-window -v -t $PKG.1 $widget_dir/rsstail \; \
+		split-window -h -t $PKG.0 $widget_dir/jp2a \; \
+		split-window -h -t $PKG.1 $widget_dir/newsboat \; \
+		split-window -v -t $PKG.1 $widget_dir/img2txt \; \
 		send-keys -t $PKG.3 "Enter" \; \
 		resize-pane -t $PKG.6 -y 3 \; \
 		resize-pane -t $PKG.5 -y 3 \; \

@@ -1,6 +1,14 @@
 hollywood (1.18) unreleased; urgency=medium
 
-  * UNRELEASED
+  * bin/wallstreet, debian/control, lib/wallstreet/newsbeuter =>
+    lib/wallstreet/newsboat, lib/wallstreet/ticker, lib/wallstreet/w3m,
+    share/wallstreet/newsbeuter.config =>
+    share/wallstreet/newsboat.config, share/wallstreet/newsbeuter.urls
+    => share/wallstreet/newsboat.urls:
+    - Get wallstreet working again
+    - move from newsbeuter to newsboat, Closes: #914627
+    - move from google to yahoo
+    - replace rsstail panel
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 11 Jun 2019 23:39:29 -0500
 

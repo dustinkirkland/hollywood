@@ -43,7 +43,7 @@ Depends:
  tmux,
 Recommends:
  caca-utils,
- newsbeuter,
+ newsboat,
  python3,
  rsstail,
  ticker,

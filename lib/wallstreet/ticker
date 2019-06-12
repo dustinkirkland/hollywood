@@ -18,29 +18,31 @@ command -v ticker >/dev/null 2>&1 || exit 1
 
 [ -n "$TMDIR" ] || TMPDIR=$(mktemp -d /dev/shm/$PKG.XXXXXXXXX)
 trap "rm -rf $TMPDIR; pkill -f -9 lib/wallstreet/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
-URL=http://google.com/finance
+#URL=http://google.com/finance
+URL_GAINERS=https://finance.yahoo.com/gainers
+URL_LOSERS=https://finance.yahoo.com/losers
 
 while true; do
 	case "$1" in
 		+)
-			while [ ! -s "$TMPDIR/finance" ]; do
-				w3m -dump "$URL" >$TMPDIR/finance 2>/dev/null
+			while [ ! -s "$TMPDIR/gainers" ]; do
+				w3m -dump "$URL_GAINERS" >$TMPDIR/gainers 2>/dev/null
 			done
-			text=$(cat $TMPDIR/finance | \
-				egrep "[0-9]%|^[A-Z]+\s\s+.*[0-9]" | \
-				egrep "\+[0-9\.%]+[^\s\)]|\s[\(\s][0-9\.]+%[\)\s]" | \
-				sed -e ':a;N;$!ba;s/\n/ ... /g' -e "s/\s\+/  /g")
-			ticker -u -d 0.2 -f brightgreen "$text"
+			text=$(cat $TMPDIR/gainers | \
+				egrep "^[A-Z]+\s\s+.*[0-9]" | \
+				sed -e 's/%.*/% ... /g' -e "s/\s\+/ /g" | \
+				tr -d '\n')
+			ticker -u -d 0.2 --foreground=green "$text"
 		;;
 		-)
-			while [ ! -s "$TMPDIR/finance" ]; do
-				w3m -dump "$URL" >$TMPDIR/finance 2>/dev/null
+			while [ ! -s "$TMPDIR/losers" ]; do
+				w3m -dump "$URL_LOSERS" >$TMPDIR/losers 2>/dev/null
 			done
-			text=$(cat $TMPDIR/finance | \
-				egrep "[0-9]%|^[A-Z]+\s\s+.*[0-9]" | \
-				egrep "\-[0-9\.%]+[^\s\)]" | \
-				sed -e ':a;N;$!ba;s/\n/ ... /g' -e "s/\s\+/  /g")
-			ticker -u -d 0.3 -f brightred "$text"
+			text=$(cat $TMPDIR/losers | \
+				egrep "^[A-Z]+\s\s+.*[0-9]" | \
+				sed -e 's/%.*/% ... /g' -e "s/\s\+/ /g" | \
+				tr -d '\n')
+			ticker -u -d 0.3 --foreground=red "$text"
 		;;
 		topNews|*)
 			pkill -f -9 "rsstail.*37293"
@@ -50,7 +52,7 @@ while true; do
 				sleep 1
 			done
 			text=$(cat $TMPDIR/headlines | sed -e ':a;N;$!ba;s/\n/ ... /g')
-			ticker -u -d 0.1 -f yellow "$text"
+			ticker -u -d 0.1 --foreground=yellow "$text"
 		;;
 	esac
 	sleep 60
