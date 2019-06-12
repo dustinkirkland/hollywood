@@ -1,30 +1,34 @@
 Source: hollywood
-Section: admin
+Section: games
 Priority: optional
 Maintainer: Dustin Kirkland <kirkland@ubuntu.com>
 Build-Depends: debhelper (>= 7.0.50~)
-Standards-Version: 3.9.5
-Homepage: http://launchpad.net/hollywood
+Standards-Version: 4.3.0
+Homepage: https://hollywood.computer
 
 Package: hollywood
 Architecture: all
-Depends: ${misc:Depends}, byobu,
+Depends:
+ ${misc:Depends},
+ byobu,
+ tmux,
+Recommends:
  apg,
  atop,
  bmon,
  bsdmainutils,
-# coreutils,
  ccze,
  cmatrix,
  htop,
  jp2a,
  mlocate,
  moreutils,
- mplayer,
  openssh-client,
  speedometer,
+ tmux,
  tree,
- vim
+Suggests:
+ mplayer
 Description: fill your console with Hollywood melodrama technobabble
  This utility will split your console into a multiple panes of genuine
  technobabble, perfectly suitable for any Hollywood geek melodrama.
@@ -33,16 +37,18 @@ Description: fill your console with Hollywood melodrama technobabble
 
 Package: wallstreet
 Architecture: all
-Depends: ${misc:Depends},
+Depends:
+ ${misc:Depends},
  byobu,
+ tmux,
+Recommends:
  caca-utils,
  newsbeuter,
- perl-base,
- python3-minimal,
+ python3,
  rsstail,
  ticker,
  wget,
- w3m
+ w3m,
 Description: fill your console with Wall Street-like news and stats
  This utility will split your console into a multiple panes of news
  and statistics, like any good computer screen on Wall Street.

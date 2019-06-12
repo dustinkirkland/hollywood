@@ -1,27 +1,32 @@
-Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: hollywood
 Upstream-Contact: Dustin Kirkland <dustin.kirkland@gmail.com>
-Source: http://launchpad.net/hollywood
+Source: https://launchpad.net/hollywood
 
 Files: *
-Copyright: 2014, Dustin Kirkland <dustin.kirkland@gmail.com>
-License: Apache-2
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
- http://www.apache.org/licenses/LICENSE-2.0
- On Debian systems, the complete text of the Apache version 2.0 license
- can be found in "/usr/share/common-licenses/Apache-2.0".
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
+Copyright: 2014 Dustin Kirkland <dustin.kirkland@gmail.com>
+License: Apache-2.0
 
 Files: share/hollywood/mi.mp4
-Copyright: 2014, Dustin Kirkland <dustin.kirkland@gmail.com>
+Copyright: 2014 Dustin Kirkland <dustin.kirkland@gmail.com>
 License: CC0-1.0
  Licensed under the Creative Comons Zero 1.0 Universal (CC0-1.0);
  Public Domain Dedication.
  You may obtain a copy of the License at:
  https://creativecommons.org/publicdomain/zero/1.0/
+
+License: Apache-2.0
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ .
+     https://www.apache.org/licenses/LICENSE-2.0
+ .
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ .
+ On Debian systems, the full text of the Apache License, Version 2.0
+ can be found in the file '/usr/share/common-licenses/Apache-2.0'.

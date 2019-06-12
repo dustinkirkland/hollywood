@@ -29,6 +29,9 @@ hollywood (1.16) unreleased; urgency=medium
     - use locate -l to stop matching after 4096 files
     - randomize the logs order
     - add a map, because there's always a world map
+  * debian/control, debian/copyright, debian/wallstreet.install,
+    share/man/man1/wallstreet.1:
+    - merge some of the changes from debian
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 18 Mar 2019 20:05:23 -0500
 

@@ -1,3 +1,4 @@
 bin/wallstreet usr/bin/
 lib/wallstreet usr/lib/
 share/wallstreet usr/share/
+share/man/man1/wallstreet.1 usr/share/man/man1/
