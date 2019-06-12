@@ -9,6 +9,10 @@ hollywood (1.18) unreleased; urgency=medium
     - move from newsbeuter to newsboat, Closes: #914627
     - move from google to yahoo
     - replace rsstail panel
+  * bin/wallstreet, share/wallstreet/newsboat.config:
+    - drop support for Ubuntu versions before 16.10
+    - simplify pane sizing
+    - text wrap newsboat at 70 columns
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 11 Jun 2019 23:39:29 -0500
 

@@ -49,45 +49,17 @@ if [ -z "$TMUX" ]; then
 	exit 1
 fi
 
-version=$(tmux -V | sed -e "s/.*\s//")
-if dpkg --compare-versions $version le 2.1; then
-	tmux new-window -n $PKG "$widget_dir/w3m" \; \
-		set-option -g pane-active-border-bg "default" \; \
-		set-option -g pane-active-border-fg "default" \; \
-		split-window -v -t $PKG.0 $widget_dir/ticker + \; \
-		split-window -v -t $PKG.1 $widget_dir/ticker - \; \
-		split-window -v -t $PKG.2 $widget_dir/ticker topNews \; \
-		split-window -h -t $PKG.0 $widget_dir/jp2a \; \
-		split-window -h -t $PKG.4 $widget_dir/newsboat \; \
-		split-window -v -t $PKG.4 $widget_dir/img2txt \; \
-		send-keys -t $PKG.5 "Enter" \; \
-		resize-pane -t $PKG.0 -x 80 -y 80 \; \
-		resize-pane -t $PKG.1 -y 3 \; \
-		resize-pane -t $PKG.2 -y 3 \; \
-		resize-pane -t $PKG.3 -y 3 \; \
-		resize-pane -t $PKG.4 -y 45 \; \
-		resize-pane -t $PKG.5 -x 70 \; \
-		>/dev/null 2>&1
-else
-	# Ubuntu 16.10 and newer
-	tmux new-window -n $PKG "$widget_dir/w3m" \; \
-		split-window -v -t $PKG.0 $widget_dir/ticker + \; \
-		split-window -v -t $PKG.1 $widget_dir/ticker - \; \
-		split-window -v -t $PKG.2 $widget_dir/ticker topNews \; \
-		split-window -h -t $PKG.0 $widget_dir/jp2a \; \
-		split-window -h -t $PKG.1 $widget_dir/newsboat \; \
-		split-window -v -t $PKG.1 $widget_dir/img2txt \; \
-		send-keys -t $PKG.3 "Enter" \; \
-		resize-pane -t $PKG.6 -y 3 \; \
-		resize-pane -t $PKG.5 -y 3 \; \
-		resize-pane -t $PKG.4 -y 3 \; \
-		resize-pane -t $PKG.0 -x 80 -y 80 \; \
-		resize-pane -t $PKG.3 -x 70 \; \
-		resize-pane -t $PKG.2 -y 30 \; \
-		set-option -g pane-active-border-bg "default" \; \
-		set-option -g pane-active-border-fg "default" \; \
-		>/dev/null 2>&1
-fi
+tmux new-window -n $PKG "$widget_dir/w3m" \; \
+	split-window -v -t $PKG.0 $widget_dir/ticker + \; \
+	split-window -v -t $PKG.1 $widget_dir/ticker - \; \
+	split-window -v -t $PKG.2 $widget_dir/ticker topNews \; \
+	split-window -h -t $PKG.0 $widget_dir/newsboat \; \
+	split-window -h -t $PKG.1 $widget_dir/img2txt \; \
+	send-keys -t $PKG.1 "Enter" \; \
+	resize-pane -t $PKG.0 -x 80 -y 999999 \; \
+	set-option -g pane-active-border-bg "default" \; \
+	set-option -g pane-active-border-fg "default" \; \
+	>/dev/null 2>&1
 
 while true; do
 	if [ $(tmux list-panes -t $PKG 2>/dev/null | wc -l) -gt 0 ]; then
