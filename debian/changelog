@@ -22,6 +22,13 @@ hollywood (1.16) unreleased; urgency=medium
       length of the animation
     - reorganize the stat widget, to run head first, then randomize,
       improves start time drammatically
+  * lib/hollywood/apg, lib/hollywood/code, lib/hollywood/jp2a,
+    lib/hollywood/logs, lib/hollywood/map, lib/hollywood/sshart,
+    share/hollywood/map.jpg:
+    - randomize the colors on apg
+    - use locate -l to stop matching after 4096 files
+    - randomize the logs order
+    - add a map, because there's always a world map
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 18 Mar 2019 20:05:23 -0500
 

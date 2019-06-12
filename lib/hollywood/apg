@@ -18,6 +18,6 @@ command -v apg >/dev/null 2>&1 || exit 1
 
 trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" INT
 while true; do
-	apg -qlt -c /dev/urandom -n 1 | ccze -A -c default=magenta
+	apg -qlt -c /dev/urandom -n 1 | ccze -A -c default=$(printf "red\ngreen\nyellow\nblue\nmagenta\ncyan" | sort -R | head -n1)
 	sleep 0.2
 done

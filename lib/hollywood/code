@@ -19,7 +19,7 @@ command -v view >/dev/null 2>&1 || exit 1
 
 trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" INT
 while true; do
-	FILES=$(locate "/usr/*.java" "/usr/*.c" "/usr/*.cpp" | sort -R | head -n 4096) || true
+	FILES=$(locate -l 4096 "/usr/*.java" "/usr/*.c" "/usr/*.cpp" 2>/dev/null | sort -R)
 	for f in $FILES; do
 		[ -r "$f" ] || continue
 		[ -s "$f" ] || continue

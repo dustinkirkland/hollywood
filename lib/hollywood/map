@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright 2014 Dustin Kirkland <dustin.kirkland@gmail.com>
+# Copyright 2019 Dustin Kirkland <dustin.kirkland@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,20 +14,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-command -v ssh-keygen >/dev/null 2>&1 || exit 1
-command -v ccze >/dev/null 2>&1 || exit 1
+command -v jp2a >/dev/null 2>&1 || exit 1
+
+trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" INT
 
 PKG=hollywood
-tmpdir="/tmp/$PKG"
-trap "rm -rf $tmpdir 2>/dev/null && pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" INT
+dir="$(dirname $0)/../../share/$PKG"
 while true; do
-	mkdir -p "$tmpdir"
-	tmpfile=$(mktemp -p "$tmpdir" -t XXXXXX)
-	rm -f $tmpfile
-	art=$(ssh-keygen -vvv -b 1024 -t dsa -N "" -f $tmpfile)
-	rm -f $tmpfile $tmpfile.pub
-	wait
-	clear
-	echo "$art" | ccze -A -c default=red
-	sleep 3 &
+	jp2a --colors -z --fill "$dir/map.jpg"
+	sleep 1
 done
