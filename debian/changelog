@@ -1,8 +1,8 @@
-hollywood (1.17) unreleased; urgency=medium
+hollywood (1.17-0ubuntu1) eoan; urgency=medium
 
   * No change rebuild
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 11 Jun 2019 23:37:14 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 11 Jun 2019 23:39:27 -0500
 
 hollywood (1.16-0ubuntu1) eoan; urgency=medium
 
