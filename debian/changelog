@@ -13,8 +13,10 @@ hollywood (1.18) unreleased; urgency=medium
     - drop support for Ubuntu versions before 16.10
     - simplify pane sizing
     - text wrap newsboat at 70 columns
+  * debian/changelog:
+    - merge in Debian maintainer changelogs, here upstream into this one
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 11 Jun 2019 23:39:29 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 12 Jun 2019 19:00:15 -0500
 
 hollywood (1.17-0ubuntu1) eoan; urgency=medium
 
@@ -72,6 +74,32 @@ hollywood (1.15-0ubuntu1) disco; urgency=medium
     - https://github.com/dustinkirkland/hollywood/issues/27
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 18 Mar 2019 20:05:17 -0500
+
+hollywood (1.14-2) unstable; urgency=medium
+
+  * New Maintainer (Closes: #920883):
+    - Add myself to Maintainer field on d/control.
+  * Bump debhelper to debhelper-compat (= 12) from 11 on d/control.
+    - Delete compat file
+  * Bump Standards-Version to 4.3.0 (from 4.2.1) on d/control.
+  * Add myself to d/copyright for debian/* files.
+  * Add Vcs-* links
+
+ -- Emmanuel Arias <emamnuelarias30@gmail.com>  Fri, 15 Feb 2019 01:25:04 +0000
+
+hollywood (1.14-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * debian/control: Add missing package dependency tmux.
+    (Closes: #912823)
+
+ -- Boyuan Yang <byang@debian.org>  Fri, 07 Dec 2018 23:02:30 -0500
+
+hollywood (1.14-1) unstable; urgency=medium
+
+  * Initial release (Closes: #888265)
+
+ -- Yangfl <mmyangfl@gmail.com>  Sun, 21 Oct 2018 21:17:10 +0800
 
 hollywood (1.14-0ubuntu1) bionic; urgency=medium
 
