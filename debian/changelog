@@ -1,3 +1,9 @@
+hollywood (1.19) unreleased; urgency=medium
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 12 Jun 2019 19:07:15 -0500
+
 hollywood (1.18-0ubuntu1) eoan; urgency=medium
 
   * bin/wallstreet, debian/control, lib/wallstreet/newsbeuter =>
