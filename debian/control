@@ -1,12 +1,10 @@
 Source: hollywood
 Section: games
 Priority: optional
-Maintainer: Emmanuel Arias <emmanuelarias30@gmail.com>
-Build-Depends: debhelper-compat (= 12)
-Homepage: http://launchpad.net/hollywood
-Vcs-Git: https://salsa.debian.org/eamanu-guest/hollywood.git
-Vcs-Browser: https://salsa.debian.org/eamanu-guest/hollywood
+Maintainer: Dustin Kirkland <kirkland@ubuntu.com>
+Build-Depends: debhelper (>= 7.0.50~)
 Standards-Version: 4.3.0
+Homepage: https://hollywood.computer
 
 Package: hollywood
 Architecture: all
@@ -16,6 +14,7 @@ Depends:
  tmux,
 Recommends:
  apg,
+ atop,
  bmon,
  bsdmainutils,
  ccze,
@@ -26,9 +25,10 @@ Recommends:
  moreutils,
  openssh-client,
  speedometer,
+ tmux,
  tree,
 Suggests:
- mplayer,
+ mplayer
 Description: fill your console with Hollywood melodrama technobabble
  This utility will split your console into a multiple panes of genuine
  technobabble, perfectly suitable for any Hollywood geek melodrama.
@@ -43,7 +43,7 @@ Depends:
  tmux,
 Recommends:
  caca-utils,
- newsbeuter,
+ newsboat,
  python3,
  rsstail,
  ticker,
