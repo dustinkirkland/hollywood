@@ -1,4 +1,4 @@
-hollywood (1.18) unreleased; urgency=medium
+hollywood (1.18-0ubuntu1) eoan; urgency=medium
 
   * bin/wallstreet, debian/control, lib/wallstreet/newsbeuter =>
     lib/wallstreet/newsboat, lib/wallstreet/ticker, lib/wallstreet/w3m,
@@ -16,7 +16,7 @@ hollywood (1.18) unreleased; urgency=medium
   * debian/changelog:
     - merge in Debian maintainer changelogs, here upstream into this one
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 12 Jun 2019 19:00:15 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 12 Jun 2019 19:07:14 -0500
 
 hollywood (1.17-0ubuntu1) eoan; urgency=medium
 
