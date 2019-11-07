@@ -1,3 +1,9 @@
+hollywood (1.20) unreleased; urgency=medium
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 07 Nov 2019 07:34:13 -0600
+
 hollywood (1.19-0ubuntu1) focal; urgency=medium
 
   * bin/hollywood, debian/control, debian/copyright, lib/hollywood/apg,
