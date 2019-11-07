@@ -7,14 +7,6 @@ Files: *
 Copyright: 2014 Dustin Kirkland <dustin.kirkland@gmail.com>
 License: Apache-2.0
 
-Files: share/hollywood/mi.mp4
-Copyright: 2014 Dustin Kirkland <dustin.kirkland@gmail.com>
-License: CC0-1.0
- Licensed under the Creative Comons Zero 1.0 Universal (CC0-1.0);
- Public Domain Dedication.
- You may obtain a copy of the License at:
- https://creativecommons.org/publicdomain/zero/1.0/
-
 License: Apache-2.0
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.

@@ -3,4 +3,3 @@
   (many ncurses programs will complain if the window is too small)
 * factorize 'trap' commands ?
 * don't depend on $RANDOM (so that we can use $SHELL)
-* play the mi.mp4 file on a loop
