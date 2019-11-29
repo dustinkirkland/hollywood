@@ -1,8 +1,9 @@
 hollywood (1.20) unreleased; urgency=medium
 
-  * UNRELEASED
+  * lib/hollywood/mplayer, share/hollywood/soundwave.mp4:
+    - added sound wave video (no sound)
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 07 Nov 2019 07:34:13 -0600
+ -- Dustin Kirkland <kirkland@x250>  Fri, 29 Nov 2019 14:40:45 -0600
 
 hollywood (1.19-0ubuntu1) focal; urgency=medium
 

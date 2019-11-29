@@ -18,4 +18,4 @@ command -v mplayer >/dev/null 2>&1 || exit 1
 trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" INT
 PKG=hollywood
 dir="$(dirname $0)/../../share/$PKG"
-DISPLAY= mplayer -vo caca -loop 0 $MPLAYER_OPTS $dir/mi.mp4
+DISPLAY= mplayer -vo caca -loop 0 $MPLAYER_OPTS $dir/soundwave.mp4
