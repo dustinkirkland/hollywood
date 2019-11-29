@@ -1,4 +1,4 @@
-hollywood (1.20) unreleased; urgency=medium
+hollywood (1.20-0ubuntu1) focal; urgency=medium
 
   * lib/hollywood/mplayer, share/hollywood/soundwave.mp4:
     - added sound wave video (no sound)
@@ -9,7 +9,7 @@ hollywood (1.20) unreleased; urgency=medium
   * debian/changelog:
     - fix email
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 29 Nov 2019 14:58:46 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 29 Nov 2019 15:07:08 -0600
 
 hollywood (1.19-0ubuntu1) focal; urgency=medium
 
