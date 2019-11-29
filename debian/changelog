@@ -4,8 +4,10 @@ hollywood (1.20) unreleased; urgency=medium
     - added sound wave video (no sound)
     - start at a random point, between 0 and 99 seconds into the video
     - speed it up 100x
+  * debian/control:
+    - depends, rather than recommends
 
- -- Dustin Kirkland <kirkland@x250>  Fri, 29 Nov 2019 14:53:43 -0600
+ -- Dustin Kirkland <kirkland@x250>  Fri, 29 Nov 2019 14:57:46 -0600
 
 hollywood (1.19-0ubuntu1) focal; urgency=medium
 
