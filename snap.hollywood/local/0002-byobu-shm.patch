@@ -1,0 +1,20 @@
+--- dirs.orig	2020-02-16 00:18:13.938669957 -0300
++++ dirs	2020-02-16 00:20:06.556951542 -0300
+@@ -49,7 +49,7 @@
+ # Create and export the runtime cache directory
+ if [ -w /dev/shm ]; then
+ 	# Use shm for performance, if possible
+-	for i in /dev/shm/$PKG-$USER-*; do
++	for i in /dev/shm/snap.$SNAP_NAME.$USER/*; do
+ 		if [ -d "$i" ] && [ -O "$i" ]; then
+ 			export BYOBU_RUN_DIR="$i"
+ 			break
+@@ -57,7 +57,7 @@
+ 	done
+ 	# Still empty, make a new one
+ 	if [ ! -d "$BYOBU_RUN_DIR" ] || [ ! -O "$BYOBU_RUN_DIR" ]; then
+-		export BYOBU_RUN_DIR=$(mktemp -d /dev/shm/$PKG-$USER-XXXXXXXX)
++		export BYOBU_RUN_DIR=$(mktemp -d /dev/shm/snap.$SNAP_NAME.$USER/XXXXXXXX)
+ 	fi
+ fi
+ if [ ! -d "$BYOBU_RUN_DIR" ] || [ ! -O "$BYOBU_RUN_DIR" ] || [ ! -w "$BYOBU_RUN_DIR" ]; then
