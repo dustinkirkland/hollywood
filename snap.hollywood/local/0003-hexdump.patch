@@ -1,0 +1,13 @@
+--- hexdump.orig	2020-02-16 10:01:00.332202757 -0300
++++ hexdump	2020-02-16 10:01:30.707334337 -0300
+@@ -19,8 +19,8 @@
+ 
+ trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
+ while true; do
+-	for f in $(ls /usr/bin/ | sort -R); do
+-		head -c 4096 "/usr/bin/$f" | hexdump -C | ccze -A -c default=green -c dir="bold green"
++	for f in $(ls "$SNAP/usr/bin/" | sort -R); do
++		head -c 4096 "$SNAP/usr/bin/$f" | hexdump -C | ccze -A -c default=green -c dir="bold green"
+ 		sleep 0.7
+ 	done
+ done

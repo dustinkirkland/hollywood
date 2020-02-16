@@ -1,0 +1,11 @@
+--- /snap/hollywood/current/usr/lib/hollywood/man.orig	2016-05-09 21:33:50.000000000 -0300
++++ /snap/hollywood/current/usr/lib/hollywood/man	2020-02-16 14:25:13.000000000 -0300
+@@ -19,7 +19,7 @@
+ 
+ trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
+ while true; do
+-	FILES=$(ls /usr/share/man/man1/ | sort -R | sed "s/\.1\.gz.*$//" | head -n 4096)
++	FILES=$(ls "$SNAP/usr/share/man/man1/" | sort -R | sed "s/\.1\.gz.*$//" | head -n 4096)
+ 	for f in $FILES; do
+ 		man "$f" | ccze -A
+ 		sleep 0.2

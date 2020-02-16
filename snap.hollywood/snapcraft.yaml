@@ -1,23 +1,60 @@
 name: hollywood
-version: 1.13
+base: core18
+version: "1.13"
 summary: fill your console with Hollywood melodrama technobabble
 description: >
     This utility will split your console into a multiple panes of genuine
     technobabble, perfectly suitable for any Hollywood geek melodrama.
     It is particularly suitable on any number of computer consoles in the
     background of any excellent schlock technothriller.
-confinement: classic
+confinement: strict
 grade: stable
 
 parts:
+  setup:
+    plugin: dump
+    source: snap/local
+    prime:
+      - setup
+
   hollywood:
     plugin: nil
-    stage-packages: [hollywood]
-    stage:
-        - -bin/hollywood
-    snap:
-        - -bin/hollywood
+    build-packages:
+      - patch
+    stage-packages:
+      - coreutils
+      - iproute2
+      - hollywood
+      - man-db
+    override-build: |
+      snapcraftctl build
+      # patch apg hardcoded paths
+      patch -s -b "$SNAPCRAFT_PART_INSTALL/usr/bin/apg" "$SNAPCRAFT_STAGE/0001-apg.patch"
+      patch -s -b "$SNAPCRAFT_PART_INSTALL/usr/lib/byobu/include/dirs" "$SNAPCRAFT_STAGE/0002-byobu-shm.patch"
+      patch -s -b "$SNAPCRAFT_PART_INSTALL/usr/lib/hollywood/hexdump" "$SNAPCRAFT_STAGE/0003-hexdump.patch"
+      patch -s -b "$SNAPCRAFT_PART_INSTALL/usr/lib/hollywood/man" "$SNAPCRAFT_STAGE/0004-man.patch"
+    organize:
+      usr/lib/$SNAPCRAFT_ARCH_TRIPLET/ccze: usr/lib/ccze
+    prime:
+      - -**/*.orig
+    after:
+      - setup
+
+environment:
+  LANG: C.UTF-8
+  LC_ALL: C.UTF-8
+  LD_LIBRARY_PATH: $SNAP/usr/lib/man-db
+  MAN_TEST_DISABLE_SYSTEM_CONFIG: 1
+  MANPATH: $SNAP/usr/share/man
+  GROFF_FONT_PATH: $SNAP/usr/share/groff/current/font
+  GROFF_TMAC_PATH: $SNAP/usr/share/groff/current/tmac
 
 apps:
    hollywood:
-     command: hollywood
+     plugs:
+       - network-bind
+       - network-observe
+       - system-observe
+     command-chain:
+       - setup
+     command: usr/bin/hollywood

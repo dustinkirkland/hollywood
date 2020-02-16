@@ -1,0 +1,20 @@
+--- apg.orig	2020-02-16 00:22:11.159181623 -0300
++++ apg	2020-02-16 00:21:25.655813884 -0300
+@@ -1,6 +1,6 @@
+ #!/bin/sh
+ 
+-CONFFILE="/etc/apg.conf"
++CONFFILE="$SNAP/etc/apg.conf"
+ 
+ # wrapper to give default parameters to apg if invoked without
+ 
+@@ -9,7 +9,7 @@
+   if [ -e "$CONFFILE" ]; then
+     . $CONFFILE
+   fi
+-  /usr/lib/apg/apg $APG_PARM
++  "$SNAP/usr/lib/apg/apg" $APG_PARM
+ else
+-  /usr/lib/apg/apg $@
++  "$SNAP/usr/lib/apg/apg" $@
+ fi
