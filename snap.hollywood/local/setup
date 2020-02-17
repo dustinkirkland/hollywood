@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+ccze_plugin_dir="$HOME/.ccze"
+
+# Workaround hardcoded paths in ccze. Link to the confined HOME.
+if [ ! -d "$ccze_plugin_dir" ] ; then
+    if [ -L "$ccze_plugin_dir" ]; then
+        rm "$ccze_plugin_dir"
+    fi
+    ln -s "$SNAP/usr/lib/ccze" "$HOME/.ccze"
+fi
+
+byoburc="$HOME/.byoburc"
+# Workaround BYOBU_PREFIX using realpath which does not work
+# well for a constantly changing symlink.
+if [ -f "$byoburc"  ] && ! grep $(realpath "$SNAP") "$byoburc" ; then
+    rm "$byoburc"
+fi
+
+exec "$@"

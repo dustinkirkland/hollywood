@@ -1,8 +1,23 @@
 hollywood (1.21) unreleased; urgency=medium
 
-  * UNRELEASED
+  [ Sergio Schvezov ]
+  * === added directory snap.hollywood/local, snap.hollywood/local/0001-
+    apg.patch, snap.hollywood/local/0002-byobu-shm.patch,
+    snap.hollywood/local/0003-hexdump.patch, snap.hollywood/local/0004-
+    man.patch, snap.hollywood/local/setup,
+    snap.hollywood/snapcraft.yaml:
+    - Use base: core18
+    - Move to strict confinement
+    - Patch apg to be snap-aware
+    - Patch 3 hollywood files to be snap-aware:
+    - /dev/shm path
+    - man related path
+    - paths for hexdump
+    - Add command-chain for minor workarounds:
+    - BYOBU_PREFIX uses realpath in .byoburc
+    - Link czze plugins to the confined home
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 29 Nov 2019 15:07:12 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 17 Feb 2020 08:33:03 -0600
 
 hollywood (1.20-0ubuntu1) focal; urgency=medium
 
