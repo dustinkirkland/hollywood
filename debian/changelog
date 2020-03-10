@@ -1,4 +1,4 @@
-hollywood (1.21) unreleased; urgency=medium
+hollywood (1.21-0ubuntu1) focal; urgency=medium
 
   [ Sergio Schvezov ]
   * === added directory snap.hollywood/local, snap.hollywood/local/0001-
@@ -21,7 +21,7 @@ hollywood (1.21) unreleased; urgency=medium
   * snap.hollywood/snapcraft.yaml:
     - adjusted to build
 
- -- Dustin Kirkland <kirkland@x250>  Tue, 10 Mar 2020 08:23:13 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 10 Mar 2020 08:25:33 -0500
 
 hollywood (1.20-0ubuntu1) focal; urgency=medium
 
