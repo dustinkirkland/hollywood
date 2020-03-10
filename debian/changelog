@@ -17,7 +17,11 @@ hollywood (1.21) unreleased; urgency=medium
     - BYOBU_PREFIX uses realpath in .byoburc
     - Link czze plugins to the confined home
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 17 Feb 2020 08:33:03 -0600
+  [ Dustin Kirkland ]
+  * snap.hollywood/snapcraft.yaml:
+    - adjusted to build
+
+ -- Dustin Kirkland <kirkland@x250>  Tue, 10 Mar 2020 08:23:13 -0500
 
 hollywood (1.20-0ubuntu1) focal; urgency=medium
 

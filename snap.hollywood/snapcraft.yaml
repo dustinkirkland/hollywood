@@ -13,7 +13,7 @@ grade: stable
 parts:
   setup:
     plugin: dump
-    source: snap/local
+    source: ./local
     prime:
       - setup
 
