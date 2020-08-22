@@ -16,7 +16,7 @@ Recommends:
  apg,
  atop,
  bmon,
- bsdmainutils,
+ bsdextrautils|bsdmainutils,
  ccze,
  cmatrix,
  htop,
