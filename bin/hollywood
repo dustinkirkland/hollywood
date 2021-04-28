@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # N.B.: Use bash for $RANDOM
 #
 # hollywood: create a hollywood suitable consoles of tech geekery
@@ -74,7 +74,7 @@ if [ -z "$TMUX" ]; then
 	else
 		tmux_launcher=tmux
 	fi
-	$tmux_launcher new-session -d -s $PKG "/bin/bash"
+	$tmux_launcher new-session -d -s $PKG "bash"
 	$tmux_launcher send-keys -t $PKG "$0 $1"
 	$tmux_launcher send-keys -t $PKG Enter
 	exec $tmux_launcher attach-session -t $PKG
