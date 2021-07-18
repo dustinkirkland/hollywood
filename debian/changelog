@@ -1,5 +1,5 @@
 hollywood (1.22) unreleased; urgency=medium
-
+ 
   * debian/control:
     - depend on bsdextrautils|bsdmainutils, Closes: #963226, #964524
 
