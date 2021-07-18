@@ -21,7 +21,7 @@ PKG="hollywood"
 trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit 0" INT
 
 spin_up() {
-	local w=
+	local w= 
 	local panes=
 	local splits=
 	local pane=
