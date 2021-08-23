@@ -1,3 +1,11 @@
+hollywood (1.21-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Depend on bsdextrautils for hexdump. (Closes: #964524, #963226)
+  * Update locate recommendation. (Closes: #989519)
+
+ -- Chris Hofstaedtler <zeha@debian.org>  Mon, 23 Aug 2021 08:46:46 +0000
+
 hollywood (1.21-1) unstable; urgency=medium
 
   [ Sergio Schvezov ]
