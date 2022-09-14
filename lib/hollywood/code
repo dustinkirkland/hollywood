@@ -14,17 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-command -v locate >/dev/null 2>&1 || exit 1
-command -v view >/dev/null 2>&1 || exit 1
+command -v find >/dev/null 2>&1 || exit 1
+command -v pygmentize >/dev/null 2>&1 || exit 1
 
 trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" INT
 while true; do
-	FILES=$(locate -l 4096 "/usr/*.java" "/usr/*.c" "/usr/*.cpp" 2>/dev/null | sort -R)
-	for f in $FILES; do
-		[ -r "$f" ] || continue
-		[ -s "$f" ] || continue
-		[ -f "$f" ] || continue
-		pygmentize "$f" 2>/dev/null || true
-		sleep 2
-	done
+	find /usr -readable -size +0 -type f -name \*.java -o -name \*.c -o -name \*.cpp -exec pygmentize "{}" \; -exec sleep 2 \; 2>/dev/null
 done
