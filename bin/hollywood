@@ -75,7 +75,7 @@ if [ -z "$TMUX" ]; then
 		tmux_launcher=tmux
 	fi
 	$tmux_launcher new-session -d -s $PKG "/bin/bash"
-	$tmux_launcher send-keys -t $PKG "$0 $1"
+	$tmux_launcher send-keys -t $PKG "$0 -s $SPLITS -d $DELAY"
 	$tmux_launcher send-keys -t $PKG Enter
 	exec $tmux_launcher attach-session -t $PKG
 	exit 1

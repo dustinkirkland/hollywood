@@ -5,8 +5,10 @@ hollywood (1.22) unreleased; urgency=medium
   * debian/control, lib/hollywood/code, lib/hollywood/jp2a:
     - use find instead of locate (which is faster, but not always there)
     - add dependency to get pygmatize command
+  * bin/hollywood:
+    - fix situation where -s and -d options do not work
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 26 Jun 2023 18:51:15 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 26 Jun 2023 18:56:24 -0500
 
 hollywood (1.21-0ubuntu1) focal; urgency=medium
 
