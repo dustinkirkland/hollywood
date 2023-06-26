@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright 2014 Dustin Kirkland <dustin.kirkland@gmail.com>
+# Copyright 2014-2023 Dustin Kirkland <dustin.kirkland@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,16 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-command -v locate >/dev/null 2>&1 || exit 1
+# locate would be faster, but find is more universal
+command -v find >/dev/null 2>&1 || exit 1
+
+# try to render images to ascii art
 command -v jp2a >/dev/null 2>&1 || exit 1
 
 trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" INT
 while true; do
-	FILES=$(locate -l 4096 "/usr/*jpg" 2>/dev/null | sort -R)
+	FILES=$(find /usr -readable -size +0 -type f -name \*.jpg 2>/dev/null | sort -R)
 	for f in $FILES; do
-		[ -r "$f" ] || continue
-		[ -s "$f" ] || continue
-		[ -f "$f" ] || continue
 		clear
 		jp2a --colors --term-fit "$f"
 		sleep 0.57

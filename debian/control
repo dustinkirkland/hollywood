@@ -24,6 +24,7 @@ Recommends:
  mlocate,
  moreutils,
  openssh-client,
+ python3-pygments,
  speedometer,
  tree,
 Description: fill your console with Hollywood melodrama technobabble

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright 2014 Dustin Kirkland <dustin.kirkland@gmail.com>
+# Copyright 2014-2023 Dustin Kirkland <dustin.kirkland@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,17 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-command -v locate >/dev/null 2>&1 || exit 1
-command -v view >/dev/null 2>&1 || exit 1
+# locate would be faster, but find is more universal
+command -v find >/dev/null 2>&1 || exit 1
+# try to colorize our code, but if not, just print it to screen
+command -v pygmentize >/dev/null 2>&1 && viewer="pygmentize" || viewer="cat"
 
 trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" INT
 while true; do
-	FILES=$(locate -l 4096 "/usr/*.java" "/usr/*.c" "/usr/*.cpp" 2>/dev/null | sort -R)
+	FILES=$(find /usr -readable -size +0 -type f -name \*.java -o -name \*.c -o -name \*.cpp -o -name \*.py 2>/dev/null | sort -R)
 	for f in $FILES; do
-		[ -r "$f" ] || continue
-		[ -s "$f" ] || continue
-		[ -f "$f" ] || continue
-		pygmentize "$f" 2>/dev/null || true
+		$viewer "$f" 2>/dev/null || true
 		sleep 2
 	done
 done
