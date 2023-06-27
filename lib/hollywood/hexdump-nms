@@ -20,7 +20,7 @@ command -v ccze >/dev/null 2>&1 || exit 1
 trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" INT
 while true; do
 	for f in $(ls /usr/bin/ | sort -R); do
-		hexdump -C /usr/bin/$f | nms
+		hexdump -C /usr/bin/$f | nms -a
 		sleep 99
 	done
 done
