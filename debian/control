@@ -23,6 +23,7 @@ Recommends:
  jp2a,
  mlocate,
  moreutils,
+ mplayer,
  openssh-client,
  python3-pygments,
  speedometer,
