@@ -14,7 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# detect if apg is installed
 command -v apg >/dev/null 2>&1 || exit 1
+# detect if ccze is installed
+command -v ccze >/dev/null 2>&1 || exit 1
 
 trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" INT
 while true; do
