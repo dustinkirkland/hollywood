@@ -1,4 +1,4 @@
-hollywood (1.22) unreleased; urgency=medium
+hollywood (1.22) testing; urgency=medium
 
   [ Dustin Kirkland ]
   * debian/control:
@@ -11,7 +11,7 @@ hollywood (1.22) unreleased; urgency=medium
     - use find instead of locate (which is faster, but not always there)
     - add dependency to get pygmatize command
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 26 Jun 2023 18:56:24 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 12 Feb 2026 16:05:53 -0600
 
 hollywood (1.21-0ubuntu1) focal; urgency=medium
 
