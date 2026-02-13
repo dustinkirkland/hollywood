@@ -20,6 +20,12 @@ Install on Ubuntu/Debian:
 sudo apt install hollywood
 ```
 
+Install on [Chainguard OS](https://www.chainguard.dev/chainguard-os) (Wolfi):
+
+```bash
+apk add hollywood
+```
+
 ## Usage
 
 ```bash
