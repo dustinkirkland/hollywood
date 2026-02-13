@@ -1,3 +1,11 @@
+hollywood (1.24) unreleased; urgency=medium
+
+  [ Dustin Kirkland ]
+  * lib/hollywood/bat, debian/control:
+    - add bat plugin for syntax-highlighted code display
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 13 Feb 2026 16:30:00 -0600
+
 hollywood (1.23) testing; urgency=medium
 
   [ DemonPlayer00 ]
