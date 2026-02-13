@@ -24,7 +24,7 @@ while true; do
 	mkdir -p "$tmpdir"
 	tmpfile=$(mktemp -p "$tmpdir" -t XXXXXX)
 	rm -f $tmpfile
-	art=$(ssh-keygen -vvv -b 1024 -t dsa -N "" -f $tmpfile)
+	art=$(ssh-keygen -vvv -b 1024 -t ed25519 -N "" -f $tmpfile)
 	rm -f $tmpfile $tmpfile.pub
 	wait
 	clear
