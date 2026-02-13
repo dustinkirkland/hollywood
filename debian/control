@@ -30,6 +30,7 @@ Recommends:
  mtr-tiny,
  nmap,
  openssh-client,
+ pv,
  python3-pygments,
  speedometer,
  tree,
