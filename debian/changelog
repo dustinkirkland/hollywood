@@ -5,6 +5,8 @@ hollywood (1.24) unreleased; urgency=medium
     - add bat plugin for syntax-highlighted code display
   * lib/hollywood/figlet, debian/control:
     - add figlet plugin for large ASCII text banners
+  * lib/hollywood/iftop, debian/control:
+    - add iftop plugin for real-time bandwidth usage display
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 13 Feb 2026 16:30:00 -0600
 

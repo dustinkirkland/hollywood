@@ -22,6 +22,7 @@ Recommends:
  cmatrix,
  figlet,
  htop,
+ iftop,
  jp2a,
  mlocate,
  moreutils,
