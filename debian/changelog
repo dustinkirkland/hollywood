@@ -7,6 +7,8 @@ hollywood (1.24) unreleased; urgency=medium
     - add figlet plugin for large ASCII text banners
   * lib/hollywood/pv, debian/control:
     - add pv plugin for data transfer progress visualization
+  * share/man/man1/hollywood.1, README:
+    - add security note about running in a container for demos
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 13 Feb 2026 16:30:00 -0600
 

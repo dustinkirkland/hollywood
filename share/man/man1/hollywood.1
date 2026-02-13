@@ -22,6 +22,14 @@ To quit, press Ctrl-C to kill the \fBhollywood\fP script itself.
 
 \fBhollywood\fP tries not to overwhelm your system by running widgets with the minimum scheduling priority per \fBnice\fP(1).
 
+.SH SECURITY NOTE
+
+Some \fBhollywood\fP widgets display real system information such as running processes, log files, network interface statistics, and file system details.  This information could be sensitive in some environments.
+
+For demonstrations or presentations, consider running \fBhollywood\fP inside a container:
+
+    docker run \-it \-\-rm dustinkirkland/hollywood
+
 .SH SEE ALSO
 \fBbyobu\fP(1), \fBnice\fP(1), https://hollywood.computer
 
