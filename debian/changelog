@@ -1,4 +1,4 @@
-hollywood (1.24) unreleased; urgency=medium
+hollywood (1.24) testing; urgency=medium
 
   [ Dustin Kirkland ]
   * lib/hollywood/bat, debian/control:
