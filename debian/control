@@ -27,6 +27,7 @@ Recommends:
  mlocate,
  moreutils,
  mplayer,
+ mtr-tiny,
  openssh-client,
  python3-pygments,
  speedometer,
