@@ -1,3 +1,30 @@
+hollywood (1.23) unreleased; urgency=medium
+
+  [ DemonPlayer00 ]
+  * lib/hollywood/sshart:
+    - replace deprecated dsa key type with ed25519 in ssh-keygen
+
+  [ Mixolyde ]
+  * debian/control:
+    - add mplayer to recommends, Closes: #47
+  * lib/hollywood/apg:
+    - add missing ccze command check, consistent with other widgets
+
+  [ Florian Franzen ]
+  * lib/wallstreet/w3m:
+    - use relative path to breaks script instead of hardcoded /usr/lib path
+  * bin/hollywood, bin/wallstreet, lib/hollywood/code, lib/hollywood/jp2a,
+    lib/hollywood/mplayer, lib/wallstreet/breaks, lib/wallstreet/img2txt,
+    lib/wallstreet/jp2a, lib/wallstreet/newsboat, lib/wallstreet/rsstail,
+    lib/wallstreet/ticker, lib/wallstreet/w3m:
+    - use #!/usr/bin/env for portable shebang lines
+
+  [ Dustin Kirkland ]
+  * lib/hollywood/mplayer:
+    - always run mplayer with -nosound, Closes: #27
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 13 Feb 2026 16:05:53 -0600
+
 hollywood (1.22) testing; urgency=medium
 
   [ Dustin Kirkland ]
