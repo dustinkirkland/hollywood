@@ -9,6 +9,8 @@ hollywood (1.24) unreleased; urgency=medium
     - add iftop plugin for real-time bandwidth usage display
   * lib/hollywood/mtr, debian/control:
     - add mtr plugin for network traceroute visualization
+  * lib/hollywood/nmap, debian/control:
+    - add nmap plugin for network port scanning display
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 13 Feb 2026 16:30:00 -0600
 

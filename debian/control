@@ -28,6 +28,7 @@ Recommends:
  moreutils,
  mplayer,
  mtr-tiny,
+ nmap,
  openssh-client,
  python3-pygments,
  speedometer,
