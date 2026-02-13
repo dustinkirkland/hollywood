@@ -33,6 +33,7 @@ Recommends:
  pv,
  python3-pygments,
  speedometer,
+ strace,
  tree,
 Description: fill your console with Hollywood melodrama technobabble
  This utility will split your console into a multiple panes of genuine
