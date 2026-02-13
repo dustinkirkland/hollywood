@@ -5,7 +5,7 @@ Fill your console with Hollywood melodrama technobabble.
 
 This utility splits your terminal into multiple panes of genuine technobabble, perfectly suitable for any Hollywood geek melodrama.  It is particularly suitable on any number of computer consoles in the background of any excellent schlock technothriller.
 
-https://hollywood.computer
+For more information, visit https://a.hollywood.computer/
 
 
 Quick Start
@@ -29,6 +29,33 @@ Usage
     hollywood -s 8 -d 15              # combine options
 
 Press Ctrl-C to quit.
+
+
+Samples
+-------
+
+ - YouTube stream: https://www.youtube.com/watch?v=18RSYZa58FE
+ - MP4 download (suitable as a Zoom/Meet background): https://drive.google.com/uc?id=1PK4IKYw_5R9D4BQEepmNmCbiWqSq4nks&export=download
+
+
+As Seen On
+----------
+
+Hollywood has been spotted in the wild on television, in commercials, and across the internet:
+
+ - NBC News: https://www.nbcnews.com/tech/security/americans-are-getting-freaked-out-about-doing-stuff-internet-n574661
+ - CNBC: https://www.cnbc.com/video/2020/06/17/cnbcs-disruptor-50-attabotics.html
+ - Saturday Night Live: https://www.nbc.com/saturday-night-live/video/mr-robot/3108917
+ - Netflix "Unit 42": https://www.netflix.com/title/81027195
+ - Yahoo Finance: https://finance.yahoo.com/news/mother-data-breaches-26-billion-173012707.html
+ - Full Frontal with Samantha Bee: https://www.youtube.com/watch?v=C8AxAvh3-ck&t=54
+ - Map Men: https://www.youtube.com/watch?v=yTyX_EJQOIU&t=323
+ - Spy Ninjas: https://www.youtube.com/watch?v=JM9u9ehNscI&ab_channel=PROJECTZORGO-SPYNINJAHacker&t=43
+ - Experian: https://www.youtube.com/watch?v=vBEKs_Priu0
+ - SentinelOne: https://twitter.com/DustinKirkland/status/1303879028886175745
+ - SUSE parody music video: https://www.youtube.com/watch?v=b0tsZB_LEQk
+ - DEFCON music channel
+ - Texas A&M Foundation magazine: https://www.txamfoundation.com/Spring-2019/Cover-Feature.aspx
 
 
 Widgets
@@ -75,6 +102,14 @@ Widget design rules:
  - Must not exhaust memory or overload the system
  - Must not be too egregious with I/O
  - Must not require outbound internet access
+
+
+Packages
+--------
+
+ - Source code: https://github.com/dustinkirkland/hollywood
+ - Ubuntu: http://pad.lv/u/hollywood
+ - Debian: https://packages.qa.debian.org/h/hollywood.html
 
 
 License
