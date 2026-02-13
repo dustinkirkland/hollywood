@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+#
+# Copyright 2026 Dustin Kirkland <dustin.kirkland@gmail.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+command -v figlet >/dev/null 2>&1 || exit 1
+
+trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" INT
+while true; do
+	word=$(printf "HACKED\nENCRYPTED\nDECRYPTING\nFIREWALL\nOVERRIDE\nSCANNING\nDOWNLOAD\nBYPASSING\nCRACKING\nINTERCEPT\nPAYLOAD\nACCESS\nDENIED\nGRANTED\nLOCKED\nTRACING\nBREACH\nENABLED\nSYNCING\nUPLINK" | sort -R | head -n1)
+	clear
+	figlet "$word"
+	sleep 2
+done

@@ -20,6 +20,7 @@ Recommends:
  bsdextrautils|bsdmainutils,
  ccze,
  cmatrix,
+ figlet,
  htop,
  jp2a,
  mlocate,
