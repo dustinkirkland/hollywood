@@ -11,8 +11,12 @@ hollywood (1.25) UNRELEASED; urgency=medium
     - maintain backward compatibility with -s|--splits override option
   * share/man/man1/hollywood.1:
     - document new CPU-aware default behavior for splits option
+  * lib/hollywood/speedometer:
+    - add graceful error handling for urwid compatibility issues
+    - detect speedometer crashes and display helpful error message
+    - prevent infinite crash loops when urwid 2.4+ is installed, Closes: #72
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 13 Feb 2026 17:00:00 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 13 Feb 2026 17:30:00 -0600
 
 hollywood (1.24) testing; urgency=medium
 
