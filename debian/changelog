@@ -1,3 +1,19 @@
+hollywood (1.25) UNRELEASED; urgency=medium
+
+  [ Dustin Kirkland ]
+  * bin/hollywood:
+    - implement CPU-aware split limiting: default to 2x nproc instead of
+      all available widgets, significantly reducing system resource usage
+      on lower-end systems, Closes: #32, #3
+    - improve process cleanup with proper tmux session termination and
+      enhanced signal trapping (INT, TERM, EXIT), Closes: #44
+    - add fallback to 4 CPUs if nproc is unavailable
+    - maintain backward compatibility with -s|--splits override option
+  * share/man/man1/hollywood.1:
+    - document new CPU-aware default behavior for splits option
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 13 Feb 2026 17:00:00 -0600
+
 hollywood (1.24) testing; urgency=medium
 
   [ Dustin Kirkland ]

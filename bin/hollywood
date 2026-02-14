@@ -18,7 +18,15 @@
 # limitations under the License.
 
 PKG="hollywood"
-trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit 0" INT
+# Improved cleanup: kill the tmux session and all child processes
+cleanup() {
+	# Kill the tmux session if it exists
+	tmux kill-session -t $PKG >/dev/null 2>&1
+	# Kill any remaining hollywood widget processes
+	pkill -f -9 "lib/hollywood/" >/dev/null 2>&1
+	exit 0
+}
+trap cleanup INT TERM EXIT
 
 spin_up() {
 	local w=
@@ -44,7 +52,14 @@ spin_up() {
 }
 
 WIDGET_DIR="$(dirname $0)/../lib/$PKG"
-SPLITS=$(ls "$WIDGET_DIR" | wc -l)
+# Determine the default number of splits based on CPU count
+# Default to 2x the number of processors, but cap at available widgets
+NPROC=$(nproc 2>/dev/null || echo 4)
+MAX_WIDGETS=$(ls "$WIDGET_DIR" | wc -l)
+DEFAULT_SPLITS=$((NPROC * 2))
+# Cap at the number of available widgets
+[ $DEFAULT_SPLITS -gt $MAX_WIDGETS ] && DEFAULT_SPLITS=$MAX_WIDGETS
+SPLITS=$DEFAULT_SPLITS
 DELAY=10
 while [ ! -z "$1" ]; do
 	case "$1" in
