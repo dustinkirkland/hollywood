@@ -11,7 +11,7 @@ For more information, visit [hollywood.computer](https://a.hollywood.computer/).
 Run in Docker (no installation needed):
 
 ```bash
-docker run -it --rm dustinkirkland/hollywood
+docker run -it --rm cgr.dev/chainguard/hollywood
 ```
 
 Install on Ubuntu/Debian:
