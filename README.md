@@ -32,7 +32,7 @@ apk add hollywood
 hollywood                          # run with defaults
 hollywood -s 5                     # limit to 5 splits
 hollywood -d 30                    # rearrange panes every 30 seconds
-hollywood -s 8 -d 15              # combine options
+hollywood -s 8 -d 15               # combine options
 ```
 
 Press `Ctrl-C` to quit.
