@@ -14,7 +14,36 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+declare -g PID=0
+declare -g CHANGE=0
+
+# Minimum terminal size required for `bmon --show-all`
+MIN_ROWS=11
+MIN_COLS=48
+
+check_win_size(){
+    if [ $(tput lines) -lt $MIN_ROWS ] || [ $(tput cols) -lt $MIN_COLS ];then
+        CHANGE=1
+    fi
+}
+
+check_win_size
+if [ $CHANGE -eq 1 ];then
+    exec ./speedometer
+fi
+
 command -v bmon >/dev/null 2>&1 || exit 1
 
+trap "check_win_size" WINCH
 trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" INT
-bmon --show-all
+trap "kill -9 $PID" EXIT
+
+bmon --show-all &
+PID=$!
+
+# Prevent WINCH signal interruption of the `wait` command
+while [ $CHANGE -ne 1 ];do
+    wait $PID
+done
+kill -9 $PID
+exec ./speedometer
