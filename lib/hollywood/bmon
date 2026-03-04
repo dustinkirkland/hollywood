@@ -45,5 +45,5 @@ PID=$!
 while [ $CHANGE -ne 1 ];do
     wait $PID
 done
-kill $PID
+kill -9 $PID
 exec ./speedometer
