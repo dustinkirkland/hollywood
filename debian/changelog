@@ -2,7 +2,9 @@ hollywood (1.21-2) UNRELEASED; urgency=medium
 
   * QA upload.
   * Migrate to Git repository in Games team on Salsa
-  * d/copyright: Source is at Github
+  * d/copyright:
+     - Source is at Github
+     - Add Files: debian/*
   * Add watch file
 
  -- Andreas Tille <tille@debian.org>  Sat, 20 Jun 2026 22:41:48 +0200
