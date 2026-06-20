@@ -1,4 +1,4 @@
-hollywood (1.21-2) UNRELEASED; urgency=medium
+hollywood (1.25-1) UNRELEASED; urgency=medium
 
   * QA upload.
   * Orphan package
@@ -10,8 +10,9 @@ hollywood (1.21-2) UNRELEASED; urgency=medium
   * debhelper-compat (= 13)
   * Move binary from /usr/bin to /usr/games since its in Games section
   * Lintian-overrides for orphaned-package-maintained-in-private-space
+  * New upstream version
 
- -- Andreas Tille <tille@debian.org>  Sat, 20 Jun 2026 22:41:48 +0200
+ -- Andreas Tille <tille@debian.org>  Sat, 20 Jun 2026 23:51:29 +0200
 
 hollywood (1.21-1.1) unstable; urgency=medium
 
