@@ -1,4 +1,80 @@
-hollywood (1.21) released; urgency=medium
+hollywood (1.25) testing; urgency=medium
+
+  [ Dustin Kirkland ]
+  * bin/hollywood:
+    - implement CPU-aware split limiting: default to 2x nproc instead of
+      all available widgets, significantly reducing system resource usage
+      on lower-end systems, Closes: #32, #3
+    - improve process cleanup with proper tmux session termination and
+      enhanced signal trapping (INT, TERM, EXIT), Closes: #44
+    - add fallback to 4 CPUs if nproc is unavailable
+    - maintain backward compatibility with -s|--splits override option
+  * share/man/man1/hollywood.1:
+    - document new CPU-aware default behavior for splits option
+  * lib/hollywood/speedometer:
+    - add graceful error handling for urwid compatibility issues
+    - detect speedometer crashes and display helpful error message
+    - prevent infinite crash loops when urwid 2.4+ is installed, Closes: #72
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 13 Feb 2026 17:30:00 -0600
+
+hollywood (1.24) testing; urgency=medium
+
+  [ Dustin Kirkland ]
+  * lib/hollywood/bat, debian/control:
+    - add bat plugin for syntax-highlighted code display
+  * lib/hollywood/figlet, debian/control:
+    - add figlet plugin for large ASCII text banners
+  * lib/hollywood/pv, debian/control:
+    - add pv plugin for data transfer progress visualization
+  * share/man/man1/hollywood.1, README:
+    - add security note about running in a container for demos
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 13 Feb 2026 16:30:00 -0600
+
+hollywood (1.23) testing; urgency=medium
+
+  [ DemonPlayer00 ]
+  * lib/hollywood/sshart:
+    - replace deprecated dsa key type with ed25519 in ssh-keygen
+
+  [ Mixolyde ]
+  * debian/control:
+    - add mplayer to recommends, Closes: #47
+  * lib/hollywood/apg:
+    - add missing ccze command check, consistent with other widgets
+
+  [ Florian Franzen ]
+  * lib/wallstreet/w3m:
+    - use relative path to breaks script instead of hardcoded /usr/lib path
+  * bin/hollywood, bin/wallstreet, lib/hollywood/code, lib/hollywood/jp2a,
+    lib/hollywood/mplayer, lib/wallstreet/breaks, lib/wallstreet/img2txt,
+    lib/wallstreet/jp2a, lib/wallstreet/newsboat, lib/wallstreet/rsstail,
+    lib/wallstreet/ticker, lib/wallstreet/w3m:
+    - use #!/usr/bin/env for portable shebang lines
+
+  [ Dustin Kirkland ]
+  * lib/hollywood/mplayer:
+    - always run mplayer with -nosound, Closes: #27
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 13 Feb 2026 16:05:53 -0600
+
+hollywood (1.22) testing; urgency=medium
+
+  [ Dustin Kirkland ]
+  * debian/control:
+    - depend on bsdextrautils|bsdmainutils, Closes: #963226, #964524
+  * bin/hollywood:
+    - fix situation where -s and -d options do not work
+
+  [ Dustin Kirkland, Fabien Wernli ]
+  * debian/control, lib/hollywood/code, lib/hollywood/jp2a:
+    - use find instead of locate (which is faster, but not always there)
+    - add dependency to get pygmatize command
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 12 Feb 2026 16:05:53 -0600
+
+hollywood (1.21-0ubuntu1) focal; urgency=medium
 
   [ Sergio Schvezov ]
   * === added directory snap.hollywood/local, snap.hollywood/local/0001-
@@ -21,7 +97,7 @@ hollywood (1.21) released; urgency=medium
   * snap.hollywood/snapcraft.yaml:
     - adjusted to build
 
- -- Dustin Kirkland <kirkland@x250>  Tue, 10 Mar 2020 08:23:13 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 10 Mar 2020 08:25:33 -0500
 
 hollywood (1.20-0ubuntu1) focal; urgency=medium
 
