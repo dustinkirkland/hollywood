@@ -3,12 +3,13 @@
 hollywood \- fill your console with Hollywood melodrama technobabble
 
 .SH SYNOPSIS
-\fBhollywood\fP [-s|--splits SPLITS] [-q|--quiet|--nosound]
+\fBhollywood\fP [-s|--splits SPLITS] [-d|--delay DELAY] [--sound]
 
 .SH OPTIONS
 
+    -d|--delay DELAY        The delay in seconds before rearranging splits (default=10s)
     -s|--splits SPLITS      The number of splits to divide your screen
-    -q|--quiet|--nosound    Disable the theme song
+    --sound                 Enable the theme song (default sound=off)
 
 .SH DESCRIPTION
 
@@ -23,7 +24,7 @@ To quit, press Ctrl-C to kill the \fBhollywood\fP script itself.
 \fBhollywood\fP tries not to overwhelm your system by running widgets with the minimum scheduling priority per \fBnice\fP(1).
 
 .SH SEE ALSO
-\fBbyobu\fP(1), \fBnice\fP(1)
+\fBbyobu\fP(1), \fBnice\fP(1), https://hollywood.computer
 
 .SH AUTHOR
 This manpage and the utility were written by Dustin Kirkland <dustin.kirkland@gmail.com> for Ubuntu systems (but may be used by others).  Permission is granted to copy, distribute and/or modify this document and the utility under the terms of the Apache2 License.

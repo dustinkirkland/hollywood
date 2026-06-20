@@ -17,7 +17,7 @@
 command -v hexdump >/dev/null 2>&1 || exit 1
 command -v ccze >/dev/null 2>&1 || exit 1
 
-trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
+trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" INT
 while true; do
 	for f in $(ls /usr/bin/ | sort -R); do
 		head -c 4096 "/usr/bin/$f" | hexdump -C | ccze -A -c default=green -c dir="bold green"

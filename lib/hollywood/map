@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright 2016 Dustin Kirkland <dustin.kirkland@gmail.com>
+# Copyright 2019 Dustin Kirkland <dustin.kirkland@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-command -v newsbeuter >/dev/null 2>&1 || exit 1
+command -v jp2a >/dev/null 2>&1 || exit 1
 
-trap "pkill -f -9 lib/wallstreet/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
+trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" INT
+
+PKG=hollywood
+dir="$(dirname $0)/../../share/$PKG"
 while true; do
-	newsbeuter -r -C /usr/share/wallstreet/newsbeuter.config -u /usr/share/wallstreet/newsbeuter.urls
+	jp2a --colors -z --fill "$dir/map.jpg"
 	sleep 1
 done
