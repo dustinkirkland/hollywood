@@ -1,7 +1,7 @@
 Source: hollywood
 Section: games
 Priority: optional
-Maintainer: Dustin Kirkland <kirkland@ubuntu.com>
+Maintainer: Debian QA Group <packages@qa.debian.org>
 Build-Depends: debhelper-compat (= 13)
 Standards-Version: 4.3.0
 Vcs-Browser: https://salsa.debian.org/games/hollywood
