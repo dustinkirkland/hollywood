@@ -4,6 +4,8 @@ Priority: optional
 Maintainer: Dustin Kirkland <kirkland@ubuntu.com>
 Build-Depends: debhelper (>= 7.0.50~)
 Standards-Version: 4.3.0
+Vcs-Browser: https://salsa.debian.org/games/hollywood
+Vcs-Git: https://salsa.debian.org/games/hollywood.git
 Homepage: https://hollywood.computer
 
 Package: hollywood

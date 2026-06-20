@@ -1,3 +1,10 @@
+hollywood (1.21-2) UNRELEASED; urgency=medium
+
+  * QA upload.
+  * Migrate to Git repository in Games team on Salsa
+
+ -- Andreas Tille <tille@debian.org>  Sat, 20 Jun 2026 22:41:48 +0200
+
 hollywood (1.21-1.1) unstable; urgency=medium
 
   * Non-maintainer upload.
