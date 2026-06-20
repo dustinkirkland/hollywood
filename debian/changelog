@@ -9,6 +9,7 @@ hollywood (1.21-2) UNRELEASED; urgency=medium
   * Add watch file
   * debhelper-compat (= 13)
   * Move binary from /usr/bin to /usr/games since its in Games section
+  * Lintian-overrides for orphaned-package-maintained-in-private-space
 
  -- Andreas Tille <tille@debian.org>  Sat, 20 Jun 2026 22:41:48 +0200
 
