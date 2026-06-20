@@ -1,4 +1,4 @@
-hollywood (1.25-1) UNRELEASED; urgency=medium
+hollywood (1.25-1) unstable; urgency=medium
 
   * QA upload.
   * Orphan package
@@ -15,7 +15,7 @@ hollywood (1.25-1) UNRELEASED; urgency=medium
   * Remove Priority field (cme)
   * lintian-brush: add d/u/metadata (routine-update)
 
- -- Andreas Tille <tille@debian.org>  Sat, 20 Jun 2026 23:51:29 +0200
+ -- Andreas Tille <tille@debian.org>  Sat, 20 Jun 2026 23:54:03 +0200
 
 hollywood (1.21-1.1) unstable; urgency=medium
 
