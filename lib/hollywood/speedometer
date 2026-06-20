@@ -16,10 +16,38 @@
 
 command -v speedometer >/dev/null 2>&1 || exit 1
 
+# Find default network interface
+while read Iface Destination Gateway Flags RefCnt Use Metric Mask MTU Window IRTT; do
+	[ "$Mask" = "00000000" ] && break
+done < /proc/net/route
+
+# Test if speedometer can run without errors (urwid compatibility check)
+# Run for 1 second and check exit status
+timeout 1 speedometer -tx $Iface -rx $Iface -i 0.75 >/dev/null 2>&1
+EXIT_CODE=$?
+
+# Exit codes: 0 or 124 (timeout) are OK, anything else indicates an error
+if [ $EXIT_CODE -ne 0 ] && [ $EXIT_CODE -ne 124 ]; then
+	# Speedometer failed (likely urwid compatibility issue)
+	# Display a helpful message instead of crashing
+	echo "Speedometer unavailable (urwid compatibility issue)"
+	echo ""
+	echo "This may be due to incompatible urwid version (2.4.0+)"
+	echo "See: https://github.com/wardi/speedometer/issues/30"
+	echo ""
+	echo "Workarounds:"
+	echo "  - Downgrade urwid: pip3 install 'urwid<2.4.0'"
+	echo "  - Or wait for speedometer upstream fix"
+	sleep 3600  # Keep pane open but idle
+	exit 0
+fi
+
 trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" INT
 while true; do
-	while read Iface Destination Gateway Flags RefCnt Use Metric Mask MTU Window IRTT; do
-		[ "$Mask" = "00000000" ] && break
-	done < /proc/net/route
-	speedometer -tx $Iface -rx $Iface -i 0.75
+	speedometer -tx $Iface -rx $Iface -i 0.75 2>/dev/null || {
+		# If speedometer crashes during runtime, exit gracefully
+		echo "Speedometer crashed - exiting gracefully"
+		sleep 5
+		exit 0
+	}
 done

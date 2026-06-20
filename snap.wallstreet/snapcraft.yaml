@@ -1,0 +1,22 @@
+name: wallstreet
+version: 1.13
+summary: fill your console with Wall Street-like news and stats
+
+description: >
+    This utility will split your console into a multiple panes of news
+    and statistics, like any good computer screen on Wall Street.
+confinement: classic
+grade: stable
+
+parts:
+  wallstreet:
+    plugin: nil
+    stage-packages: [wallstreet]
+    stage:
+        - -bin/wallstreet
+    snap:
+        - -bin/wallstreet
+
+apps:
+   wallstreet:
+     command: wallstreet

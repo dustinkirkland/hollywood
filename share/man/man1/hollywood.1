@@ -8,7 +8,7 @@ hollywood \- fill your console with Hollywood melodrama technobabble
 .SH OPTIONS
 
     -d|--delay DELAY        The delay in seconds before rearranging splits (default=10s)
-    -s|--splits SPLITS      The number of splits to divide your screen
+    -s|--splits SPLITS      The number of splits to divide your screen (default=2*nproc, capped at available widgets)
 
 .SH DESCRIPTION
 
@@ -21,6 +21,14 @@ It is particularly suitable on any number of computer consoles in the background
 To quit, press Ctrl-C to kill the \fBhollywood\fP script itself.
 
 \fBhollywood\fP tries not to overwhelm your system by running widgets with the minimum scheduling priority per \fBnice\fP(1).
+
+.SH SECURITY NOTE
+
+Some \fBhollywood\fP widgets display real system information such as running processes, log files, network interface statistics, and file system details.  This information could be sensitive in some environments.
+
+For demonstrations or presentations, consider running \fBhollywood\fP inside a container:
+
+    docker run \-it \-\-rm dustinkirkland/hollywood
 
 .SH SEE ALSO
 \fBbyobu\fP(1), \fBnice\fP(1), https://hollywood.computer
