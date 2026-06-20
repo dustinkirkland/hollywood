@@ -11,6 +11,7 @@ hollywood (1.25-1) UNRELEASED; urgency=medium
   * Move binary from /usr/bin to /usr/games since its in Games section
   * Lintian-overrides for orphaned-package-maintained-in-private-space
   * New upstream version
+  * Standards-Version: 4.7.4 (routine-update)
 
  -- Andreas Tille <tille@debian.org>  Sat, 20 Jun 2026 23:51:29 +0200
 
