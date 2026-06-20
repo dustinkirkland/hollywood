@@ -6,6 +6,7 @@ hollywood (1.21-2) UNRELEASED; urgency=medium
      - Source is at Github
      - Add Files: debian/*
   * Add watch file
+  * debhelper-compat (= 13)
 
  -- Andreas Tille <tille@debian.org>  Sat, 20 Jun 2026 22:41:48 +0200
 
