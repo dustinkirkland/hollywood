@@ -1,0 +1,239 @@
+hollywood (1.14) released; urgency=medium
+
+  * rebuild release tarball without snap packaging embedded
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 31 Jan 2018 14:23:13 -0600
+
+hollywood (1.13-0ubuntu1) bionic; urgency=medium
+
+  * === added directory snap, snap/snapcraft.yaml:
+    - added a first crack at a snapcraft.yaml
+  * snap/snapcraft.yaml:
+    - polish up the snapcraft.yaml
+  * === added directory snap.wallstreet, === renamed directory snap =>
+    snap.hollywood, snap.wallstreet/snapcraft.yaml:
+    - all wallstreet snap packaging
+  * === added directory snap.wallstreet, === renamed directory snap =>
+    snap.hollywood, snap.hollywood/snapcraft.yaml,
+    snap.wallstreet/snapcraft.yaml:
+    - fix versions
+  * lib/wallstreet/w3m:
+    - fix Google Finance URL
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 31 Jan 2018 14:23:10 -0600
+
+hollywood (1.12-0ubuntu1) zesty; urgency=medium
+
+  * bin/breaks => lib/wallstreet/breaks, lib/wallstreet/w3m:
+    - install missing binary, move out of /usr/bin
+  * bin/wallstreet, debian/control, lib/wallstreet/breaks,
+    lib/wallstreet/newsbeuter, share/wallstreet/newsbeuter1.urls,
+    share/wallstreet/newsbeuter2.urls,
+    share/wallstreet/newsbeuter3.urls, share/wallstreet/newsbeuter.urls:
+    - cope with tmux's change of pane enumeration :-(
+  * bin/wallstreet, lib/wallstreet/rsstail,
+    share/wallstreet/newsbeuter.urls:
+    - add more feeds, remove empty lines from rsstail
+  * lib/wallstreet/rsstail, share/wallstreet/newsbeuter.config:
+    - fix background, reload newsbeuter once a minute
+  * share/wallstreet/nrss.config:
+    - initial nrss config
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 04 Dec 2016 11:17:38 -0600
+
+hollywood (1.11-0ubuntu1) zesty; urgency=medium
+
+  * bin/breaks, bin/wallstreet, lib/wallstreet/img2txt,
+    lib/wallstreet/jp2a, lib/wallstreet/rsstail, lib/wallstreet/w3m,
+    share/wallstreet/lynx.lss, share/wallstreet/newsbeuter2.urls,
+    share/wallstreet/newsbeuter3.urls:
+    - first crack at a "wallstreet" package
+  * bin/wallstreet, lib/wallstreet/img2txt, lib/wallstreet/jp2a,
+    lib/wallstreet/newsbeuter, lib/wallstreet/rsstail,
+    lib/wallstreet/ticker, lib/wallstreet/w3m:
+    - further refinement, added a couple of tickers
+  * bin/breaks, bin/wallstreet, lib/wallstreet/img2txt,
+    lib/wallstreet/jp2a, lib/wallstreet/newsbeuter,
+    lib/wallstreet/rsstail, lib/wallstreet/ticker, lib/wallstreet/w3m,
+    share/wallstreet/newsbeuter.config:
+    - a number of updates, statically configuring the windows, focusing on
+      news
+  * bin/hollywood, debian/hollywood.install, lib/hollywood/mplayer,
+    share/man/man1/hollywood.1:
+    - add a -h|--help option
+    - move the splits argument to "--splits"
+    - add a -q|--quiet|--nosound arg to enable quiet mode
+  * debian/control, lib/wallstreet/img2txt, lib/wallstreet/jp2a:
+    - update dependencies, add wallstreet stuff
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 30 Nov 2016 16:57:52 -0600
+
+hollywood (1.10-0ubuntu1) zesty; urgency=medium
+
+  * share/man/man1/hollywood.1:
+    - fixed github issue #14
+      https://github.com/dustinkirkland/hollywood/issues/14
+      fixed incomplete sentence in manpage
+  * bin/hollywood:
+    - switch layout every 5 seconds
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 18 Sep 2016 20:46:45 -0500
+
+hollywood (1.9-0ubuntu1) yakkety; urgency=medium
+
+  [ dlahoti ]
+  * lib/hollywood/errno:
+    - add check for ccze to errno
+
+  [ Dustin Kirkland ]
+  * bin/hollywood:
+    - fix github #12, SPLITS Parameter doesn't work
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 18 Sep 2016 20:46:43 -0500
+
+hollywood (1.8-0ubuntu1) yakkety; urgency=medium
+
+  [ Dimitri Merejkowsky and Dustin Kirkland ]
+  * bin/hollywood, lib/hollywood/apg, lib/hollywood/bmon,
+    lib/hollywood/cmatrix, lib/hollywood/code, lib/hollywood/errno,
+    lib/hollywood/hexdump, lib/hollywood/htop, lib/hollywood/jp2a,
+    lib/hollywood/logs, lib/hollywood/man, lib/hollywood/mplayer,
+    lib/hollywood/speedometer, lib/hollywood/sshart, lib/hollywood/stat,
+    lib/hollywood/tree, TODO:
+    - improve stability
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 09 May 2016 21:33:35 -0500
+
+hollywood (1.7-0ubuntu1) vivid; urgency=medium
+
+  * debian/control:
+    - add missing dependency on mlocate:
+      https://github.com/dustinkirkland/hollywood/issues/2
+  * lib/hollywood/apg, lib/hollywood/bmon, lib/hollywood/cmatrix,
+    lib/hollywood/code, lib/hollywood/errno, lib/hollywood/hexdump,
+    lib/hollywood/htop, lib/hollywood/jp2a, lib/hollywood/logs,
+    lib/hollywood/man, lib/hollywood/mplayer, lib/hollywood/speedometer,
+    lib/hollywood/sshart, lib/hollywood/stat, lib/hollywood/tree:
+    - test for existence of each widget
+      + https://github.com/dustinkirkland/hollywood/issues/1
+  * bin/hollywood, share/man/man1/hollywood.1:
+    - exit cleanly, trap signals, document exit, renice widgets
+      to minimum scheduling priority
+  * close LP: #1403659, now that we launch byobu if not already running
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 05 Jan 2015 09:58:13 -0600
+
+hollywood (1.6-0ubuntu1) vivid; urgency=medium
+
+  * bin/hollywood, lib/hollywood/bmon, lib/hollywood/cmatrix,
+    lib/hollywood/htop, lib/hollywood/speedometer:
+    - be a little more resilient to inadvertent failures
+  * bin/hollywood, lib/hollywood/apg, lib/hollywood/bmon,
+    lib/hollywood/cmatrix, lib/hollywood/errno, lib/hollywood/hexdump,
+    lib/hollywood/htop, lib/hollywood/jp2a, lib/hollywood/logs,
+    lib/hollywood/man, lib/hollywood/speedometer, lib/hollywood/sshart,
+    lib/hollywood/stat, lib/hollywood/tree:
+    - launch byobu, if we're not already in a byobu, LP: #1403659
+    - be a bit more resilient on launch
+  * bin/hollywood:
+    - create a new session, delay just a bit, launch it
+  * bin/hollywood, debian/control, debian/copyright:
+    - make lintian happier
+  * lib/hollywood/apg, lib/hollywood/bmon, lib/hollywood/cmatrix,
+    lib/hollywood/code, lib/hollywood/errno, lib/hollywood/hexdump,
+    lib/hollywood/htop, lib/hollywood/jp2a, lib/hollywood/logs,
+    lib/hollywood/man, lib/hollywood/speedometer, lib/hollywood/sshart,
+    lib/hollywood/stat, lib/hollywood/tree:
+    - rather than tmux killing the window (which leaves running processes
+      behind), kill the processes themselves and let the window die off
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 22:16:36 -0600
+
+hollywood (1.5-0ubuntu1) vivid; urgency=medium
+
+  * lib/hollywood/apg, lib/hollywood/bmon, lib/hollywood/cmatrix,
+    lib/hollywood/code, lib/hollywood/errno, lib/hollywood/hexdump,
+    lib/hollywood/htop, lib/hollywood/jp2a, lib/hollywood/logs,
+    lib/hollywood/man, lib/hollywood/speedometer, lib/hollywood/sshart,
+    lib/hollywood/stat, lib/hollywood/tree:
+    - exit on ctrl-c in any window
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 11:41:02 -0600
+
+hollywood (1.4-0ubuntu1) vivid; urgency=medium
+
+  * === added directory share/hollywood, bin/hollywood, debian/control,
+    debian/copyright, lib/hollywood/mplayer, share/hollywood/mi.mp4:
+    - add Mission Impossible theme song with audio visualizer movie
+    - song was downloaded and is used under CC0 1.0, from:
+      + https://archive.org/details/MissionImpossibleTheme
+    - video was created by using gtk-recordmydesktop screencast of
+      totem, using the Monoscope visual effect, while playing the song,
+      then mixed back with the song using avconv
+    - added mplayer to deps
+    - added mplayer plugin to play mi.mp4 and render to ascii art
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 08:33:18 -0600
+
+hollywood (1.3-0ubuntu1) vivid; urgency=medium
+
+  * bin/hollywood, lib/hollywood/apg:
+    - colorize nato speak, move panes around
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 16 Dec 2014 18:14:26 -0600
+
+hollywood (1.2-0ubuntu1) vivid; urgency=medium
+
+  * lib/hollywood/code:
+    - ensure we're only looking at code in /usr
+  * debian/control:
+    - add vim for syntax highlighting of code
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 16 Dec 2014 15:45:00 -0600
+
+hollywood (1.1-0ubuntu1) vivid; urgency=medium
+
+  * === added directory usr, === added directory usr/share, === added
+    directory usr/share/man, === added directory usr/share/man/man1,
+    usr/share/man/man1/hollywood.1:
+    - add a manpage
+  * debian/control, debian/copyright:
+    - fix some linitian errors
+  * debian/install, === removed directory usr, === renamed directory
+    usr/share => share:
+    - install the manpage
+  * bin/hollywood:
+    - support limiting to a set number of splits
+  * bin/hollywood, lib/hollywood/speedometer:
+    - fix a typo and route logic
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 16 Dec 2014 15:32:42 -0600
+
+hollywood (1.0-0ubuntu1) vivid; urgency=medium
+
+  * === added directory debian, === added directory debian/source,
+    debian/compat, debian/control, debian/copyright, debian/install,
+    debian/rules, debian/source/format:
+    - inital packaging
+  * bin/hollywood, debian/control, lib/hollywood/top:
+    - add htop, remove top;  htop is more hollywood
+  * lib/hollywood/man:
+    - add a random manpage viewer
+  * bin/hollywood, debian/copyright, lib/hollywood/cmatrix,
+    lib/hollywood/code, lib/hollywood/errno, lib/hollywood/hexdump,
+    lib/hollywood/logs, lib/hollywood/man, lib/hollywood/sshart,
+    lib/hollywood/tree:
+    use Apache2 license
+  * bin/hollywood, debian/control, lib/hollywood/apg,
+    lib/hollywood/code, lib/hollywood/htop, lib/hollywood/stat, README:
+    - dbar looks interesting?
+    - silence tmux messages
+    - add apg, htop, and stat
+  * bin/hollywood, debian/control, lib/hollywood/bmon,
+    lib/hollywood/jp2a, lib/hollywood/speedometer, README:
+    - add a few more tools
+    - update dependencies
+  * lib/hollywood/stat:
+    - default to yellow
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 09 Dec 2014 17:40:29 -0600
