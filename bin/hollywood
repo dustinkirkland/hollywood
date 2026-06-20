@@ -34,7 +34,7 @@ spin_up() {
 		# Allow for failed widgets
 		splits=$(echo "$panes" | wc -l)
 		pane=$((RANDOM % $splits))
-		tmux split-window $dir -t ${PKG}.$pane "MPLAYER_OPTS='$MPLAYER_OPTS' nice -n 19 $WIDGET_DIR/$w" >/dev/null 2>&1
+		tmux split-window $dir -t ${PKG}.$pane "nice -n 19 $WIDGET_DIR/$w" >/dev/null 2>&1
 		sleep 0.2
 		split=$((split+1))
 		if [ $split -ge $SPLITS ]; then
@@ -43,16 +43,11 @@ spin_up() {
 	done
 }
 
-MPLAYER_OPTS="-nosound -speed 5"
 WIDGET_DIR="$(dirname $0)/../lib/$PKG"
 SPLITS=$(ls "$WIDGET_DIR" | wc -l)
 DELAY=10
 while [ ! -z "$1" ]; do
 	case "$1" in
-		--sound)
-			MPLAYER_OPTS=""
-			shift
-		;;
 		-d|--delay)
 			DELAY="$2"
 			shift 2
