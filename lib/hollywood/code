@@ -19,9 +19,9 @@ command -v find >/dev/null 2>&1 || exit 1
 # try to colorize our code, but if not, just print it to screen
 command -v pygmentize >/dev/null 2>&1 && viewer="pygmentize" || viewer="cat"
 
-trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" INT
+trap "pkill -9 -f lib/hollywood/ >/dev/null 2>&1; exit" INT
 while true; do
-	FILES=$(find /usr -readable -size +0 -type f -name \*.java -o -name \*.c -o -name \*.cpp -o -name \*.py 2>/dev/null | sort -R)
+	FILES=$(find /usr -readable -size +0 -type f \( -name \*.java -o -name \*.c -o -name \*.cpp -o -name \*.py \) 2>/dev/null | sort -R)
 	for f in $FILES; do
 		$viewer "$f" 2>/dev/null || true
 		sleep 2

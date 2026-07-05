@@ -20,7 +20,7 @@ f=$(mktemp)
 URL="http://www.wsj.com"
 URL="http://www.wsj.com/news/markets"
 
-trap "rm -f $f; pkill -f -9 lib/wallstreet/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
+trap "rm -f $f; pkill -9 -f lib/wallstreet/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
 wget -q -O- $URL | sed -e "s/\.jpg/.jpg\n/g" | sed -e "s/.*http/http/g" | grep "^http.*\/images\/.*jpg$" | grep -v "\"" >$f 2>/dev/null
 while true; do
 	clear

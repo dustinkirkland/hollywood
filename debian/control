@@ -27,6 +27,7 @@ Recommends:
  jp2a,
  plocate | locate,
  moreutils,
+ mplayer,
  openssh-client,
  pv,
  python3-pygments,

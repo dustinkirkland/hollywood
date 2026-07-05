@@ -20,7 +20,7 @@ command -v find >/dev/null 2>&1 || exit 1
 # try to render images to ascii art
 command -v jp2a >/dev/null 2>&1 || exit 1
 
-trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" INT
+trap "pkill -9 -f lib/hollywood/ >/dev/null 2>&1; exit" INT
 while true; do
 	FILES=$(find /usr -readable -size +0 -type f -name \*.jpg 2>/dev/null | sort -R)
 	for f in $FILES; do

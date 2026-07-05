@@ -1,4 +1,20 @@
-hollywood (1.25) testing; urgency=medium
+hollywood (1.26) unstable; urgency=medium
+
+  [ Dustin Kirkland ]
+  * debian/control:
+    - add mplayer to Recommends (was documented in 1.23 but never applied)
+  * lib/hollywood/code:
+    - fix find command to properly group -name alternatives with parentheses
+      so -readable -size +0 -type f apply to all file types, not just .java
+  * lib/hollywood/sshart:
+    - replace predictable /tmp/hollywood tmpdir with mktemp -d for security
+    - drop unused -b 1024 flag from ssh-keygen ed25519 invocation
+  * bin/hollywood, lib/hollywood/*, lib/wallstreet/*:
+    - fix pkill argument order from -f -9 to -9 -f (signal before flags)
+
+ -- Dustin Kirkland <dustin.kirkland@gmail.com>  Mon, 23 Jun 2026 00:00:00 -0500
+
+hollywood (1.25) unstable; urgency=medium
 
   [ Dustin Kirkland ]
   * bin/hollywood:

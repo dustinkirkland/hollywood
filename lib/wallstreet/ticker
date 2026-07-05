@@ -17,7 +17,7 @@
 command -v ticker >/dev/null 2>&1 || exit 1
 
 [ -n "$TMDIR" ] || TMPDIR=$(mktemp -d /dev/shm/$PKG.XXXXXXXXX)
-trap "rm -rf $TMPDIR; pkill -f -9 lib/wallstreet/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
+trap "rm -rf $TMPDIR; pkill -9 -f lib/wallstreet/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
 #URL=http://google.com/finance
 URL_GAINERS=https://finance.yahoo.com/gainers
 URL_LOSERS=https://finance.yahoo.com/losers
@@ -45,7 +45,7 @@ while true; do
 			ticker -u -d 0.3 --foreground=red "$text"
 		;;
 		topNews|*)
-			pkill -f -9 "rsstail.*37293"
+			pkill -9 -f "rsstail.*37293"
 			rsstail -H -N -p -d -i 60 -r -b 37293 -u http://feeds.reuters.com/reuters/topNews >$TMPDIR/headlines 2>/dev/null &
 			while [ ! -s $TMPDIR/headlines ]; do
 				# Wait for headlines

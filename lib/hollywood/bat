@@ -16,7 +16,7 @@
 
 command -v batcat >/dev/null 2>&1 || exit 1
 
-trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" INT
+trap "pkill -9 -f lib/hollywood/ >/dev/null 2>&1; exit" INT
 while true; do
 	f=$(find /usr -name "*.py" -o -name "*.js" -o -name "*.c" -o -name "*.h" -o -name "*.sh" -o -name "*.pl" -o -name "*.rb" 2>/dev/null | sort -R | head -n1)
 	[ -z "$f" ] && exit 1

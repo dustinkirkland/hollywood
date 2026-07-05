@@ -18,7 +18,7 @@ command -v w3m >/dev/null 2>&1 || exit 1
 PKG="wallstreet"
 
 [ -n "$TMDIR" ] || TMPDIR=$(mktemp -d /dev/shm/$PKG.XXXXXXXXX)
-trap "rm -rf $TMPDIR; pkill -f -9 lib/wallstreet/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
+trap "rm -rf $TMPDIR; pkill -9 -f lib/wallstreet/ >/dev/null 2>&1; exit" HUP INT QUIT TERM
 #URL=https://finance.google.com/finance
 URL=https://finance.yahoo.com/trending-tickers
 

@@ -23,7 +23,7 @@ cleanup() {
 	# Kill the tmux session if it exists
 	tmux kill-session -t $PKG >/dev/null 2>&1
 	# Kill any remaining hollywood widget processes
-	pkill -f -9 "lib/hollywood/" >/dev/null 2>&1
+	pkill -9 -f "lib/hollywood/" >/dev/null 2>&1
 	exit 0
 }
 trap cleanup INT TERM EXIT

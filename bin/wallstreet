@@ -19,7 +19,7 @@
 
 PKG="wallstreet"
 [ -n "$TMDIR" ] || export TMPDIR=$(mktemp -d /dev/shm/$PKG.XXXXXXXXX)
-trap "rm -rf $TMPDIR; pkill -f -9 lib/$PKG/ >/dev/null 2>&1; exit 0" EXIT HUP INT QUIT TERM
+trap "rm -rf $TMPDIR; pkill -9 -f lib/$PKG/ >/dev/null 2>&1; exit 0" EXIT HUP INT QUIT TERM
 
 dir="-v"
 widget_dir="$(dirname $0)/../lib/$PKG"

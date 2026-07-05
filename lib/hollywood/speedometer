@@ -42,7 +42,7 @@ if [ $EXIT_CODE -ne 0 ] && [ $EXIT_CODE -ne 124 ]; then
 	exit 0
 fi
 
-trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" INT
+trap "pkill -9 -f lib/hollywood/ >/dev/null 2>&1; exit" INT
 while true; do
 	speedometer -tx $Iface -rx $Iface -i 0.75 2>/dev/null || {
 		# If speedometer crashes during runtime, exit gracefully

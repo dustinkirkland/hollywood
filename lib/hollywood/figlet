@@ -16,7 +16,7 @@
 
 command -v figlet >/dev/null 2>&1 || exit 1
 
-trap "pkill -f -9 lib/hollywood/ >/dev/null 2>&1; exit" INT
+trap "pkill -9 -f lib/hollywood/ >/dev/null 2>&1; exit" INT
 while true; do
 	word=$(printf "HACKED\nENCRYPTED\nDECRYPTING\nFIREWALL\nOVERRIDE\nSCANNING\nDOWNLOAD\nBYPASSING\nCRACKING\nINTERCEPT\nPAYLOAD\nACCESS\nDENIED\nGRANTED\nLOCKED\nTRACING\nBREACH\nENABLED\nSYNCING\nUPLINK" | sort -R | head -n1)
 	clear
