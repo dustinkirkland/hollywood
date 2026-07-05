@@ -47,6 +47,7 @@ PPA_TARGET = "ppa:hollywood/ppa"
 #   git remote add salsa git@salsa.debian.org:games-team/hollywood.git
 SALSA_REMOTE = "salsa"
 SALSA_BRANCH = "master"
+SALSA_UPSTREAM_BRANCH = "upstream"
 
 
 # ── thread-local stdout (parallel output capture) ──────────────────────────
@@ -205,12 +206,18 @@ def load_identity():
     return identity
 
 
-def check_tools():
+def check_tools(mode):
     required = ["dput", "debsign", "git", "docker", "gh"]
+    if mode == "final":
+        required.append("gbp")
     missing = [t for t in required if not shutil.which(t)]
     if missing:
-        die(f"Missing tools: {' '.join(missing)}\n  sudo apt install devscripts dput gh")
+        die(
+            f"Missing tools: {' '.join(missing)}\n"
+            "  sudo apt install devscripts dput git-buildpackage gh"
+        )
     print(f"  Tools OK: {' '.join(required)}")
+
 
 
 def check_clean():
@@ -222,6 +229,44 @@ def check_clean():
             + "\n  Commit or stash before releasing."
         )
     print("  Working tree clean.")
+
+
+def check_salsa_sync(mode):
+    r = run(
+        ["git", "-C", str(HOLLYWOOD_SRC), "remote", "get-url", SALSA_REMOTE],
+        capture=True, check=False,
+    )
+    if r.returncode != 0:
+        return  # no salsa remote
+
+    run(["git", "-C", str(HOLLYWOOD_SRC), "fetch", SALSA_REMOTE], check=False)
+
+    salsa_ref = run(
+        ["git", "-C", str(HOLLYWOOD_SRC), "rev-parse",
+         f"{SALSA_REMOTE}/{SALSA_BRANCH}"],
+        capture=True, check=False,
+    )
+    if salsa_ref.returncode != 0:
+        return  # salsa branch not yet created
+
+    merge_base = run(
+        ["git", "-C", str(HOLLYWOOD_SRC), "merge-base",
+         "HEAD", f"{SALSA_REMOTE}/{SALSA_BRANCH}"],
+        capture=True, check=False,
+    )
+    if (merge_base.returncode == 0 and
+            merge_base.stdout.strip() != salsa_ref.stdout.strip()):
+        msg = (
+            f"salsa/{SALSA_BRANCH} has commits not in local master.\n"
+            f"  Merge first: git fetch salsa && git merge salsa/{SALSA_BRANCH}\n"
+            f"  Then re-run."
+        )
+        if mode == "final":
+            die(msg)
+        else:
+            print(f"  WARNING: {msg}")
+    else:
+        print(f"  \u2713 salsa/{SALSA_BRANCH} in sync")
 
 
 def prewarm_gpg(identity):
@@ -679,6 +724,43 @@ def push_salsa(v):
 
     print(f"    https://salsa.debian.org/games-team/hollywood")
 
+    # Phase 8b: seed upstream branch via gbp import-orig
+    section("Phase 8b: Seed upstream branch (gbp import-orig)")
+    import tempfile
+    with tempfile.TemporaryDirectory(prefix="hollywood-salsa-") as tmpdir_s:
+        tmpdir = Path(tmpdir_s)
+        orig_name = f"hollywood_{tag}.orig.tar.gz"
+        orig_path = tmpdir / orig_name
+
+        print(f"  Generating {orig_name} from tag {tag}\u2026")
+        run(["git", "-C", str(HOLLYWOOD_SRC), "archive",
+             "--format=tar.gz", f"--prefix=hollywood-{tag}/",
+             f"--output={orig_path}", tag])
+
+        salsa_clone = tmpdir / "hollywood-salsa"
+        print("  Cloning Salsa into temp dir\u2026")
+        run(["git", "clone",
+             "git@salsa.debian.org:games-team/hollywood.git",
+             str(salsa_clone)])
+
+        run(["git", "-C", str(salsa_clone), "config",
+             "user.email", "dustin.kirkland@gmail.com"])
+        run(["git", "-C", str(salsa_clone), "config",
+             "user.name", "Dustin Kirkland"])
+
+        print("  Running gbp import-orig\u2026")
+        run(["gbp", "import-orig",
+             f"--upstream-branch={SALSA_UPSTREAM_BRANCH}",
+             f"--debian-branch={SALSA_BRANCH}",
+             "--no-merge",
+             str(orig_path)],
+            cwd=str(salsa_clone))
+
+        print(f"  Pushing {SALSA_UPSTREAM_BRANCH} to Salsa\u2026")
+        run(["git", "-C", str(salsa_clone), "push", "origin",
+             SALSA_UPSTREAM_BRANCH])
+        print(f"  \u2713 upstream branch seeded on Salsa")
+
 
 # ── phase 9: Chainguard reminder ─────────────────────────────────────────
 
@@ -795,7 +877,8 @@ def main():
     banner(f"hollywood release pipeline — {mode.upper()}")
 
     identity = load_identity()
-    check_tools()
+    check_salsa_sync(mode)
+    check_tools(mode)
     check_clean()
     prewarm_gpg(identity)
     v = determine_versions(mode)
