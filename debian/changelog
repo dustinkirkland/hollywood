@@ -1,3 +1,20 @@
+hollywood (1.25-2) unstable; urgency=medium
+
+  * QA upload.
+
+  [ Andreas Tille ]
+  * debian/gbp.conf: Set pristine-tar = true
+
+  [ Boyuan Yang ]
+  * debian/salsa-ci.yml: Add the very basic version.
+  * debian/copyright: Sync with upstream tree.
+  * debian/control: Correct Vcs-* fields.
+  * debian/source/lintian-overrides: Fix typo.
+  * debian/control: Add new recommended packages: bat, figlet, mplayer,
+    pv, python3-pygments.
+
+ -- Boyuan Yang <byang@debian.org>  Tue, 15 Sep 2026 21:10:18 -0400
+
 hollywood (1.25-1) unstable; urgency=medium
 
   * QA upload.
