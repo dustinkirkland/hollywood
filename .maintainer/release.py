@@ -155,10 +155,23 @@ def die(msg):
 _interactive = False
 
 
-def confirm(prompt, skippable=False):
-    if not _interactive:
+def confirm(prompt, skippable=False, always=False):
+    """Prompt to proceed/skip/abort.
+
+    Non-interactive mode (the default — no -i/--interactive) auto-proceeds
+    without prompting, UNLESS always=True. always=True is for the steps
+    that put the maintainer's signature on artifacts and publish them
+    (GPG signing, PPA/mentors upload, GitHub release, Salsa push) — those
+    must never happen without a human reading what is about to be signed
+    and published, regardless of --interactive, and refuse outright if
+    stdin isn't a real terminal to confirm from.
+    """
+    if not _interactive and not always:
         print(f"\n  (auto-proceeding: {prompt[:70]}{'…' if len(prompt) > 70 else ''})")
         return True
+    if always and not sys.stdin.isatty():
+        die("This step needs an explicit yes from a terminal and stdin is not one.\n"
+            "  Re-run from an interactive shell (or with -i).")
     opts = "[y/s/N]" if skippable else "[y/N]"
     ans = input(f"\n{prompt} {opts} ").strip().lower()
     if ans in ("y", "yes"):
@@ -596,6 +609,11 @@ def create_github_release(v):
     section("Phase 6: Git tag + GitHub release")
     tag = v["base_ver"]
 
+    # Not skippable: push_salsa()'s gbp import-orig later archives this tag,
+    # so skipping here would just fail downstream instead of up front.
+    confirm(f"Create signed tag {tag}, push it to origin, and publish a "
+            f"GitHub release?", always=True)
+
     local = run(["git", "-C", str(HOLLYWOOD_SRC), "tag", "--list", tag], capture=True)
     if tag in local.stdout.split():
         print(f"  (tag {tag} already exists locally — skipping creation)")
@@ -637,16 +655,23 @@ def sign_and_upload(v, identity):
     outdir = v["outdir"]
 
     print(f"\n── Step 1: GPG signing  (key: {gpgkey})")
+    to_sign = [
+        f for subdir in ["ppa", "debian"]
+        for f in sorted((outdir / subdir).glob("*_source.changes"))
+    ]
+    print(f"  {len(to_sign)} file(s) to sign:")
+    for f in to_sign:
+        print(f"    {f.name}")
+    confirm(f"  Sign {len(to_sign)} file(s) with GPG key {gpgkey}?", always=True)
     signed = 0
-    for subdir in ["ppa", "debian"]:
-        for f in sorted((outdir / subdir).glob("*_source.changes")):
-            print(f"  Signing: {f.name}")
-            run(["debsign", "-k", gpgkey, str(f)])
-            signed += 1
+    for f in to_sign:
+        print(f"  Signing: {f.name}")
+        run(["debsign", "-k", gpgkey, str(f)])
+        signed += 1
     print(f"  ✓ {signed} file(s) signed.")
 
     print(f"\n── Step 2: PPA  {PPA_TARGET}")
-    if confirm(f"  Upload all series to {PPA_TARGET}?", skippable=True):
+    if confirm(f"  Upload all series to {PPA_TARGET}?", skippable=True, always=True):
         for f in sorted((outdir / "ppa").glob("*_source.changes")):
             print(f"  dput {PPA_TARGET} {f.name}")
             run(["dput", PPA_TARGET, str(f)])
@@ -656,7 +681,7 @@ def sign_and_upload(v, identity):
     print("\n── Step 3: Debian unstable  (mentors.debian.net)")
     deb_changes = sorted((outdir / "debian").glob("*_source.changes"))
     if deb_changes:
-        if confirm("  Upload to mentors.debian.net?", skippable=True):
+        if confirm("  Upload to mentors.debian.net?", skippable=True, always=True):
             run(["dput", "mentors", str(deb_changes[0])])
             print(f"\n  ✓ Uploaded. Email Andreas Tille <tille@debian.org>:")
             print(f"    Subject: hollywood {v['deb_version']} sponsorship request")
@@ -684,6 +709,11 @@ def push_salsa(v):
             f"git@salsa.debian.org:games-team/hollywood.git\n"
             f"  Skipping Salsa push."
         )
+        return
+
+    if not confirm(f"Push master + tag {tag} to salsa/{SALSA_BRANCH}, and seed the "
+                    f"upstream branch there (gbp import-orig)?", skippable=True, always=True):
+        print("  (Salsa push skipped)")
         return
 
     print("  Fetching salsa to check for upstream commits…")
