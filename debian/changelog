@@ -12,7 +12,7 @@ hollywood (1.26-1) unstable; urgency=medium
   * bin/hollywood, lib/hollywood/*, lib/wallstreet/*:
     - fix pkill argument order from -f -9 to -9 -f (signal before flags)
 
- -- Dustin Kirkland <dustin.kirkland@gmail.com>  Mon, 23 Jun 2026 00:00:00 -0500
+ -- Dustin Kirkland <dustin.kirkland@gmail.com>  Sun, 11 Oct 2026 11:15:58 -0500
 
 hollywood (1.25-2) unstable; urgency=medium
 
