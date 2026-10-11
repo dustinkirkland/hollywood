@@ -2,7 +2,7 @@ Source: hollywood
 Section: games
 Maintainer: Dustin Kirkland <dustin.kirkland@gmail.com>
 Build-Depends:
- debhelper-compat (= 14),
+ debhelper-compat (= 13),
 Standards-Version: 4.7.4
 Vcs-Browser: https://salsa.debian.org/games-team/hollywood
 Vcs-Git: https://salsa.debian.org/games-team/hollywood.git

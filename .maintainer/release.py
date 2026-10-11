@@ -83,21 +83,26 @@ sys.stdout = _TLSStdout(sys.stdout)
 # ── helpers ────────────────────────────────────────────────────────────────
 
 def run(cmd, check=True, capture=False, **kwargs):
-    kw = dict(check=check, text=True, **kwargs)
+    kw = dict(text=True, **kwargs)
     if capture:
         kw.update(stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        return subprocess.run(cmd, shell=isinstance(cmd, str), **kw)
+        return subprocess.run(cmd, shell=isinstance(cmd, str), check=check, **kw)
     buf = getattr(_tls, "buf", None)
     if buf is not None:
         kw.update(stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        result = subprocess.run(cmd, shell=isinstance(cmd, str), **kw)
+        # check=False here regardless of the caller's check: subprocess.run's
+        # own check=True raises from inside the call, before this function
+        # ever reaches the buf.write() below -- silently discarding exactly
+        # the output a failure needs to be diagnosable. Do the check
+        # ourselves, after capturing.
+        result = subprocess.run(cmd, shell=isinstance(cmd, str), check=False, **kw)
         buf.write(result.stdout or "")
         if check and result.returncode != 0:
             short = (cmd[0] if isinstance(cmd, list) else str(cmd).split()[0])
             buf.write(f"\n[exit {result.returncode}] {short}\n")
             raise subprocess.CalledProcessError(result.returncode, cmd, result.stdout)
         return result
-    return subprocess.run(cmd, shell=isinstance(cmd, str), **kw)
+    return subprocess.run(cmd, shell=isinstance(cmd, str), check=check, **kw)
 
 
 def run_parallel(labeled_fns, log_dir=None):
@@ -389,7 +394,7 @@ echo "--- Verify files ---"
 test -x /usr/games/hollywood  && echo "  ✓ /usr/games/hollywood"
 test -x /usr/games/wallstreet && echo "  ✓ /usr/games/wallstreet"
 test -d /usr/lib/hollywood    && echo "  ✓ /usr/lib/hollywood"
-test -f /usr/share/man/man1/hollywood.1 && echo "  ✓ man page"
+test -f /usr/share/man/man1/hollywood.1.gz && echo "  ✓ man page"
 
 NWIDGETS=$(ls /usr/lib/hollywood/ | wc -l)
 echo "  ✓ $NWIDGETS widgets installed"
