@@ -394,7 +394,14 @@ echo "--- Verify files ---"
 test -x /usr/games/hollywood  && echo "  ✓ /usr/games/hollywood"
 test -x /usr/games/wallstreet && echo "  ✓ /usr/games/wallstreet"
 test -d /usr/lib/hollywood    && echo "  ✓ /usr/lib/hollywood"
-test -f /usr/share/man/man1/hollywood.1.gz && echo "  ✓ man page"
+# Checked against the built .deb's own contents, not the installed
+# filesystem: Ubuntu's official Docker images path-exclude
+# /usr/share/man/* at the dpkg level (see /etc/dpkg/dpkg.cfg.d/docker),
+# so the man page never actually lands on disk here even though the
+# package correctly contains it -- that's a Docker-image policy, not
+# a packaging bug, so verify the package instead of the filesystem.
+dpkg-deb -c "$WORKDIR"/hollywood_*.deb | grep -q '/usr/share/man/man1/hollywood\.1\.gz$' \
+  && echo "  ✓ man page (in .deb)"
 
 NWIDGETS=$(ls /usr/lib/hollywood/ | wc -l)
 echo "  ✓ $NWIDGETS widgets installed"
