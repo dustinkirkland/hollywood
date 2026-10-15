@@ -445,7 +445,12 @@ git checkout -b debian/latest
 git config user.email "ci@salsa.local"
 git config user.name "Salsa CI"
 git add -f debian/
-git commit -q -m "debian: add packaging (Salsa CI simulation)"
+# debian/ already lives on the same branch as everything else in this
+# repo (no separate upstream-only branch to layer packaging onto), so
+# this is a no-op here and `git commit` would fail on "nothing to
+# commit" -- which, under set -e, kills the whole phase. Only commit
+# if there's actually something staged.
+git diff --cached --quiet || git commit -q -m "debian: add packaging (Salsa CI simulation)"
 
 echo "--- gbp buildpackage ---"
 gbp buildpackage \
