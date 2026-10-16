@@ -313,6 +313,48 @@ def prewarm_gpg(identity):
 
 # ── phase 2: versions ─────────────────────────────────────────────────────
 
+def ubuntu_series():
+    """Return (supported, devel, devel_status) Ubuntu series names.
+
+    Launchpad is authoritative: the host's distro-info-data lags behind each
+    Ubuntu release (ported from byobu's release.py — see its 0f2be23f: on
+    26.10's release week the host still listed the previous series as
+    newest and `ubuntu-distro-info --devel` failed, and the old hardcoded
+    fallback here ("oracular") would then have pointed a build at a
+    released series too, same failure shape). ubuntu-distro-info is only a
+    fallback for when Launchpad is unreachable, and must then actually
+    know a devel series (--devel fails when stale). supported excludes the
+    devel series; it's what the PPA builds for.
+    """
+    try:
+        def lp(url):
+            return json.loads(urllib.request.urlopen(url, timeout=30).read())
+        devel = lp("https://api.launchpad.net/1.0/ubuntu")["current_series_link"].rsplit("/", 1)[1]
+        entries = lp("https://api.launchpad.net/1.0/ubuntu/series")["entries"]
+        status = {e["name"]: e["status"] for e in entries}
+        supported = [
+            e["name"]
+            for e in sorted(entries, key=lambda e: float(e.get("version") or "0"))
+            if e["status"] in ("Current Stable Release", "Supported")
+            and float(e.get("version") or "0") >= 22.04
+        ]
+        if devel not in status or devel in supported or not supported:
+            raise RuntimeError(f"implausible Launchpad series data: devel={devel}")
+        return supported, devel, status[devel]
+    except Exception as e:
+        print(f"  (Launchpad series query failed: {e} — falling back to ubuntu-distro-info)")
+    try:
+        supported = run(["ubuntu-distro-info", "--supported"], capture=True).stdout.split()
+        devel = run(["ubuntu-distro-info", "--devel"], capture=True, check=False).stdout.strip()
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        supported, devel = [], ""
+    if not devel:
+        die("Could not determine the Ubuntu development series: Launchpad is unreachable\n"
+            "  and ubuntu-distro-info has no devel series (update distro-info-data).")
+    supported = [s for s in supported if s != devel]
+    return supported, devel, "unknown (from distro-info)"
+
+
 def determine_versions(mode):
     section("Phase 2: Determine versions")
 
@@ -329,33 +371,14 @@ def determine_versions(mode):
     deb_version   = f"{base_ver}-1"
     ubuntu_ver    = f"{base_ver}-0ubuntu1"
 
-    # Ubuntu series
-    try:
-        r = run(["ubuntu-distro-info", "--supported"], capture=True, check=False)
-        series = r.stdout.split() if r.returncode == 0 else []
-        if not series:
-            raise RuntimeError
-    except (FileNotFoundError, RuntimeError):
-        print("  (ubuntu-distro-info unavailable — querying Launchpad)")
-        d = json.loads(urllib.request.urlopen(
-            "https://api.launchpad.net/1.0/ubuntu/series"
-        ).read())
-        active = {"Active Development", "Current Stable Release", "Supported"}
-        series = [
-            e["name"] for e in d["entries"]
-            if e["status"] in active and float(e.get("version") or "0") >= 22.04
-        ]
-
-    try:
-        devel_series = run(
-            ["ubuntu-distro-info", "--devel"], capture=True, check=False
-        ).stdout.strip()
-    except FileNotFoundError:
-        devel_series = series[-1] if series else "oracular"
+    series, devel_series, devel_status = ubuntu_series()
 
     print(f"  Debian:       {deb_version}")
-    print(f"  Ubuntu:       {ubuntu_ver} → {devel_series}")
+    print(f"  Ubuntu:       {ubuntu_ver} → {devel_series}  ({devel_status})")
     print(f"  PPA series:   {' '.join(series)}")
+    if mode == "final" and devel_status != "Active Development":
+        print(f"  ⚠ {devel_series} is in '{devel_status}', not 'Active Development';\n"
+              f"    an upload may sit in the unapproved queue until the archive opens.")
 
     outdir = Path(f"/tmp/hollywood-release-{base_ver}")
     if outdir.exists():
