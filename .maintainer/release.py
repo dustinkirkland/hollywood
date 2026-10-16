@@ -22,6 +22,11 @@ Final skips phase 3 (smoke already passed on RC commit):
     7   Sign and upload (GPG sign + dput — interactive)
     8   Salsa push (push tag + HEAD to salsa games-team)
     9   Chainguard reminder
+    10  Open next development cycle (open-dev) — confirmed, auto-proceeds
+        by default (same as byobu's release.py); `-i` lets you skip it
+        for this run with 's'. Leaves the next cycle with a home from
+        the moment `final` exits, instead of post-release commits
+        silently piling onto the version that was just shipped.
 """
 
 import argparse
@@ -889,8 +894,7 @@ def print_summary(v, mode):
     print(f"  Artifacts: {outdir}")
     if mode == "rc":
         print("\n  When ready to cut the final: ./release.py final")
-    else:
-        print("\n  Next: ./release.py open-dev")
+    # else: final's own Phase 10 already ran (or offered) open-dev.
 
 
 # ── main ──────────────────────────────────────────────────────────────────
@@ -947,6 +951,25 @@ def main():
         sign_and_upload(v, identity)
         push_salsa(v)
         chainguard_reminder(v)
+
+        # A final release leaves debian/changelog's top entry pinned at the
+        # version that was just shipped. Any commit made after this point
+        # with nothing bumped first has no home — it just piles onto the
+        # already-released entry, same failure mode byobu's release.py
+        # guards against in its own Phase 10 (and the exact thing
+        # _OPEN_DEV_MSG_RE/commits_since_last_release in petname's
+        # release.py were built to catch after it happened for real there).
+        # Closing the loop here means the next cycle always has a home from
+        # the moment this one's process exits.
+        section("Phase 10: Open next development cycle")
+        if confirm(
+            f"Final release {v['base_ver']} is complete. Run open-dev now "
+            f"to bump debian/changelog to the next version and open a "
+            f"fresh UNRELEASED heading, so post-release commits don't "
+            f"accumulate under the {v['base_ver']} label again?",
+            skippable=True,
+        ):
+            open_dev(identity)
 
     print_summary(v, mode)
 
