@@ -673,7 +673,7 @@ def build_debian_source(v, identity):
 
 # ── phase 6: git tag + GitHub release ────────────────────────────────────
 
-def create_github_release(v):
+def create_github_release(v, identity):
     section("Phase 6: Git tag + GitHub release")
     tag = v["base_ver"]
 
@@ -686,8 +686,14 @@ def create_github_release(v):
     if tag in local.stdout.split():
         print(f"  (tag {tag} already exists locally — skipping creation)")
     else:
-        run(["git", "-C", str(HOLLYWOOD_SRC), "tag", "-s", tag, "-m", f"hollywood {tag}"])
-        print(f"  ✓ Tag {tag} created")
+        # -u (not just -s): user.signingkey is unset, and there are multiple
+        # secret keys in the keyring with overlapping "Dustin Kirkland" UIDs
+        # (gpg --list-secret-keys), so a bare -s leaves GPG to pick whichever
+        # it defaults to -- not necessarily identity["GPGKEY"], the one every
+        # other signing step here (debsign, prewarm_gpg) explicitly uses.
+        run(["git", "-C", str(HOLLYWOOD_SRC), "tag", "-u", identity["GPGKEY"],
+             tag, "-m", f"hollywood {tag}"])
+        print(f"  ✓ Tag {tag} created (signed with {identity['GPGKEY']})")
 
     remote = run(
         ["git", "-C", str(HOLLYWOOD_SRC), "ls-remote", "--tags", "origin", tag],
@@ -1009,7 +1015,7 @@ def main():
 
     if mode == "final":
         if should_run("6", start_from):
-            create_github_release(v)
+            create_github_release(v, identity)
         if should_run("7", start_from):
             sign_and_upload(v, identity)
         if should_run("8", start_from):
