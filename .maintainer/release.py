@@ -852,10 +852,25 @@ def push_salsa(v):
         run(["git", "-C", str(salsa_clone), "config",
              "user.name", "Dustin Kirkland"])
 
+        # A plain clone only checks out a local branch for HEAD (master);
+        # SALSA_UPSTREAM_BRANCH exists on the remote but only as
+        # origin/upstream until a local branch is made for it, and
+        # `gbp import-orig --upstream-branch=upstream` requires the local
+        # branch to already exist ("Repository does not have branch
+        # 'upstream'") -- it won't create it for you.
+        run(["git", "-C", str(salsa_clone), "branch", SALSA_UPSTREAM_BRANCH,
+             f"origin/{SALSA_UPSTREAM_BRANCH}"])
+
         print("  Running gbp import-orig\u2026")
+        # --no-interactive + an explicit --upstream-version: without them
+        # gbp prompts ("What is the upstream version? [1.26]") and dies on
+        # EOF the moment stdin isn't a terminal -- it already guesses the
+        # right default, it just won't act on a guess without asking.
         run(["gbp", "import-orig",
              f"--upstream-branch={SALSA_UPSTREAM_BRANCH}",
              f"--debian-branch={SALSA_BRANCH}",
+             f"--upstream-version={v['base_ver']}",
+             "--no-interactive",
              "--no-merge",
              str(orig_path)],
             cwd=str(salsa_clone))
