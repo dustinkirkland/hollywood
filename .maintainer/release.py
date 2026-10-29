@@ -162,6 +162,18 @@ def die(msg):
     sys.exit(1)
 
 
+# Canonical phase order for --start-from (ported from byobu's release.py):
+# resume a `final` run that died partway through without re-running (and
+# re-wiping the output of) everything before it.
+_PHASE_ORDER = ["3", "4", "5", "6", "7", "8", "9"]
+
+
+def should_run(phase, start_from):
+    if start_from is None:
+        return True
+    return _PHASE_ORDER.index(phase) >= _PHASE_ORDER.index(start_from)
+
+
 _interactive = False
 
 
@@ -355,7 +367,7 @@ def ubuntu_series():
     return supported, devel, "unknown (from distro-info)"
 
 
-def determine_versions(mode):
+def determine_versions(mode, resume=False):
     section("Phase 2: Determine versions")
 
     cl = (HOLLYWOOD_SRC / "debian" / "changelog").read_text()
@@ -381,11 +393,22 @@ def determine_versions(mode):
               f"    an upload may sit in the unapproved queue until the archive opens.")
 
     outdir = Path(f"/tmp/hollywood-release-{base_ver}")
-    if outdir.exists():
-        shutil.rmtree(outdir)
-    for sub in ["debs", "debian", "ppa", "ubuntu", "logs"]:
-        (outdir / sub).mkdir(parents=True)
-    print(f"  Output dir:   {outdir}")
+    if resume:
+        # --start-from: reuse whatever earlier phases already built (PPA
+        # .changes/.dsc, the Debian source package, ...) instead of wiping
+        # it -- that's the whole point of resuming rather than restarting.
+        if not outdir.exists():
+            die(f"--start-from: output directory {outdir} not found.\n"
+                f"  Run without --start-from first to (re)create it.")
+        for sub in ["debs", "debian", "ppa", "ubuntu", "logs"]:
+            (outdir / sub).mkdir(parents=True, exist_ok=True)
+        print(f"  Resuming in: {outdir}")
+    else:
+        if outdir.exists():
+            shutil.rmtree(outdir)
+        for sub in ["debs", "debian", "ppa", "ubuntu", "logs"]:
+            (outdir / sub).mkdir(parents=True)
+        print(f"  Output dir:   {outdir}")
 
     return dict(
         base_ver=base_ver,
@@ -933,8 +956,19 @@ def main():
         default="rc",
     )
     parser.add_argument("--interactive", "-i", action="store_true", default=False)
+    parser.add_argument(
+        "--start-from", choices=_PHASE_ORDER, default=None,
+        help="Resume a `final` run from this phase (e.g. after it died or "
+             "you aborted a confirm), reusing the existing "
+             "/tmp/hollywood-release-<ver> output dir instead of rebuilding "
+             "and re-wiping everything before it. final only.",
+    )
     args = parser.parse_args()
     mode = args.mode
+    start_from = args.start_from
+    if start_from and mode != "final":
+        die("--start-from only applies to `final` (rc rebuilds are cheap "
+            "and idempotent; there's nothing to resume there).")
 
     global _interactive
     _interactive = args.interactive
@@ -948,32 +982,40 @@ def main():
         run_salsa_ci()
         return
 
-    banner(f"hollywood release pipeline — {mode.upper()}")
+    banner(f"hollywood release pipeline — {mode.upper()}"
+           + (f"  [resuming from phase {start_from}]" if start_from else ""))
 
     identity = load_identity()
     check_salsa_sync(mode)
     check_tools(mode)
     check_clean()
     prewarm_gpg(identity)
-    v = determine_versions(mode)
+    v = determine_versions(mode, resume=(start_from is not None))
 
-    # Phases 3 + 3b run in parallel (both are Docker, independent)
-    run_parallel([
-        ("smoke test",  run_smoke_test),
-        ("salsa CI",    run_salsa_ci),
-    ], log_dir=v["outdir"] / "logs")
+    if should_run("3", start_from):
+        # Phases 3 + 3b run in parallel (both are Docker, independent)
+        run_parallel([
+            ("smoke test",  run_smoke_test),
+            ("salsa CI",    run_salsa_ci),
+        ], log_dir=v["outdir"] / "logs")
 
-    # PPA builds (per-series parallelism handled inside)
-    build_ppa_packages(v, identity)
+    if should_run("4", start_from):
+        # PPA builds (per-series parallelism handled inside)
+        build_ppa_packages(v, identity)
 
-    # Debian source build
-    build_debian_source(v, identity)
+    if should_run("5", start_from):
+        # Debian source build
+        build_debian_source(v, identity)
 
     if mode == "final":
-        create_github_release(v)
-        sign_and_upload(v, identity)
-        push_salsa(v)
-        chainguard_reminder(v)
+        if should_run("6", start_from):
+            create_github_release(v)
+        if should_run("7", start_from):
+            sign_and_upload(v, identity)
+        if should_run("8", start_from):
+            push_salsa(v)
+        if should_run("9", start_from):
+            chainguard_reminder(v)
 
         # A final release leaves debian/changelog's top entry pinned at the
         # version that was just shipped. Any commit made after this point
