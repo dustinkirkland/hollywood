@@ -1,3 +1,9 @@
+hollywood (1.27-1) UNRELEASED; urgency=medium
+
+  * Open 1.27 for development
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 29 Oct 2026 13:18:38 -0500
+
 hollywood (1.26-1) unstable; urgency=medium
 
   [ Dustin Kirkland ]
